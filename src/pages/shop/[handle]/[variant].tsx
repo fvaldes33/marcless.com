@@ -167,15 +167,15 @@ const ProductVariantDetail: NextPage<PageProps> = ({ product, variant }) => {
         </div>
       </section>
 
-      <section className="py-12 [ md:py-16 ]">
+      <section className="py-8 [ md:py-16 ]">
         <div className="container mx-auto px-4 [ md:grid md:grid-cols-5 ] [ lg:px-0 ]">
           <div className="col-span-3 flex items-center">
-            <div className="flex flex-col px-8">
+            <div className="flex flex-col [ md:px-8 ]">
               <h2 className="font-sans font-normal mb-6 text-primary tracking-wider">{productDetails.includes.eyebrow}</h2>
               <p className="text-3xl font-serif mb-4 text-gray-800">
                 {productDetails.includes.heading}
               </p>
-              <p className="mb-16 max-w-2xl text-xl text-gray-600 lg:mx-auto">
+              <p className="mb-8 [ md:mb-16 ] max-w-2xl text-xl text-gray-600 lg:mx-auto">
                 {productDetails.includes.copy}
               </p>
 
@@ -193,8 +193,8 @@ const ProductVariantDetail: NextPage<PageProps> = ({ product, variant }) => {
               </div>
             </div>
           </div>
-          <div className="col-span-2">
-            <figure className="aspect-w-3 aspect-h-4 rounded-lg overflow-hidden">
+          <div className="col-span-2 mt-8 [ md:mt-0 ]">
+            <figure className="aspect-w-4 aspect-h-4 [ md:aspect-w-3 md:aspect-h-4 ] rounded-lg overflow-hidden">
               <Image
                 className="w-full h-full object-center object-cover transition duration-150 hover:scale-110"
                 layout="fill"
