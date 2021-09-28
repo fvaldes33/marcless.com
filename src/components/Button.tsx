@@ -1,17 +1,22 @@
 import Link from 'next/link';
-import { Fragment } from 'react';
+import { forwardRef, Fragment } from 'react';
 import { classNames } from '../utils/helpers';
 
 interface ButtonProps {
   href?: string;
   variant?: 'primary' | 'secondary' | 'light';
+  children?: React.ReactNode;
+  onClick?: () => void;
 }
 
-const Button: React.FC<ButtonProps> = ({
-  href,
-  children,
-  variant = 'primary'
-}) => {
+type ButtonRef = HTMLAnchorElement & HTMLButtonElement;
+const Button = forwardRef<ButtonRef, ButtonProps>((props, ref) => {
+  const {
+    href,
+    children,
+    variant = 'primary',
+    ...rest
+  } = props;
 
   const baseClasses = 'text-base flex items-center justify-between px-12 py-4 rounded-lg transition duration-300 hover:opacity-90';
   const getVariantClass = (): string => {
@@ -31,7 +36,7 @@ const Button: React.FC<ButtonProps> = ({
   if (href) {
     return (
       <Link href={href} passHref>
-        <a className={classNames(
+        <a ref={ref} {...rest} className={classNames(
           getVariantClass(),
           baseClasses
         )}>
@@ -43,7 +48,7 @@ const Button: React.FC<ButtonProps> = ({
 
   return (
     <Fragment>
-      <button className={classNames(
+      <button ref={ref} {...rest} className={classNames(
         getVariantClass(),
         baseClasses
       )}>
@@ -51,6 +56,7 @@ const Button: React.FC<ButtonProps> = ({
       </button>
     </Fragment>
   );
-}
+});
 
+Button.displayName = 'Button';
 export default Button;

@@ -17,6 +17,7 @@ import { Disclosure, Transition } from '@headlessui/react';
 import { ChevronRightIcon } from '@heroicons/react/outline';
 import { defaultDescription } from '@/src/utils/constants';
 import blueOnSoap from '@/src/assets/blue-on-soap.jpg';
+import { CHECKOUT_MUTATION } from '@/src/mutations';
 
 interface PageProps {
   product: GetSingleProduct_products_edges_node;
@@ -25,6 +26,7 @@ interface PageProps {
 
 const ProductVariantDetail: NextPage<PageProps> = ({ product, variant }) => {
   const router = useRouter();
+  const [loading, setLoading] = useState(false);
   const [imageShown, setImageShown] = useState(() => {
     return variant.image!;
   });
@@ -33,6 +35,26 @@ const ProductVariantDetail: NextPage<PageProps> = ({ product, variant }) => {
   useEffect(() => {
     setImageShown(variant.image!);
   }, [variant]);
+
+  const createCheckout = async () => {
+    setLoading(true);
+
+    try {
+      const { data } = await client.mutate({
+        mutation: CHECKOUT_MUTATION,
+        variables: {
+          variantId: variant.id,
+        }
+      });
+      const { webUrl } = data.checkoutCreate.checkout;
+      window.location.href = webUrl;
+
+    } catch (error) {
+
+    } finally {
+      setLoading(false);
+    }
+  }
 
   return (
     <>
@@ -128,7 +150,7 @@ const ProductVariantDetail: NextPage<PageProps> = ({ product, variant }) => {
               </div>
             </div>
 
-            <Button>
+            <Button onClick={() => createCheckout()}>
               add to cart
             </Button>
 
