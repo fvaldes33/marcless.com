@@ -20,7 +20,7 @@ interface PageProps {
   variant: GetSingleProduct_products_edges_node_variants_edges_node;
 }
 
-const Home: NextPage<PageProps> = ({ product, variant }) => {
+const ProductVariantDetail: NextPage<PageProps> = ({ product, variant }) => {
   const router = useRouter();
   const [imageShown, setImageShown] = useState(() => {
     return variant.image!;
@@ -201,4 +201,4 @@ export const getStaticPaths = async () => {
   }
 }
 
-export default Home
+export default ProductVariantDetail;
