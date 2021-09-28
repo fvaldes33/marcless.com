@@ -7,6 +7,18 @@
 // GraphQL query operation: GetSingleProduct
 // ====================================================
 
+export interface GetSingleProduct_products_edges_node_seo {
+  __typename: "SEO";
+  /**
+   * The SEO title.
+   */
+  title: string | null;
+  /**
+   * The meta description.
+   */
+  description: string | null;
+}
+
 export interface GetSingleProduct_products_edges_node_priceRange_minVariantPrice {
   __typename: "MoneyV2";
   /**
@@ -169,6 +181,10 @@ export interface GetSingleProduct_products_edges_node {
    * The description of the product, complete with HTML formatting.
    */
   descriptionHtml: any;
+  /**
+   * The product's SEO information.
+   */
+  seo: GetSingleProduct_products_edges_node_seo;
   /**
    * The price range.
    */

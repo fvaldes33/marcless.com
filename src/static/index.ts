@@ -1,7 +1,13 @@
+import blueOnSoap from '@/src/assets/blue-on-soap.jpg';
+
 export const MarcRazor = {
   punchLine: 'Razor + 20 Blades',
-  included: {
-    heading: 'Each razor comes with:',
+  includes: {
+    eyebrow: 'what do you get',
+    heading: 'The same great features, at a fraction of the cost.',
+    copy: 'Lorem ipsum dolor sit amet consect adipisicing elit. Possimus magnam voluptatum cupiditate veritatis in accusamus quisquam.',
+    subheading: 'Each razor comes with:',
+    image: blueOnSoap,
     items: [
       '1x Reusable Safety Razor',
       '20 x Replacement razor blades',

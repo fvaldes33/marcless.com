@@ -30,11 +30,11 @@ const FeatureList = () => {
     <div className="py-12 [ md:py-24 ] bg-white">
       <div className="max-w-screen-lg mx-auto px-4 [ lg:px-0 ]">
         <div className="lg:text-center">
-          <h2 className="font-sans text-xl text-primary font-semibold tracking-wider">why marc<i>less</i></h2>
-          <p className="mt-2 text-3xl font-serif text-gray-800 sm:text-4xl">
+          <h2 className="font-sans font-normal mb-6 text-primary tracking-wider">why marc<i>less</i></h2>
+          <p className="text-3xl font-serif mb-4 text-gray-800">
             The same great features, at a fraction of the cost.
           </p>
-          <p className="mt-4 max-w-2xl text-xl text-gray-600 lg:mx-auto">
+          <p className="mb-16 max-w-2xl text-xl text-gray-600 lg:mx-auto">
             Lorem ipsum dolor sit amet consect adipisicing elit. Possimus magnam voluptatum cupiditate veritatis in
             accusamus quisquam.
           </p>

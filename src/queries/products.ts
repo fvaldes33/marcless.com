@@ -60,6 +60,10 @@ export const SINGLE_PRODUCT_QUERY = gql`
           handle
           description
           descriptionHtml
+          seo {
+            title
+            description
+          }
           priceRange {
             minVariantPrice {
               amount
