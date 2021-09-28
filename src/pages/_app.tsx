@@ -5,10 +5,11 @@ import type { AppProps } from 'next/app';
 import AppProvider from '@/src/state';
 import client from '@/src/utils/apollo';
 import { STORE_QUERY } from '@/src/queries';
-import { Store } from '@/src/types';
+import { Store, Store_shop } from '@/src/types';
 import Header from '@/src/components/Header';
+import Footer from '@/src/components/Footer';
 
-type AppPropsWithGlobals = AppProps & { store: Store };
+type AppPropsWithGlobals = AppProps & { store: Store_shop };
 
 function Body({ children }: { children: React.ReactNode }) {
   return (
@@ -26,6 +27,7 @@ function MyApp({ Component, pageProps, store }: AppPropsWithGlobals) {
         <main>
           <Component {...pageProps} />
         </main>
+        <Footer />
       </Body>
     </AppProvider>
   );

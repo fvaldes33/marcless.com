@@ -1,11 +1,11 @@
-import type { Store } from '@/src/queries';
+import type { Store, Store_shop } from '@/src/queries';
 
-export type { Store };
+export type { Store, Store_shop };
 
 export interface AppState {
   ready: boolean;
   navOpen: boolean;
-  store?: Store;
+  store?: Store_shop;
 }
 
 type ActionMap<M extends { [index: string]: any }> = {

@@ -20,33 +20,81 @@ export interface Store_shop_primaryDomain {
 export interface Store_shop_privacyPolicy {
   __typename: "ShopPolicy";
   /**
+   * Policy’s title.
+   */
+  title: string;
+  /**
+   * Policy’s handle.
+   */
+  handle: string;
+  /**
    * Public URL to the policy.
    */
   url: any;
+  /**
+   * Policy text, maximum size of 64kb.
+   */
+  body: string;
 }
 
 export interface Store_shop_shippingPolicy {
   __typename: "ShopPolicy";
   /**
+   * Policy’s title.
+   */
+  title: string;
+  /**
+   * Policy’s handle.
+   */
+  handle: string;
+  /**
    * Public URL to the policy.
    */
   url: any;
+  /**
+   * Policy text, maximum size of 64kb.
+   */
+  body: string;
 }
 
 export interface Store_shop_refundPolicy {
   __typename: "ShopPolicy";
   /**
+   * Policy’s title.
+   */
+  title: string;
+  /**
+   * Policy’s handle.
+   */
+  handle: string;
+  /**
    * Public URL to the policy.
    */
   url: any;
+  /**
+   * Policy text, maximum size of 64kb.
+   */
+  body: string;
 }
 
 export interface Store_shop_termsOfService {
   __typename: "ShopPolicy";
   /**
+   * Policy’s title.
+   */
+  title: string;
+  /**
+   * Policy’s handle.
+   */
+  handle: string;
+  /**
    * Public URL to the policy.
    */
   url: any;
+  /**
+   * Policy text, maximum size of 64kb.
+   */
+  body: string;
 }
 
 export interface Store_shop {

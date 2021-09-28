@@ -10,7 +10,7 @@ const features = [
     icon: ThumbUpIcon,
   },
   {
-    name: 'Perfect shaving',
+    name: 'Perfect shave',
     description:
       'Achieve a closer, smoother, more professional shave.',
     icon: LightningBoltIcon,
@@ -27,7 +27,7 @@ const FeatureList = () => {
   const { state: { store, navOpen }, dispatch } = useContext(Context);
 
   return (
-    <div className="py-12 [ md:py-24 ] bg-white">
+    <section className="pt-12 [ md:pt-24 ] bg-white">
       <div className="max-w-screen-lg mx-auto px-4 [ lg:px-0 ]">
         <div className="lg:text-center">
           <h2 className="font-sans font-normal mb-6 text-primary tracking-wider">why marc<i>less</i></h2>
@@ -56,7 +56,7 @@ const FeatureList = () => {
           </dl>
         </div>
       </div>
-    </div>
+    </section>
   );
 }
 
