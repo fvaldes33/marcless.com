@@ -10,58 +10,58 @@ const Footer = () => {
 
   return (
     <footer className="bg-secondary text-white py-6 [ md:py-12 ]">
-      <div className="container mx-auto grid grid-cols-2 py-12 border-b border-gray-200">
-        <div className="">
+
+      <div className="container mx-auto px-4 [ md:grid md:grid-cols-2 ] [ lg:px-0 ] py-12 border-b border-gray-200">
+        <div className="text-center [ md:text-left ]">
           <Link href="/" passHref>
             <a className="font-serif block text-4xl tracking-wide">
               marc<span className="bg-primary text-white">less</span>
             </a>
           </Link>
         </div>
-        <div className="">
+        <div className="text-center [ md:text-left ]">
           form
         </div>
       </div>
-      <div className="container mx-auto grid grid-cols-2 py-12">
-        <div className="">
-          <ul className="flex space-x-6">
-            <li>
+
+      <div className="container mx-auto [ md:grid md:grid-cols-2 ] py-12">
+        <div className="text-center mb-8 [ md:mb-0 md:text-left ]">
+          <ul className="flex flex-wrap justify-center [ md:justify-start ]">
+            <li className="px-3 mb-3 [ md:mb-0 ]">
               <Link href="/shop" passHref>
                 <a>Shop</a>
               </Link>
             </li>
-            <li>
+            <li className="px-3 mb-3 [ md:mb-0 ]">
               <Link href="/about" passHref>
                 <a>About</a>
               </Link>
             </li>
-            <li>
+            <li className="px-3 mb-3 [ md:mb-0 ]">
               <Link href="/shipping-policy" passHref>
                 <a>Shipping</a>
               </Link>
             </li>
-            <li>
+            <li className="px-3 mb-3 [ md:mb-0 ]">
               <Link href="/refund-policy" passHref>
                 <a>Refunds</a>
               </Link>
             </li>
-            <li>
+            <li className="px-3 mb-3 [ md:mb-0 ]">
               <Link href="/privacy-policy" passHref>
                 <a>Privacy</a>
               </Link>
             </li>
-            <li>
+            <li className="px-3 mb-3 [ md:mb-0 ]">
               <Link href="/terms-of-service" passHref>
                 <a>Terms</a>
               </Link>
             </li>
           </ul>
         </div>
-        <div className="flex justify-end">
-          <ul className="flex space-x-4">
-            <li>
-              <p className="font-serif text-lg">Stay Connected</p>
-            </li>
+        <div className="flex flex-col items-center justify-center [ md:flex-row md:justify-end ]">
+          <p className="font-serif text-lg mb-6 [ md:mb-0 md:mr-6 ]">Stay Connected</p>
+          <ul className="flex space-x-6">
             <li>
               <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
                 <path fill="currentColor" d="M22.675 0h-21.35c-.732 0-1.325.593-1.325 1.325v21.351c0 .731.593 1.324 1.325 1.324h11.495v-9.294h-3.128v-3.622h3.128v-2.671c0-3.1 1.893-4.788 4.659-4.788 1.325 0 2.463.099 2.795.143v3.24l-1.918.001c-1.504 0-1.795.715-1.795 1.763v2.313h3.587l-.467 3.622h-3.12v9.293h6.116c.73 0 1.323-.593 1.323-1.325v-21.35c0-.732-.593-1.325-1.325-1.325z" />
