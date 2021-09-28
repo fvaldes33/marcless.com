@@ -6,17 +6,37 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "next lint",
+    "codegen:schema": "apollo client:download-schema --endpoint=https://marcless.myshopify.com/api/2021-07/graphql.json --header=\"X-Shopify-Storefront-Access-Token: b4e15d92a0a94ef3d4ab7e9ace3394c7\"",
+    "codegen:generate": "apollo client:codegen --localSchemaFile=schema.json --target=typescript"
   },
   "dependencies": {
+    "@headlessui/react": "^1.4.1",
+    "@heroicons/react": "^1.0.4",
+    "apollo-boost": "^0.4.9",
+    "apollo-cache-inmemory": "^1.6.6",
+    "apollo-client": "^2.6.10",
+    "apollo-link": "^1.2.14",
+    "apollo-link-error": "^1.1.13",
+    "apollo-link-http": "^1.5.17",
+    "graphql": "^15.6.0",
+    "isomorphic-fetch": "^3.0.0",
     "next": "11.1.2",
     "react": "17.0.2",
     "react-dom": "17.0.2"
   },
   "devDependencies": {
+    "@tailwindcss/aspect-ratio": "^0.2.1",
+    "@tailwindcss/forms": "^0.3.3",
+    "@tailwindcss/typography": "^0.4.1",
+    "@types/graphql": "^14.5.0",
+    "@types/isomorphic-fetch": "^0.0.35",
     "@types/react": "17.0.24",
+    "autoprefixer": "^10.3.5",
     "eslint": "7.32.0",
     "eslint-config-next": "11.1.2",
+    "postcss": "^8.3.8",
+    "tailwindcss": "^2.2.15",
     "typescript": "4.4.3"
   }
 }
