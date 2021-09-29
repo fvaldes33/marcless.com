@@ -4,6 +4,8 @@ import { classNames } from '../utils/helpers';
 
 interface ButtonProps {
   href?: string;
+  block?: boolean;
+  disabled?: boolean;
   variant?: 'primary' | 'secondary' | 'light';
   children?: React.ReactNode;
   onClick?: () => void;
@@ -14,6 +16,8 @@ const Button = forwardRef<ButtonRef, ButtonProps>((props, ref) => {
   const {
     href,
     children,
+    block = false,
+    disabled = false,
     variant = 'primary',
     ...rest
   } = props;
@@ -34,13 +38,28 @@ const Button = forwardRef<ButtonRef, ButtonProps>((props, ref) => {
   }
 
   if (href) {
+    if (href.includes('http')) {
+      return (
+        <a href={href} ref={ref} {...rest} className={classNames(
+          block ? 'block w-full' : ''
+        )}>
+          <span className={classNames(
+            baseClasses,
+            getVariantClass(),
+          )}>{children}</span>
+        </a>
+      );
+    }
+
     return (
       <Link href={href} passHref>
         <a ref={ref} {...rest} className={classNames(
-          getVariantClass(),
-          baseClasses
+          block ? 'block w-full' : ''
         )}>
-          {children}
+          <span className={classNames(
+            baseClasses,
+            getVariantClass(),
+          )}>{children}</span>
         </a>
       </Link>
     );
@@ -48,11 +67,13 @@ const Button = forwardRef<ButtonRef, ButtonProps>((props, ref) => {
 
   return (
     <Fragment>
-      <button ref={ref} {...rest} className={classNames(
-        getVariantClass(),
-        baseClasses
+      <button ref={ref} {...rest} disabled={disabled} className={classNames(
+        block ? 'block w-full' : ''
       )}>
-        {children}
+        <span className={classNames(
+          baseClasses,
+          getVariantClass(),
+        )}>{children}</span>
       </button>
     </Fragment>
   );

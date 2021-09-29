@@ -1,23 +1,22 @@
 /* eslint-disable @next/next/no-img-element */
-import { useEffect, useState } from 'react';
+import { useContext, useEffect, useState } from 'react';
 import type { NextPage, GetStaticProps } from 'next';
 import Head from 'next/head';
 import Link from 'next/link';
 import Image from 'next/image';
-import { useRouter } from 'next/router';
 import fetch from 'isomorphic-fetch';
 import client from '@/src/utils/apollo';
 import { GetSingleProduct, GetSingleProductVariables, GetSingleProduct_products_edges_node, GetSingleProduct_products_edges_node_variants_edges_node } from '@/src/queries/__generated__/GetSingleProduct';
 import { SINGLE_PRODUCT_QUERY } from '@/src/queries';
 import Button from '@/src/components/Button';
-import ProductFeatures from '@/src/components/ProductFeatures';
+import TestimonialGrid from '@/src/components/TestimonialGrid';
 import { formatPrice } from '@/src/utils/helpers';
 import { getStaticProductDetails } from '@/src/static';
 import { Disclosure, Transition } from '@headlessui/react';
-import { ChevronRightIcon } from '@heroicons/react/outline';
+import { ChevronRightIcon, RefreshIcon } from '@heroicons/react/outline';
 import { defaultDescription } from '@/src/utils/constants';
-import blueOnSoap from '@/src/assets/blue-on-soap.jpg';
-import { CHECKOUT_MUTATION } from '@/src/mutations';
+import { Context } from '@/src/state';
+import { Action } from '@/src/types';
 
 interface PageProps {
   product: GetSingleProduct_products_edges_node;
@@ -25,7 +24,7 @@ interface PageProps {
 }
 
 const ProductVariantDetail: NextPage<PageProps> = ({ product, variant }) => {
-  const router = useRouter();
+  const { state: { checkout, shopifyClient }, dispatch } = useContext(Context);
   const [loading, setLoading] = useState(false);
   const [imageShown, setImageShown] = useState(() => {
     return variant.image!;
@@ -36,23 +35,33 @@ const ProductVariantDetail: NextPage<PageProps> = ({ product, variant }) => {
     setImageShown(variant.image!);
   }, [variant]);
 
+  const openCartDrawer = () => {
+    dispatch({ type: Action.SetCartOpen, payload: { cartOpen: true } });
+  }
+
   const createCheckout = async () => {
     setLoading(true);
 
-    try {
-      const { data } = await client.mutate({
-        mutation: CHECKOUT_MUTATION,
-        variables: {
-          variantId: variant.id,
-        }
-      });
-      const { webUrl } = data.checkoutCreate.checkout;
-      window.location.href = webUrl;
+    const items = [
+      {
+        variantId: variant.id,
+        quantity: 1,
+      }
+    ];
 
+    try {
+      const newCheckout = await shopifyClient.checkout.addLineItems(
+        checkout.id,
+        items
+      );
+      dispatch({ type: Action.SetCheckout, payload: { checkout: newCheckout } });
+      openCartDrawer();
     } catch (error) {
 
     } finally {
-      setLoading(false);
+      setTimeout(() => {
+        setLoading(false);
+      }, 500);
     }
   }
 
@@ -150,8 +159,12 @@ const ProductVariantDetail: NextPage<PageProps> = ({ product, variant }) => {
               </div>
             </div>
 
-            <Button onClick={() => createCheckout()}>
-              add to cart
+            <Button disabled={loading} onClick={() => createCheckout()}>
+              {loading ? (
+                <RefreshIcon className="h-6 w-6 animate-spin" aria-hidden="true" />
+              ) : (
+                <>add to cart</>
+              )}
             </Button>
 
             <div className="w-full mt-12">
@@ -189,7 +202,7 @@ const ProductVariantDetail: NextPage<PageProps> = ({ product, variant }) => {
         </div>
       </section>
 
-      <section className="py-8 [ md:py-16 ]">
+      <section className="pt-8 [ md:pt-16 ]">
         <div className="container mx-auto px-4 [ md:grid md:grid-cols-5 ] [ lg:px-0 ]">
           <div className="col-span-3 flex items-center">
             <div className="flex flex-col [ md:px-8 ]">
@@ -227,6 +240,10 @@ const ProductVariantDetail: NextPage<PageProps> = ({ product, variant }) => {
           </div>
         </div>
       </section>
+
+      <TestimonialGrid />
+
+      <div className="my-24"></div>
 
       {/* <pre>{JSON.stringify({ productDetails, product, variant }, null, 2)}</pre> */}
     </>

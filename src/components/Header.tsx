@@ -1,12 +1,15 @@
+/* eslint-disable @next/next/no-img-element */
 import { useContext, Fragment } from "react";
 import Link from "next/link";
-import { Transition } from '@headlessui/react'
-import { MenuIcon, SearchIcon, ShoppingBagIcon, UserIcon, XIcon } from '@heroicons/react/outline';
+import { Transition, Menu, Popover } from '@headlessui/react'
+import { LogoutIcon, MenuIcon, SearchIcon, ShoppingBagIcon, UserIcon, XIcon } from '@heroicons/react/outline';
+import CartDrawer from './CartDrawer';
+import MenuDrawer from './MenuDrawer';
 import { Context } from "../state";
 import { Action } from "../types";
 
 const Header = () => {
-  const { state: { store, navOpen }, dispatch } = useContext(Context);
+  const { state: { customer, checkout, navOpen }, dispatch } = useContext(Context);
 
   const toggleNav = () => {
     dispatch({ type: Action.SetNav, payload: { navOpen: !navOpen } });
@@ -29,47 +32,47 @@ const Header = () => {
               <SearchIcon className="h-6 w-6" aria-hidden="true" />
             </li>
             <li className="hidden md:block">
-              <UserIcon className="h-6 w-6" aria-hidden="true" />
+              {(customer && customer.email) ? (
+                <Menu as="div" className="relative">
+                  <Menu.Button>
+                    <img src={customer.avatar} className="h-6 w-6 rounded-full overflow-hidden" alt="avatar" />
+                  </Menu.Button>
+                  <Menu.Items className="bg-white shadow-xl rounded-xl overflow-hidden absolute mt-2 right-0 origin-top-right z-10 flex flex-col">
+                    <Menu.Item>
+                      <a className="px-4 py-2 hover:bg-gray-200 flex items-center" href="/analytics">
+                        <UserIcon className="h-4 w-4 mr-3" aria-hidden="true" />
+                        <span>Account</span>
+                      </a>
+                    </Menu.Item>
+                    <Menu.Item>
+                      <a className="px-4 py-2 hover:bg-gray-200 flex items-center" href="/analytics">
+                        <LogoutIcon className="h-4 w-4 mr-3" aria-hidden="true" />
+                        <span>Logout</span>
+                      </a>
+                    </Menu.Item>
+                  </Menu.Items>
+                </Menu>
+              ) : (
+                <UserIcon className="h-6 w-6" aria-hidden="true" />
+              )}
             </li>
-            <li>
-              <ShoppingBagIcon className="h-6 w-6" aria-hidden="true" />
+            <li className="relative">
+              <Link href="/cart" passHref>
+                <a>
+                  <ShoppingBagIcon className="h-6 w-6" aria-hidden="true" />
+                </a>
+              </Link>
+              {checkout.lineItems.length > 0 && (
+                <span
+                  className="absolute transform -translate-x-2 -translate-y-2 top-0 right-0 h-4 w-4 text-xs bg-primary rounded-full flex justify-center items-center">{checkout.lineItems.length}</span>
+              )}
             </li>
           </ul>
         </nav>
       </div>
-      <Transition
-        show={navOpen}
-      >
-        <Transition.Child
-          as={Fragment}
-          enter="transition-opacity ease-linear duration-300"
-          enterFrom="opacity-0"
-          enterTo="opacity-100"
-          leave="transition-opacity ease-linear duration-300"
-          leaveFrom="opacity-100"
-          leaveTo="opacity-0"
-        >
-          <div className="absolute inset-0 w-full h-full bg-gray-100 opacity-75 z-50"></div>
-        </Transition.Child>
-        <Transition.Child
-          as={Fragment}
-          enter="transition ease-in-out duration-300 transform"
-          enterFrom="-translate-x-full"
-          enterTo="translate-x-0"
-          leave="transition ease-in-out duration-300 transform"
-          leaveFrom="translate-x-0"
-          leaveTo="-translate-x-full"
-        >
-          <div className="absolute inset-0 w-4/5 bg-white h-full border-r border-gray-300 [ md:w-1/2 ] [ lg:w-1/3 ] z-50">
-            <button
-              className="absolute top-0 left-0 mt-4 ml-4 h-12 w-12 flex items-center justify-center rounded-full bg-primary text-white"
-              onClick={() => toggleNav()}
-            >
-              <XIcon className="h-6 w-6" aria-hidden="true" />
-            </button>
-          </div>
-        </Transition.Child>
-      </Transition>
+
+      <MenuDrawer />
+      <CartDrawer />
     </header>
   );
 }
