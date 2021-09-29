@@ -10,10 +10,11 @@ import { GetSingleProduct, GetSingleProductVariables, GetSingleProduct_products_
 import { SINGLE_PRODUCT_QUERY } from '@/src/queries';
 import Button from '@/src/components/Button';
 import TestimonialGrid from '@/src/components/TestimonialGrid';
-import { formatPrice } from '@/src/utils/helpers';
+import QtySelector from '@/src/components/QtySelector';
+import { classNames, formatPrice } from '@/src/utils/helpers';
 import { getStaticProductDetails } from '@/src/static';
 import { Disclosure, Transition } from '@headlessui/react';
-import { ChevronRightIcon, RefreshIcon } from '@heroicons/react/outline';
+import { ChevronRightIcon, MinusCircleIcon, PlusCircleIcon, RefreshIcon } from '@heroicons/react/outline';
 import { defaultDescription } from '@/src/utils/constants';
 import { Context } from '@/src/state';
 import { Action } from '@/src/types';
@@ -26,6 +27,7 @@ interface PageProps {
 const ProductVariantDetail: NextPage<PageProps> = ({ product, variant }) => {
   const { state: { checkout, shopifyClient }, dispatch } = useContext(Context);
   const [loading, setLoading] = useState(false);
+  const [qty, setQty] = useState(1);
   const [imageShown, setImageShown] = useState(() => {
     return variant.image!;
   });
@@ -45,7 +47,7 @@ const ProductVariantDetail: NextPage<PageProps> = ({ product, variant }) => {
     const items = [
       {
         variantId: variant.id,
-        quantity: 1,
+        quantity: qty,
       }
     ];
 
@@ -143,13 +145,16 @@ const ProductVariantDetail: NextPage<PageProps> = ({ product, variant }) => {
             <div className="prose py-8" dangerouslySetInnerHTML={{ __html: product.descriptionHtml }} />
 
             <div className="">
-              <label className="font-serif block mb-2">Color - {variant.title}</label>
+              <label className="font-serif block mb-2">Color / {variant.title}</label>
               <div className="flex flex-wrap mb-6">
                 {product.variants.edges.map(({ node }) => {
 
                   return (
                     <Link key={node.id} href={`/shop/${product.handle}/${node.sku}`} passHref>
-                      <a className="h-8 w-8 mr-4 mb-4 rounded-full flex items-center justify-center border border-gray-700 overflow-hidden">
+                      <a className={classNames(
+                        'h-8 w-8 mr-4 mb-4 rounded-full flex items-center justify-center border-2 overflow-hidden',
+                        node.sku === variant.sku ? 'border-gray-700' : 'border-gray-200'
+                      )}>
                         <div className="h-6 w-6 rounded-full bg-black">
                         </div>
                       </a>
@@ -159,13 +164,21 @@ const ProductVariantDetail: NextPage<PageProps> = ({ product, variant }) => {
               </div>
             </div>
 
-            <Button disabled={loading} onClick={() => createCheckout()}>
-              {loading ? (
-                <RefreshIcon className="h-6 w-6 animate-spin" aria-hidden="true" />
-              ) : (
-                <>add to cart</>
-              )}
-            </Button>
+            <div className="flex justify-between">
+              <div className="">
+                {/* quantity selector */}
+                <QtySelector defaultValue={qty} onChange={(num: number) => setQty(num)} />
+              </div>
+              <div className="">
+                <Button disabled={loading} onClick={() => createCheckout()}>
+                  {loading ? (
+                    <RefreshIcon className="h-6 w-6 animate-spin" aria-hidden="true" />
+                  ) : (
+                    <>add to cart</>
+                  )}
+                </Button>
+              </div>
+            </div>
 
             <div className="w-full mt-12">
               <h2 className="font-serif text-xl mb-4 text-center [ md:text-left ]">{productDetails.faq.heading}</h2>
