@@ -13,6 +13,7 @@ class MyDocument extends Document {
           <link rel="preconnect" href="https://fonts.googleapis.com" />
           <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="true" />
           <link href="https://fonts.googleapis.com/css2?family=Bodoni+Moda&family=Montserrat:wght@300;500&display=swap" rel="stylesheet" />
+          <script type="text/javascript" id="hs-script-loader" async defer src="//js.hs-scripts.com/20789650.js"></script>
         </Head>
         <body className="font-sans font-normal">
           <Main />
