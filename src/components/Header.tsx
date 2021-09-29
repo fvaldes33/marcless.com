@@ -28,10 +28,10 @@ const Header = () => {
         </Link>
         <nav className="flex">
           <ul className="flex space-x-4">
-            <li className="hidden md:block">
+            {/* <li className="hidden md:block">
               <SearchIcon className="h-6 w-6" aria-hidden="true" />
-            </li>
-            <li className="hidden md:block">
+            </li> */}
+            {/* <li className="hidden md:block">
               {(customer && customer.email) ? (
                 <Menu as="div" className="relative">
                   <Menu.Button>
@@ -55,7 +55,7 @@ const Header = () => {
               ) : (
                 <UserIcon className="h-6 w-6" aria-hidden="true" />
               )}
-            </li>
+            </li> */}
             <li className="relative">
               <Link href="/cart" passHref>
                 <a>
