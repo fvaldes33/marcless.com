@@ -4,17 +4,14 @@ import HeroWithProduct from '@/src/components/HeroProduct';
 import FeatureList from '@/src/components/FeatureList';
 import Banner from '@/src/components/Banner';
 import ContentMedia from '@/src/components/ContentMedia';
-import ProductGrid from '@/src/components/ProductGrid';
-import FeaturedProduct from '@/src/components/FeaturedProduct';
 import TestimonialGrid from '@/src/components/TestimonialGrid';
 import Button from '@/src/components/Button';
 import { GetProducts, GetProductsVariables, PRODUCTS_QUERY } from '../queries';
 import client from '../utils/apollo';
-import manShaving from '@/src/assets/man-shaving.jpeg';
 import womanShaving from '@/src/assets/woman-shaving.jpg';
-import womanShavingPits from '@/src/assets/woman-shaving-pits.jpg';
 import brightSilverInStand from '@/src/assets/bright-silver-in-stand.jpg';
 import goldWhiteOnDish from '@/src/assets/gold-white-on-dish.jpg';
+import { ShieldCheckIcon, CashIcon, CheckIcon } from '@heroicons/react/outline';
 
 const Home: NextPage<GetProducts> = ({ products }) => {
   return (
@@ -39,11 +36,35 @@ const Home: NextPage<GetProducts> = ({ products }) => {
           }
         />
 
-        <FeatureList />
+        <FeatureList
+          eyebrow="why marc<i>less</i>"
+          heading="Say good bye to the <b>BrandTax™</b>."
+          body="We’ve created a thoughtful selection of quality razors and shaving accessories you reach for every day."
+          items={[
+            {
+              name: 'Affordability',
+              description:
+                'Better stuff, fewer dollars. It’s that simple.',
+              icon: CashIcon,
+            },
+            {
+              name: 'Quality',
+              description:
+                'Built from the highest quality materials in the industry.',
+              icon: CheckIcon,
+            },
+            {
+              name: 'Clean and sustainable',
+              description:
+                'Durable and recyclable, while free of nasty chemicals.',
+              icon: ShieldCheckIcon,
+            },
+          ]}
+        />
 
         <ContentMedia
           imagePosition="left"
-          eyebrow="no more lies"
+          eyebrow="just a better shave"
           heading="Say goodbye to irritation, nicks, and bumps"
           body="More is not always good. Say goodbye to the 3+ blades Big Razor companies are telling you to buy. One blade is truly all you need. No more irritation, nicks, or red bumps."
           image={womanShaving}

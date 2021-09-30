@@ -26,9 +26,7 @@ const ContentMedia: React.FC<ContentMediaProps> = ({ eyebrow, heading, body, cta
           <p className="text-3xl font-serif mb-4 text-gray-800">
             {heading}
           </p>
-          <p className="mb-16 max-w-2xl text-lg text-gray-600">
-            {body}
-          </p>
+          <p className="mb-16 max-w-2xl text-lg text-gray-600" dangerouslySetInnerHTML={{ __html: body }}></p>
           {cta && cta}
         </div>
 

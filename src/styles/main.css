@@ -2,3 +2,13 @@ input[type=number]::-webkit-inner-spin-button, input[type=number]::-webkit-outer
     -webkit-appearance: none;
     margin: 0;
 }
+
+.gallery__slide {
+    height: 396px;
+}
+
+@media screen and (min-width: 768px) {
+    .gallery__slide {
+        height: 620px;
+    }
+}

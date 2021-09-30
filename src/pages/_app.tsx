@@ -1,4 +1,6 @@
 import 'tailwindcss/tailwind.css';
+import 'swiper/css';
+import 'swiper/css/pagination';
 import '@/src/styles/main.css';
 import App from 'next/app';
 import type { AppProps } from 'next/app';

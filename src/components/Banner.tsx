@@ -1,6 +1,4 @@
-import { useContext } from "react";
 import Image from 'next/image';
-import { Context } from "../state";
 
 interface BannerProps {
   heading: string;
@@ -9,10 +7,8 @@ interface BannerProps {
 }
 
 const Banner: React.FC<BannerProps> = ({ heading, image, cta }) => {
-  const { state: { store, navOpen }, dispatch } = useContext(Context);
-
   return (
-    <section className="my-12 [ md:my-24 ]">
+    <section className="mt-12 [ md:mt-24 ]">
       <div className="py-12 px-4 [ md:py-40 ] [ lg:px-0 ] relative text-white">
         <div className="absolute container mx-auto inset-0 z-0 rounded-2xl overflow-hidden">
           <Image className="object-cover object-right" layout="fill" src={image} alt="man shaving" />

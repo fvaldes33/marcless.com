@@ -6,15 +6,16 @@ import Link from 'next/link';
 import Image from 'next/image';
 import fetch from 'isomorphic-fetch';
 import client from '@/src/utils/apollo';
+import { Disclosure, Transition } from '@headlessui/react';
+import { ChevronRightIcon, LightningBoltIcon, RefreshIcon, ShieldCheckIcon, ThumbUpIcon } from '@heroicons/react/outline';
 import { GetSingleProduct, GetSingleProductVariables, GetSingleProduct_products_edges_node, GetSingleProduct_products_edges_node_variants_edges_node } from '@/src/queries/__generated__/GetSingleProduct';
 import { SINGLE_PRODUCT_QUERY } from '@/src/queries';
 import Button from '@/src/components/Button';
-import TestimonialGrid from '@/src/components/TestimonialGrid';
+import FeatureList from '@/src/components/FeatureList';
+import Gallery from '@/src/components/Gallery';
 import QtySelector from '@/src/components/QtySelector';
 import { classNames, formatPrice } from '@/src/utils/helpers';
 import { getStaticProductDetails } from '@/src/static';
-import { Disclosure, Transition } from '@headlessui/react';
-import { ChevronRightIcon, MinusCircleIcon, PlusCircleIcon, RefreshIcon } from '@heroicons/react/outline';
 import { defaultDescription } from '@/src/utils/constants';
 import { Context } from '@/src/state';
 import { Action } from '@/src/types';
@@ -90,7 +91,7 @@ const ProductVariantDetail: NextPage<PageProps> = ({ product, variant }) => {
         }} />
       </Head>
 
-      <section className="py-12 [ md:py-16 ]">
+      <section className="mt-12 [ md:mt-16 ]">
         <div className="container max-w-screen-lg mx-auto px-4 [ md:grid md:grid-cols-2 ] [ lg:px-0 ]">
           <div className="col-span-1">
             <figure className="aspect-w-3 aspect-h-4 rounded-lg overflow-hidden">
@@ -148,14 +149,15 @@ const ProductVariantDetail: NextPage<PageProps> = ({ product, variant }) => {
               <label className="font-serif block mb-2">Color / {variant.title}</label>
               <div className="flex flex-wrap mb-6">
                 {product.variants.edges.map(({ node }) => {
-
+                  const colorSwatch = productDetails.colors.find((color: any) => color.name === node.title.toLowerCase().replace(/ /g, '-'));
                   return (
                     <Link key={node.id} href={`/shop/${product.handle}/${node.sku}`} passHref>
-                      <a className={classNames(
+                      <a title={node.title} className={classNames(
                         'h-8 w-8 mr-4 mb-4 rounded-full flex items-center justify-center border-2 overflow-hidden',
                         node.sku === variant.sku ? 'border-gray-700' : 'border-gray-200'
                       )}>
-                        <div className="h-6 w-6 rounded-full bg-black">
+                        <div className="h-6 w-6 relative rounded-full overflow-hidden">
+                          <Image objectFit="cover" src={colorSwatch.src} alt={colorSwatch.name} />
                         </div>
                       </a>
                     </Link>
@@ -185,7 +187,9 @@ const ProductVariantDetail: NextPage<PageProps> = ({ product, variant }) => {
               {productDetails.faq.items.map(({ question, answer }: { question: string, answer: string }, index: number) => (
                 <Disclosure key={index}>
                   {({ open }) => (
-                    <div className="mb-4">
+                    <div className={classNames(
+                      index === productDetails.faq.items.length - 1 ? '' : 'mb-4'
+                    )}>
                       <Disclosure.Button className="flex w-full items-center justify-between bg-gray-100 rounded-lg px-6 py-4 text-left">
                         <span>{question}</span>
                         <ChevronRightIcon
@@ -215,7 +219,7 @@ const ProductVariantDetail: NextPage<PageProps> = ({ product, variant }) => {
         </div>
       </section>
 
-      <section className="pt-8 [ md:pt-16 ]">
+      <section className="mt-12 [ md:mt-24 ]">
         <div className="container mx-auto px-4 [ md:grid md:grid-cols-5 ] [ lg:px-0 ]">
           <div className="col-span-3 flex items-center">
             <div className="flex flex-col [ md:px-8 ]">
@@ -254,11 +258,42 @@ const ProductVariantDetail: NextPage<PageProps> = ({ product, variant }) => {
         </div>
       </section>
 
-      <TestimonialGrid />
+      <FeatureList
+        eyebrow="the marc razor"
+        heading="Fewer blades, less irritation, great design."
+        body="Get a smooth, ultra-close shave without the aggressive, go-beneath-the-surface extra blades that cause razor burn and ingrown hairs."
+        items={[
+          {
+            name: 'Safe and easy to use',
+            description:
+              'Assemble and disassemble conveniently in seconds.',
+            icon: ThumbUpIcon,
+          },
+          {
+            name: 'Perfect shave',
+            description:
+              'Achieve a closer, smoother, more professional shave.',
+            icon: LightningBoltIcon,
+          },
+          {
+            name: 'Clean and sustainable',
+            description:
+              'Durable and recyclable, while free of nasty chemicals.',
+            icon: ShieldCheckIcon,
+          },
+        ]}
+      />
 
-      <div className="my-24"></div>
+      {/* <TestimonialGrid /> */}
+      <Gallery images={productDetails.gallery} />
 
-      {/* <pre>{JSON.stringify({ productDetails, product, variant }, null, 2)}</pre> */}
+      <div className="yotpo yotpo-main-widget"
+        data-product-id={product.id}
+        data-name={product.title}
+        data-url={`/shop/${product.handle}/${variant.sku}`}
+        data-image-url={variant.image?.transformedSrc}
+        data-description={product.description}>
+      </div>
     </>
   )
 }

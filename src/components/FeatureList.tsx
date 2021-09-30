@@ -1,6 +1,5 @@
-import { useContext } from "react";
-import { AnnotationIcon, GlobeAltIcon, LightningBoltIcon, ScaleIcon, ShieldCheckIcon, ThumbUpIcon } from '@heroicons/react/outline'
-import { Context } from "../state";
+import React, { ReactNode } from "react";
+import { LightningBoltIcon, ShieldCheckIcon, ThumbUpIcon } from '@heroicons/react/outline'
 
 const features = [
   {
@@ -23,26 +22,36 @@ const features = [
   },
 ]
 
-const FeatureList = () => {
-  const { state: { store, navOpen }, dispatch } = useContext(Context);
+interface FeatureListProps {
+  eyebrow?: string;
+  heading: string;
+  body?: string;
+  items: Array<{ name: string; description: string; icon: typeof ShieldCheckIcon }>;
+}
+
+const FeatureList: React.FC<FeatureListProps> = ({
+  eyebrow,
+  heading,
+  body,
+  items = [],
+}) => {
 
   return (
     <section className="pt-12 [ md:pt-24 ] bg-white">
       <div className="max-w-screen-lg mx-auto px-4 [ lg:px-0 ]">
         <div className="lg:text-center">
-          <h2 className="font-sans font-normal mb-6 text-primary tracking-wider">why marc<i>less</i></h2>
-          <p className="text-3xl font-serif mb-4 text-gray-800">
-            The same great features, at a fraction of the cost.
-          </p>
-          <p className="mb-16 max-w-2xl text-xl text-gray-600 lg:mx-auto">
-            Lorem ipsum dolor sit amet consect adipisicing elit. Possimus magnam voluptatum cupiditate veritatis in
-            accusamus quisquam.
-          </p>
+          {eyebrow && <h2 className="font-sans font-normal mb-6 text-primary tracking-wider" dangerouslySetInnerHTML={{ __html: eyebrow }}></h2>}
+          <p className="text-3xl font-serif mb-4 text-gray-800" dangerouslySetInnerHTML={{
+            __html: heading,
+          }}></p>
+          {body && (
+            <p className="mb-16 max-w-2xl text-xl text-gray-600 lg:mx-auto" dangerouslySetInnerHTML={{ __html: body }}></p>
+          )}
         </div>
 
         <div className="mt-10">
           <dl className="space-y-10 md:space-y-0 md:grid md:grid-cols-3 md:gap-x-8 md:gap-y-10">
-            {features.map((feature) => (
+            {items.map((feature) => (
               <div key={feature.name} className="relative">
                 <dt>
                   <div className="absolute flex items-center justify-center h-12 w-12 rounded-full bg-primary text-white">

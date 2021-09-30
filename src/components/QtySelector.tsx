@@ -38,7 +38,6 @@ const QtySelector: React.FC<QtySelectorProps> = ({
         <input
           aria-label="Manually enter quantity"
           className="appearance-none border-none text-center w-12 focus:border-none focus:ring-0 focus:outline-none"
-          defaultValue={defaultValue}
           value={value}
           onChange={e => setValue(Number(e.target.value))}
           type="number"
