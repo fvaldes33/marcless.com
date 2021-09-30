@@ -11,6 +11,7 @@ export interface ProductPageStateContext {
 
 export const defaultState: AppState = {
   ready: false,
+  active: false,
   shopifyClient: shopify,
   navOpen: false,
   cartOpen: false,

@@ -9,10 +9,14 @@ import { Context } from "../state";
 import { Action } from "../types";
 
 const Header = () => {
-  const { state: { customer, checkout, navOpen }, dispatch } = useContext(Context);
+  const { state: { customer, checkout, navOpen, active }, dispatch } = useContext(Context);
 
   const toggleNav = () => {
     dispatch({ type: Action.SetNav, payload: { navOpen: !navOpen } });
+  }
+
+  if (!active) {
+    return null;
   }
 
   return (

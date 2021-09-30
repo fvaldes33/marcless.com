@@ -20,6 +20,7 @@ export interface BasicCustomer {
 
 export interface AppState {
   ready: boolean;
+  active: boolean;
   shopifyClient: Client;
   navOpen: boolean;
   cartOpen: boolean;
