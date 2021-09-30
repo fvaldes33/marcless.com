@@ -1,32 +1,10 @@
-import React, { ReactNode } from "react";
-import { LightningBoltIcon, ShieldCheckIcon, ThumbUpIcon } from '@heroicons/react/outline'
-
-const features = [
-  {
-    name: 'Safe and easy to use',
-    description:
-      'Assemble and disassemble conveniently in seconds.',
-    icon: ThumbUpIcon,
-  },
-  {
-    name: 'Perfect shave',
-    description:
-      'Achieve a closer, smoother, more professional shave.',
-    icon: LightningBoltIcon,
-  },
-  {
-    name: 'Clean and sustainable',
-    description:
-      'Durable and recyclable, while free of nasty chemicals.',
-    icon: ShieldCheckIcon,
-  },
-]
+import React from "react";
 
 interface FeatureListProps {
   eyebrow?: string;
   heading: string;
   body?: string;
-  items: Array<{ name: string; description: string; icon: typeof ShieldCheckIcon }>;
+  items: Array<{ name: string; description: string; icon: (props: React.ComponentProps<'svg'>) => JSX.Element }>;
 }
 
 const FeatureList: React.FC<FeatureListProps> = ({
