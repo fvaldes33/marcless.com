@@ -18,6 +18,13 @@ export interface BasicCustomer {
   avatar?: string;
 }
 
+export type ContainerType = 'normal' | 'thin' | 'wide' | 'full' | string;
+export enum ContainerTypeEnum {
+  Normal = 'normal',
+  Thin = 'thin',
+  Full = 'full',
+}
+
 export interface AppState {
   ready: boolean;
   active: boolean;

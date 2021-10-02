@@ -24,6 +24,9 @@ module.exports = {
       secondary: {
         DEFAULT: '#0F0F2D',
       },
+      tertiary: {
+        DEFAULT: '#e98286',
+      },
       ...colors,
     },
   },

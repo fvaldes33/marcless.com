@@ -64,7 +64,7 @@ const NewsletterForm: React.FC<NewsletterFormProps> = ({ centered = false, onSub
   }
 
   return (
-    <form className="w-full" onSubmit={internalOnSubmitForm}>
+    <form id="NewsletterForm" className="newsletterform w-full" onSubmit={internalOnSubmitForm}>
       <div className={classNames(
         'group relative flex items-center',
         centered ? 'justify-center' : 'justify-start'

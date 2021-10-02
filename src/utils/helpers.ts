@@ -1,6 +1,31 @@
+import { ContainerType, ContainerTypeEnum } from "../types";
 
 export const helpMe = (): string => {
   return 'done!'
+}
+
+const resolveContainer = (value: ContainerType): string => {
+  switch (value) {
+    case ContainerTypeEnum.Normal:
+      return 'container mx-auto px-4 [ xl:px-0 ]';
+    case ContainerTypeEnum.Thin:
+      return 'container max-w-screen-lg mx-auto px-4 [ xl:px-0 ]';
+    case ContainerTypeEnum.Full:
+      return 'px-4 [ xl:px-0 ]';
+    default:
+      return 'container mx-auto';
+  }
+}
+
+const resolverMap: { [key: string]: (value: string) => string } = {
+  container: resolveContainer
+}
+
+export const resolveClass = (prop: string, value: string): string => {
+  if (!(prop in resolverMap)) {
+    return '';
+  }
+  return resolverMap[prop](value);
 }
 
 export function toLocalStorage(key: string, value: any): void {
