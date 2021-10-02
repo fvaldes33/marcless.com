@@ -46,7 +46,7 @@ const AboutPage: NextPage = () => {
       </div>
 
       <section className="pt-12 [ md:pt-24 ]">
-        <div className="container max-w-screen-md mx-auto flex flex-col items-start">
+        <div className="container max-w-screen-md mx-auto flex flex-col items-start px-4 [ lg:px-0 ]">
           <Eyebrow>About</Eyebrow>
           <H1 className="mb-4">Better shave, fewer dollars. It’s that simple.</H1>
           <Paragraph>

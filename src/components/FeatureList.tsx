@@ -15,7 +15,7 @@ const FeatureList: React.FC<FeatureListProps> = ({
 }) => {
 
   return (
-    <section className="pt-12 [ md:pt-24 ]">
+    <section className="pt-16 [ md:pt-32 ]">
       <div className="max-w-screen-lg mx-auto px-4 [ xl:px-0 ]">
         <div className="lg:text-center">
           {eyebrow && eyebrow}

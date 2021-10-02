@@ -21,7 +21,7 @@ const ContentMedia: React.FC<ContentMediaProps> = ({
       spacing,
     )}>
       <div className={classNames(
-        'container mx-auto space-y-10 [ md:space-y-0 md:flex ]',
+        'container mx-auto space-y-6 [ md:space-y-0 md:flex ]',
         layout === 'row' ? '[ md:flex-row ]' : '[ md:flex-row-reverse ]',
         resolveClass('container', container)
       )}>
