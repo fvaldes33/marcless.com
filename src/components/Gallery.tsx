@@ -8,7 +8,7 @@ interface GalleryProps {
 
 const Gallery: React.FC<GalleryProps> = ({ images }) => {
   return (
-    <section className="my-12 px-4 [ md:my-24 md:px-6 ]">
+    <section className="mt-12 px-4 [ md:mt-24 md:px-6 ]">
       <Swiper
         modules={[Pagination]}
         pagination={{ clickable: true }}

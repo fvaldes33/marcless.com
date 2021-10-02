@@ -10,7 +10,7 @@ const PolicyPage: NextPage = () => {
   return (
     <>
       <Head>
-        <title>Refund Policy | marcless.com</title>
+        <title>Refund Policy | Marcless</title>
         <meta name="description" content={defaultDescription} />
       </Head>
 

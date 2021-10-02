@@ -1,5 +1,5 @@
 /* eslint-disable @next/next/no-img-element */
-import { useContext, useEffect, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import type { NextPage, GetStaticProps } from 'next';
 import Head from 'next/head';
 import Link from 'next/link';
@@ -19,6 +19,7 @@ import { getStaticProductDetails } from '@/src/static';
 import { defaultDescription } from '@/src/utils/constants';
 import { Context } from '@/src/state';
 import { Action } from '@/src/types';
+import { Eyebrow, H1, LargeLead } from '@/src/components/Typography';
 
 interface PageProps {
   product: GetSingleProduct_products_edges_node;
@@ -223,7 +224,7 @@ const ProductVariantDetail: NextPage<PageProps> = ({ product, variant }) => {
         <div className="container mx-auto px-4 [ md:grid md:grid-cols-5 ] [ lg:px-0 ]">
           <div className="col-span-3 flex items-center">
             <div className="flex flex-col [ md:px-8 ]">
-              <h2 className="font-sans font-normal mb-6 text-primary tracking-wider">{productDetails.includes.eyebrow}</h2>
+              <h2 className="font-sans uppercase mb-6 text-primary tracking-widest font-bold">{productDetails.includes.eyebrow}</h2>
               <p className="text-3xl font-serif mb-4 text-gray-800">
                 {productDetails.includes.heading}
               </p>
@@ -259,32 +260,16 @@ const ProductVariantDetail: NextPage<PageProps> = ({ product, variant }) => {
       </section>
 
       <FeatureList
-        eyebrow="the marc razor"
-        heading="Fewer blades, less irritation, great design."
-        body="Get a smooth, ultra-close shave without the aggressive, go-beneath-the-surface extra blades that cause razor burn and ingrown hairs."
-        items={[
-          {
-            name: 'Safe and easy to use',
-            description:
-              'Assemble and disassemble conveniently in seconds.',
-            icon: ThumbUpIcon,
-          },
-          {
-            name: 'Perfect shave',
-            description:
-              'Achieve a closer, smoother, more professional shave.',
-            icon: LightningBoltIcon,
-          },
-          {
-            name: 'Clean and sustainable',
-            description:
-              'Durable and recyclable, while free of nasty chemicals.',
-            icon: ShieldCheckIcon,
-          },
-        ]}
+        eyebrow={<Eyebrow>the marc razor</Eyebrow>}
+        heading={<H1 className="mb-4">Fewer blades, less irritation, great design.</H1>}
+        body={
+          <LargeLead className="mb-12 max-w-screen-md mx-auto">
+            Get a smooth, ultra-close shave without the aggressive, go-beneath-the-surface extra blades that cause razor burn and ingrown hairs.
+          </LargeLead>
+        }
+        items={productDetails.features.items}
       />
 
-      {/* <TestimonialGrid /> */}
       <Gallery images={productDetails.gallery} />
 
       <div className="yotpo yotpo-main-widget"

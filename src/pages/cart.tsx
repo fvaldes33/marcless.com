@@ -28,7 +28,7 @@ const Cart: NextPage = () => {
   return (
     <>
       <Head>
-        <title>Cart | marcless.com</title>
+        <title>Cart | Marcless</title>
         <meta name="description" content={defaultDescription} />
       </Head>
 
