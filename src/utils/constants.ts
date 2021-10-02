@@ -1,3 +1,4 @@
+import { ShieldCheckIcon, CashIcon, CheckIcon } from '@heroicons/react/outline';
 import { MainMenuItem, SocialLinkItems } from "../types";
 
 export const mainNav: MainMenuItem[] = [
@@ -11,6 +12,45 @@ export const secondaryNav: MainMenuItem[] = [
   { label: 'Refunds', href: '/refund-policy' },
   { label: 'Privacy', href: '/privacy-policy' },
   { label: 'Terms', href: '/terms-of-service' },
+];
+
+export const testimonials = [
+  {
+    name: 'James G',
+    rating: 5,
+    description: 'This Safety Razor is a must have! Great Razor for men or women! 5 Stars !! I will definitely buy again.',
+  },
+  {
+    name: 'Paul V',
+    rating: 5,
+    description: 'Good quality and it seems durable. This is a great eco friendly alternative to disposable razors.',
+  },
+  {
+    name: 'Alessandra E',
+    rating: 4,
+    description: 'It takes a little getting used to, just being honest. But I can’t believe it took me this long to try a safety razor. It makes my legs and armpits extremely smooth.',
+  },
+];
+
+export const brandFeatures = [
+  {
+    name: 'Affordability',
+    description:
+      'Better stuff, fewer dollars. It’s that simple.',
+    icon: CashIcon,
+  },
+  {
+    name: 'Quality',
+    description:
+      'Built from the highest quality materials in the industry.',
+    icon: CheckIcon,
+  },
+  {
+    name: 'Clean and sustainable',
+    description:
+      'Durable and recyclable, while free of nasty chemicals.',
+    icon: ShieldCheckIcon,
+  },
 ];
 
 export const socialLinks: SocialLinkItems[] = [
@@ -31,4 +71,5 @@ export const socialLinks: SocialLinkItems[] = [
   },
 ];
 
-export const defaultDescription = 'Inspired by a vintage safety razor, crafted from solid zinc alloy and built to give you the best shave you\'ve ever had. Includes 20 blades.';
+export const defaultTitle: string = 'Better stuff, fewer dollars | Marcless';
+export const defaultDescription = 'Inspired by a vintage safety razor, crafted from solid zinc alloy and built to give you the best shave you\'ve ever had.';

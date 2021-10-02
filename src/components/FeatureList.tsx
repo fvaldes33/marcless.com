@@ -1,9 +1,9 @@
 import React from "react";
 
 interface FeatureListProps {
-  eyebrow?: string;
-  heading: string;
-  body?: string;
+  eyebrow?: JSX.Element;
+  heading: JSX.Element;
+  body?: JSX.Element;
   items: Array<{ name: string; description: string; icon: (props: React.ComponentProps<'svg'>) => JSX.Element }>;
 }
 
@@ -15,16 +15,12 @@ const FeatureList: React.FC<FeatureListProps> = ({
 }) => {
 
   return (
-    <section className="pt-12 [ md:pt-24 ] bg-white">
-      <div className="max-w-screen-lg mx-auto px-4 [ lg:px-0 ]">
+    <section className="pt-16 [ md:pt-32 ]">
+      <div className="max-w-screen-lg mx-auto px-4 [ xl:px-0 ]">
         <div className="lg:text-center">
-          {eyebrow && <h2 className="font-sans font-normal mb-6 text-primary tracking-wider" dangerouslySetInnerHTML={{ __html: eyebrow }}></h2>}
-          <p className="text-3xl font-serif mb-4 text-gray-800" dangerouslySetInnerHTML={{
-            __html: heading,
-          }}></p>
-          {body && (
-            <p className="mb-16 max-w-2xl text-xl text-gray-600 lg:mx-auto" dangerouslySetInnerHTML={{ __html: body }}></p>
-          )}
+          {eyebrow && eyebrow}
+          {heading}
+          {body && body}
         </div>
 
         <div className="mt-10">

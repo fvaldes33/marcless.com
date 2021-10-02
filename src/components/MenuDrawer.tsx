@@ -17,7 +17,7 @@ const MenuDrawer: React.FC = () => {
 
   return (
     <Transition.Root show={navOpen} as={Fragment}>
-      <Dialog as="div" className="fixed inset-0 overflow-hidden" onClose={toggleNav}>
+      <Dialog as="div" className="fixed inset-0 overflow-hidden z-50" onClose={toggleNav}>
         <div className="absolute inset-0 overflow-hidden">
           <Transition.Child
             as={Fragment}
