@@ -29,19 +29,19 @@ const Home: NextPage<GetProducts> = ({ products }) => {
         </Head>
 
         <section className="h-screen w-screen flex items-center">
-          <div className="container mx-auto flex flex-col items-center">
+          <div className="container mx-auto px-4 flex flex-col items-center [ lg:px-0 ]">
             <div>
-              <h1 className="font-serif block text-8xl tracking-wide mb-1">
+              <h1 className="font-serif block text-7xl tracking-wide mb-1 [ md:text-8xl ]">
                 marc<span className="bg-primary text-white">less</span>
               </h1>
-              <h2 className="text-base">Better stuff, fewer dollars.</h2>
+              <h2 className="text-base">Better shave, fewer dollars.</h2>
             </div>
             <div className="mt-12 flex flex-col justify-center items-center">
               {signupSuccess ? (
                 <p>Thank you for signing up!</p>
               ) : (
                 <>
-                  <p className="mb-4">Enter your email below to get notified when we go live.</p>
+                  <p className="mb-4 text-center">Enter your email below to get notified when we go live.</p>
                   <NewsletterForm
                     centered
                     onSubmitForm={() => setSignupSuccess(true)}
