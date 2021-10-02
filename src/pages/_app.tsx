@@ -23,7 +23,7 @@ function Body({ children }: { children: React.ReactNode }) {
 
 function MyApp({ Component, pageProps, store }: AppPropsWithGlobals) {
   return (
-    <AppProvider initialState={{ ready: true, active: true, store }}>
+    <AppProvider initialState={{ ready: true, active: false, store }}>
       <Body>
         <Header />
         <main>
