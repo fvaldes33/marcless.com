@@ -83,7 +83,10 @@ const Home: NextPage<GetProducts> = ({ products }) => {
             </>
           }
           media={
-            <Image src={bodyDadShaving} alt="razor on black and white marble countertop" layout="fill" objectFit="cover" objectPosition="30% 35%" />
+            <>
+              <Image src={bodyDadShaving} alt="razor on black and white marble countertop" layout="fill" objectFit="cover" objectPosition="30% 35%" />
+              <div className="absolute inset-0 w-full h-full bg-gray-800 opacity-25 [ md:hidden ]"></div>
+            </>
           }
         />
 
@@ -140,9 +143,9 @@ const Home: NextPage<GetProducts> = ({ products }) => {
         <section className="bg-primary px-4 relative text-gray-800 overflow-hidden [ md:bg-opacity-0 ] [ xl:px-0 ]">
           <div className="container mx-auto flex flex-col items-center [ md:flex-row md:justify-end ] z-10">
             <div className=" w-full flex flex-col items-start justify-end z-10 [ md:bg-white md:border-2 md:border-primary md:px-8 md:py-8 md:my-8 md:w-3/5 md:transform md:-translate-x-4 ] [ lg:px-12 lg:my-12 lg:w-1/3 lg:transform lg:-translate-x-12 ]">
-              <Eyebrow>New release</Eyebrow>
+              <Eyebrow color="sm:text-gray-600 md:text-primary" className="mt-10 mb-6 px-4 py-2 bg-white [ md:px-0 md:py-0 ]">New release</Eyebrow>
               <Display className="mb-4">
-                the marc <span className="underline">razor</span>
+                The Marc Razor <span className="underline">Rose Gold</span>
               </Display>
               <LargeLead className="mb-12">
                 Try the world&apos;s safest single blade razor.
