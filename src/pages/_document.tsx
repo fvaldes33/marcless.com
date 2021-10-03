@@ -40,7 +40,7 @@ class MyDocument extends Document {
           </script>
           <noscript>
             <img height="1" width="1" alt="" style={{ display: 'none' }}
-              src="https://www.facebook.com/tr?id={your-pixel-id-goes-here}&ev=PageView&noscript=1" />
+              src="https://www.facebook.com/tr?id=225449046285735&ev=PageView&noscript=1" />
           </noscript>
         </Head>
         <body className="font-sans font-normal">
