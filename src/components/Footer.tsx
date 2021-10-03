@@ -108,7 +108,7 @@ const Footer = () => {
             </li>
           </ul>
         </div>
-        <p className="text-xs text-center pt-4">&copy; 2021, Marcless. Powered by Shopify</p>
+        <p className="text-xs text-center pt-4">&copy; {(new Date()).getFullYear()}, Marcless. Powered by Shopify</p>
       </div>
     </footer>
   );
