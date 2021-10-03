@@ -71,5 +71,5 @@ export const socialLinks: SocialLinkItems[] = [
   },
 ];
 
-export const defaultTitle: string = 'Better stuff, fewer dollars | Marcless';
+export const defaultTitle: string = 'Better shave, fewer dollars | Marcless';
 export const defaultDescription = 'Inspired by a vintage safety razor, crafted from solid zinc alloy and built to give you the best shave you\'ve ever had.';
