@@ -22,7 +22,7 @@ class MyDocument extends Document {
           <script type="text/javascript" dangerouslySetInnerHTML={{ __html: `
             (function e(){var e=document.createElement("script");e.type="text/javascript",e.async=true,e.src="//staticw2.yotpo.com/yy9WUacB03VCmmsa1SQlo8zSb0Tulq2vsbwjchCk/widget.js";var t=document.getElementsByTagName("script")[0];t.parentNode.insertBefore(e,t)})();
           ` }}></script>
-          <meta name="facebook-domain-verification" content="qtaij2kdjzy9twvuxfwbefw1g0qlqo" />
+          <meta name="facebook-domain-verification" content="xgghiaxp2avfcfq2gyfact2xcn6upm" />
         </Head>
         <body className="font-sans font-normal">
           <Main />
