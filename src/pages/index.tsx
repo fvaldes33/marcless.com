@@ -34,6 +34,34 @@ const Home: NextPage<GetProducts> = ({ products }) => {
         <Head>
           <title>{defaultTitle}</title>
           <meta name="description" content={defaultDescription} />
+
+          <script type="application/json+ld" dangerouslySetInnerHTML={{
+            __html: JSON.stringify(
+              {
+                "@context": "http://schema.org",
+                "@type": "WebSite",
+                "name": "Marcless",
+                "alternateName": "Marlcess - Homepage",
+                "url": "https://www.marcless.com/"
+              }
+            )
+          }} />
+          <script type="application/json+ld" dangerouslySetInnerHTML={{
+            __html: JSON.stringify(
+              {
+                "@context": "http://schema.org",
+                "@type": "Organization",
+                "name": "Marcless",
+                "url": "https://www.marcless.com/",
+                "logo": "https://cdn.shopify.com/s/files/1/0598/5393/0649/files/logo.png?v=1632937802",
+                "image": "https://cdn.shopify.com/s/files/1/0598/5393/0649/files/open-graph-logo_256x256_crop_center.jpg?v=1633378498",
+                "sameAs": [
+                  "https://www.facebook.com/shopmarcless",
+                  "https://www.instagram.com/shopmarcless"
+                ]
+              }
+            )
+          }} />
         </Head>
 
         <section className="h-screen w-screen flex items-center">
