@@ -1,3 +1,4 @@
+/* eslint-disable @next/next/next-script-for-ga */
 /* eslint-disable @next/next/no-img-element */
 import Document, { Html, Head, Main, NextScript } from 'next/document'
 
@@ -42,6 +43,20 @@ class MyDocument extends Document {
             (function e(){var e=document.createElement("script");e.type="text/javascript",e.async=true,e.src="//staticw2.yotpo.com/yy9WUacB03VCmmsa1SQlo8zSb0Tulq2vsbwjchCk/widget.js";var t=document.getElementsByTagName("script")[0];t.parentNode.insertBefore(e,t)})();
           ` }}></script>
           <meta name="facebook-domain-verification" content="xgghiaxp2avfcfq2gyfact2xcn6upm" />
+          {/* <!-- Global site tag (gtag.js) - Google Analytics --> */}
+          <script async src={`https://www.googletagmanager.com/gtag/js?id=${process.env.NEXT_PUBLIC_GOOGLE_ANALYTICS}`}></script>
+          <script dangerouslySetInnerHTML={{ __html: `
+            window.dataLayer = window.dataLayer || [];
+              function gtag(){dataLayer.push(arguments);}
+              gtag('js', new Date());
+
+              gtag('config', '${process.env.NEXT_PUBLIC_GOOGLE_ANALYTICS}', {
+                'page_path': window.location.pathname,
+                'linker': {
+                  'domains': ['checkout.marcless.com']
+                }
+              });
+          `}}></script>
           <script
             dangerouslySetInnerHTML={{ __html: `
               !function(f,b,e,v,n,t,s)
