@@ -14,8 +14,6 @@ export const pageview = (url: string) => {
   if ('fbq' in (window as any)) {
     (window as any).fbq('track', 'PageView');
   }
-
-  console.log('dataLayer', (window as any).dataLayer);
 }
 
 // log specific events happening.
