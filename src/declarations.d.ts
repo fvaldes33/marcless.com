@@ -182,6 +182,11 @@ declare namespace ShopifyBuy {
     productId: string | number;
 
     /**
+     * ID of variant's product.
+     */
+    product: Product;
+
+    /**
      * Count of variants to order.
      */
     quantity: number;

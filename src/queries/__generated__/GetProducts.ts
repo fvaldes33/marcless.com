@@ -70,6 +70,14 @@ export interface GetProducts_products_edges_node_images {
   edges: GetProducts_products_edges_node_images_edges[];
 }
 
+export interface GetProducts_products_edges_node_variants_edges_node_priceV2 {
+  __typename: "MoneyV2";
+  /**
+   * Decimal money amount.
+   */
+  amount: any;
+}
+
 export interface GetProducts_products_edges_node_variants_edges_node_image {
   __typename: "Image";
   /**
@@ -99,6 +107,10 @@ export interface GetProducts_products_edges_node_variants_edges_node {
    * The SKU (stock keeping unit) associated with the variant.
    */
   sku: string | null;
+  /**
+   * The product variant’s price.
+   */
+  priceV2: GetProducts_products_edges_node_variants_edges_node_priceV2;
   /**
    * Image associated with the product variant. This field falls back to the product image if no image is available.
    */
@@ -136,6 +148,10 @@ export interface GetProducts_products_edges_node {
    * They are used by the Liquid templating language to refer to objects.
    */
   handle: string;
+  /**
+   * A categorization that a product can be tagged with, commonly used for filtering and searching.
+   */
+  productType: string;
   /**
    * Stripped description of the product, single line with HTML tags removed.
    */

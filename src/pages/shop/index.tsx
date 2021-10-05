@@ -4,11 +4,26 @@ import Head from 'next/head';
 import Link from 'next/link';
 import client from '@/src/utils/apollo';
 import { PRODUCTS_QUERY, GetProducts, GetProductsVariables } from '@/src/queries';
-import { formatPrice } from '@/src/utils/helpers';
+import { formatPrice, viewItems, transformToGoogleItem } from '@/src/utils/helpers';
 import Button from '@/src/components/Button';
 import { defaultDescription } from '@/src/utils/constants';
+import { useEffect } from 'react';
 
 const Shop: NextPage<GetProducts> = ({ products }) => {
+
+  useEffect(() => {
+    const allItems: any = [];
+    products.edges.forEach(({ node }) => {
+      node.variants.edges.forEach(({ node: variant }, index) => {
+        allItems.push({
+          ...transformToGoogleItem(node, variant),
+          list_position: (index + 1),
+        });
+      })
+    })
+    viewItems(allItems);
+  }, [products]);
+
   return (
     <>
       <Head>
