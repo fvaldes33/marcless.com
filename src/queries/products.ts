@@ -11,6 +11,7 @@ export const PRODUCTS_QUERY = gql`
           id
           title
           handle
+          productType
           description
           descriptionHtml
           priceRange {
@@ -37,6 +38,9 @@ export const PRODUCTS_QUERY = gql`
                 id
                 title
                 sku
+                priceV2 {
+                  amount
+                }
                 image {
                   transformedSrc
                   altText
@@ -58,6 +62,7 @@ export const SINGLE_PRODUCT_QUERY = gql`
           id
           title
           handle
+          productType
           description
           descriptionHtml
           seo {
