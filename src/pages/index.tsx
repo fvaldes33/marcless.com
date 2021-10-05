@@ -2,13 +2,10 @@ import type { NextPage } from 'next';
 import Head from 'next/head';
 import Image from 'next/image';
 import { useContext, useState } from 'react';
-import { ShieldCheckIcon, CashIcon, CheckIcon } from '@heroicons/react/outline';
-import HeroWithProduct from '@/src/components/HeroProduct';
 import HeroFullWidth from '@/src/components/HeroFullWidth';
 import FeatureList from '@/src/components/FeatureList';
 import Banner from '@/src/components/Banner';
 import { Eyebrow, Display, H1, H2, LargeLead, Paragraph } from '@/src/components/Typography';
-import ContentMedia from '@/src/components/ContentMedia';
 import TestimonialGrid from '@/src/components/TestimonialGrid';
 import Button from '@/src/components/Button';
 import NewsletterForm from '@/src/components/NewsletterForm';
@@ -16,16 +13,15 @@ import ContentMediaLayout from '@/src/components/ContentMediaLayout';
 import { GetProducts, GetProductsVariables, PRODUCTS_QUERY } from '@/src/queries';
 import client from '@/src/utils/apollo';
 import { Context } from '@/src/state';
+import { brandFeatures, defaultTitle, defaultDescription, testimonials } from '@/src/utils/constants';
 import womanShaving from '@/src/assets/woman-shaving-armpit.jpg';
-import brightSilverInStand from '@/src/assets/bright-silver-in-stand.jpg';
 import goldWhiteOnDish from '@/src/assets/gold-white-on-dish.jpg';
 import bodyDadShaving from '@/src/assets/dad-boy-shaving@1x.jpg';
 import allRazors from '@/src/assets/all-razor-colors@1.jpg';
 import marcOneRoseGold from '@/src/assets/marcone-rosegold-exloded.png';
-import { brandFeatures, defaultTitle, defaultDescription, testimonials } from '@/src/utils/constants';
 
 const Home: NextPage<GetProducts> = ({ products }) => {
-  const { state: { store, active }, dispatch } = useContext(Context);
+  const { state: { active } } = useContext(Context);
   const [signupSuccess, setSignupSuccess] = useState(false);
 
   if (!active) {
@@ -129,7 +125,7 @@ const Home: NextPage<GetProducts> = ({ products }) => {
                 We believe that you shouldn’t have to over pay for everyday personal care. Our product are meticulously made with integrity and from clean materials. Our promise is simple, affordable products without compromise.
               </Paragraph>
               <Button href="/about" variant="primary">
-                learn more
+                get to know us
               </Button>
             </>
           }
