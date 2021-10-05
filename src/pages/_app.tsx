@@ -40,7 +40,7 @@ function MyApp({ Component, pageProps, store }: AppPropsWithGlobals) {
   }, [router.events])
 
   return (
-    <AppProvider initialState={{ ready: true, active: false, store }}>
+    <AppProvider initialState={{ ready: true, active: true, store }}>
       <Body>
         <Header />
         <main>
