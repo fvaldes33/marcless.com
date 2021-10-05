@@ -168,10 +168,10 @@ const Home: NextPage<GetProducts> = ({ products }) => {
           }
         />
 
-        <section className="bg-primary px-4 relative text-gray-800 overflow-hidden [ md:bg-opacity-0 ] [ xl:px-0 ]">
+        <section className="bg-primary-light px-4 relative text-gray-800 overflow-hidden [ md:bg-opacity-0 ] [ xl:px-0 ]">
           <div className="container mx-auto flex flex-col items-center [ md:flex-row md:justify-end ] z-10">
-            <div className=" w-full flex flex-col items-start justify-end z-10 [ md:bg-white md:border-2 md:border-primary md:px-8 md:py-8 md:my-8 md:w-3/5 md:transform md:-translate-x-4 ] [ lg:px-12 lg:my-12 lg:w-1/3 lg:transform lg:-translate-x-12 ]">
-              <Eyebrow color="sm:text-gray-600 md:text-primary" className="mt-10 mb-6 px-4 py-2 bg-white [ md:px-0 md:py-0 ]">New release</Eyebrow>
+            <div className=" w-full flex flex-col items-start justify-end rounded-xl overflow-hidden z-10 [ md:bg-white md:border-2 md:border-primary-light md:px-8 md:py-8 md:my-8 md:w-3/5 md:transform md:-translate-x-4 ] [ lg:px-12 lg:my-12 lg:w-1/3 lg:transform lg:-translate-x-12 ]">
+              <Eyebrow color="sm:text-gray-600 md:text-primary" className="mt-10 mb-6 px-4 py-2 bg-white [ md:mt-0 md:px-0 md:py-0 ]">New release</Eyebrow>
               <Display className="mb-4">
                 The Marc Razor <span className="underline">Rose Gold</span>
               </Display>
@@ -183,12 +183,12 @@ const Home: NextPage<GetProducts> = ({ products }) => {
               </Button>
             </div>
             <div className="block mt-4 transform translate-y-12 md:hidden">
-              <Image src={marcOneRoseGold} className="transform rotate-12" alt="razor on black and white marble countertop" objectFit="contain" objectPosition="bottom" />
+              <Image src={marcOneRoseGold} className="transform rotate-12" alt="rose gold razor deconstructed" objectFit="contain" objectPosition="bottom" />
             </div>
           </div>
-          <div className="hidden bg-primary-light w-4/5 [ md:block md:w-1/2 md:absolute md:left-0 md:top-0 md:bottom-0 md:z-0 ] [ lg:w-2/3 ]">
+          <div className="hidden bg-primary-light w-4/5 [ md:rounded-tr-xl md:rounded-br-xl md:overflow-hidden md:block md:w-1/2 md:absolute md:left-0 md:top-0 md:bottom-0 md:z-0 ] [ lg:w-2/3 ]">
             <div className="relative h-full w-full">
-              <Image src={marcOneRoseGold} className="transform rotate-12 translate-y-6" alt="razor on black and white marble countertop" layout="fill" objectFit="contain" objectPosition="bottom" />
+              <Image src={marcOneRoseGold} className="transform rotate-12 translate-y-6" alt="rose gold razor deconstructed" layout="fill" objectFit="contain" objectPosition="bottom" />
             </div>
           </div>
         </section>
