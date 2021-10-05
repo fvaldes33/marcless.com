@@ -1,7 +1,74 @@
+import { GetProducts_products_edges_node, GetProducts_products_edges_node_variants_edges_node } from "../queries/__generated__/GetProducts";
 import { ContainerType, ContainerTypeEnum } from "../types";
 
 export const helpMe = (): string => {
   return 'done!'
+}
+
+export const pageview = (url: string) => {
+  (window as any).gtag('config', process.env.NEXT_PUBLIC_GOOGLE_ANALYTICS, {
+    page_path: url,
+  })
+
+  // if facebook pixel is enabled
+  if ('fbq' in (window as any)) {
+    (window as any).fbq('track', 'PageView');
+  }
+}
+
+// log specific events happening.
+export const event = ({ action, params }: { action: string; params: any }) => {
+  (window as any).gtag('event', action, params)
+}
+
+export const transformToGoogleItem = (
+  product: GetProducts_products_edges_node,
+  variant: GetProducts_products_edges_node_variants_edges_node
+) => {
+  return {
+    id: product.id,
+    name: product.title,
+    brand: 'Marcless',
+    category: product.productType || "Razors & Razor Blades",
+    variant: variant.title,
+    price: variant.priceV2.amount
+  }
+}
+
+export const viewItems = (items: any) => {
+  event({
+    action: 'view_item_list',
+    params: {
+      items
+    }
+  });
+}
+
+export const viewItem = (items: any) => {
+  event({
+    action: 'view_item',
+    params: {
+      items
+    }
+  });
+}
+
+export const addToCart = (items: any) => {
+  event({
+    action: 'add_to_cart',
+    params: {
+      items
+    }
+  });
+}
+
+export const removeFromCart = (items: any) => {
+  event({
+    action: 'remove_from_cart',
+    params: {
+      items
+    }
+  });
 }
 
 const resolveContainer = (value: ContainerType): string => {

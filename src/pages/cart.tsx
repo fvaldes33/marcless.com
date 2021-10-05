@@ -6,9 +6,10 @@ import Link from 'next/link';
 import { useContext } from 'react';
 import { Context } from '@/src/state';
 import { defaultDescription } from '@/src/utils/constants';
-import { classNames, formatPrice } from '../utils/helpers';
+import { classNames, formatPrice, removeFromCart, transformToGoogleItem } from '../utils/helpers';
 import Button from '../components/Button';
 import { Action } from '../types';
+import { GetProducts_products_edges_node, GetProducts_products_edges_node_variants_edges_node } from '../queries/__generated__/GetProducts';
 
 const Cart: NextPage = () => {
   const { state: { shopifyClient, checkout }, dispatch } = useContext(Context);
@@ -17,12 +18,22 @@ const Cart: NextPage = () => {
     window.location.href = checkout?.webUrl;
   }
 
-  const removeLineItem = async (itemID: string) => {
+  const removeLineItem = async (lineItem: LineItem) => {
+    const itemID = lineItem.id as string;
     const newCheckout = await shopifyClient.checkout.removeLineItems(
       checkout.id,
       [itemID]
     );
     dispatch({ type: Action.SetCheckout, payload: { checkout: newCheckout } });
+    removeFromCart({
+      items: [{
+        ...transformToGoogleItem(
+          lineItem.variant.product as unknown as GetProducts_products_edges_node,
+          lineItem.variant as unknown as GetProducts_products_edges_node_variants_edges_node
+        ),
+        quantity: newCheckout.lineItems.find(item => item.id === itemID)?.quantity ?? 0
+      }]
+    });
   }
 
   return (
@@ -87,7 +98,7 @@ const Cart: NextPage = () => {
                           <p className="text-gray-500">Qty {quantity}</p>
 
                           <div className="flex">
-                            <button onClick={() => removeLineItem(lineItem.id as string)} type="button" className="font-medium text-primary hover:underline">
+                            <button onClick={() => removeLineItem(lineItem)} type="button" className="font-medium text-primary hover:underline">
                               Remove
                             </button>
                           </div>

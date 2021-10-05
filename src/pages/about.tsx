@@ -30,7 +30,9 @@ const AboutPage: NextPage = () => {
 
       <div className="mt-4 py-24 px-4 [ md:py-48 ] [ lg:px-0 ] relative text-gray-800 overflow-hidden">
         <div className="absolute right-0 top-0 bottom-0 w-4/5 [ md:w-2/3 ]">
-          <Image src={roseGoldBathroom} alt="razor on black and white marble countertop" layout="fill" objectFit="cover" />
+          <div className="relative h-full w-full">
+            <Image src={roseGoldBathroom} alt="razor on black and white marble countertop" layout="fill" objectFit="cover" />
+          </div>
         </div>
 
         <div className="container mx-auto relative z-10 flex items-center justify-start h-full">

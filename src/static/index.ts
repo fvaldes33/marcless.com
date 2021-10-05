@@ -62,12 +62,12 @@ export const MarcRazor = {
     heading: 'Frequently Asked Questions',
     items: [
       {
-        question: 'What’s the difference between Alloy and Steel?',
-        answer: 'Our ALLOY razors are made from die-cast zinc alloy, coated with aerospace grade PVD chrome. Our STEEL razors are made from 100% solid stainless steel.'
+        question: 'What materials are Marc Razors made from?',
+        answer: 'The safety razors are made from brass. The metal color has been electoplated, which makes it incredibly durable. The blue, pink, mint and lilac razor are powder coated and more prone to chipping if its being dropped. Even if the razor chips or scratches if cannot rust.'
       },
       {
-        question: 'How to dispose of the razor blades?',
-        answer: 'Our ALLOY razors are made from die-cast zinc alloy, coated with aerospace grade PVD chrome. Our STEEL razors are made from 100% solid stainless steel.'
+        question: 'What blades does it accept?',
+        answer: 'It accepts any standard double sided razor blades. They can be easily found online and in stores.'
       },
       {
         question: 'How long do they last?',

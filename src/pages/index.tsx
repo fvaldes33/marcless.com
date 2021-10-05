@@ -34,6 +34,34 @@ const Home: NextPage<GetProducts> = ({ products }) => {
         <Head>
           <title>{defaultTitle}</title>
           <meta name="description" content={defaultDescription} />
+
+          <script type="application/json+ld" dangerouslySetInnerHTML={{
+            __html: JSON.stringify(
+              {
+                "@context": "http://schema.org",
+                "@type": "WebSite",
+                "name": "Marcless",
+                "alternateName": "Marlcess - Homepage",
+                "url": "https://www.marcless.com/"
+              }
+            )
+          }} />
+          <script type="application/json+ld" dangerouslySetInnerHTML={{
+            __html: JSON.stringify(
+              {
+                "@context": "http://schema.org",
+                "@type": "Organization",
+                "name": "Marcless",
+                "url": "https://www.marcless.com/",
+                "logo": "https://cdn.shopify.com/s/files/1/0598/5393/0649/files/logo.png?v=1632937802",
+                "image": "https://cdn.shopify.com/s/files/1/0598/5393/0649/files/open-graph-logo_256x256_crop_center.jpg?v=1633378498",
+                "sameAs": [
+                  "https://www.facebook.com/shopmarcless",
+                  "https://www.instagram.com/shopmarcless"
+                ]
+              }
+            )
+          }} />
         </Head>
 
         <section className="h-screen w-screen flex items-center">
@@ -83,10 +111,10 @@ const Home: NextPage<GetProducts> = ({ products }) => {
             </>
           }
           media={
-            <>
+            <div className="relative h-full w-full">
               <Image src={bodyDadShaving} alt="razor on black and white marble countertop" layout="fill" objectFit="cover" objectPosition="30% 35%" />
               <div className="absolute inset-0 w-full h-full bg-gray-800 opacity-25 [ md:hidden ]"></div>
-            </>
+            </div>
           }
         />
 
@@ -106,7 +134,9 @@ const Home: NextPage<GetProducts> = ({ products }) => {
             </>
           }
           media={
-            <Image src={allRazors} layout="fill" objectFit="cover" objectPosition="center" alt="Marc One" />
+            <div className="relative h-full w-full">
+              <Image src={allRazors} layout="fill" objectFit="cover" objectPosition="center" alt="Marc One" />
+            </div>
           }
         />
 
@@ -136,7 +166,9 @@ const Home: NextPage<GetProducts> = ({ products }) => {
             </>
           }
           media={
-            <Image src={womanShaving} layout="fill" objectFit="cover" objectPosition="center" alt="Marc One" />
+            <div className="relative h-full w-full">
+              <Image src={womanShaving} layout="fill" objectFit="cover" objectPosition="center" alt="Marc One" />
+            </div>
           }
         />
 
@@ -159,7 +191,9 @@ const Home: NextPage<GetProducts> = ({ products }) => {
             </div>
           </div>
           <div className="hidden bg-primary w-4/5 [ md:block md:w-1/2 md:absolute md:left-0 md:top-0 md:bottom-0 md:z-0 ] [ lg:w-2/3 ]">
-            <Image src={marcOneRoseGold} className="transform rotate-12 translate-y-6" alt="razor on black and white marble countertop" layout="fill" objectFit="contain" objectPosition="bottom" />
+            <div className="relative h-full w-full">
+              <Image src={marcOneRoseGold} className="transform rotate-12 translate-y-6" alt="razor on black and white marble countertop" layout="fill" objectFit="contain" objectPosition="bottom" />
+            </div>
           </div>
         </section>
 
@@ -181,10 +215,10 @@ const Home: NextPage<GetProducts> = ({ products }) => {
             </>
           }
           media={
-            <>
+            <div className="relative h-full w-full">
               <Image className="object-cover object-right" layout="fill" src={goldWhiteOnDish} alt="man shaving" />
               <div className="absolute inset-0 w-full h-full bg-secondary opacity-50 z-50"></div>
-            </>
+            </div>
           }
         />
       </>

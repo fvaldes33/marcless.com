@@ -1,14 +1,14 @@
 /* eslint-disable @next/next/no-img-element */
-/* This example requires Tailwind CSS v2.0+ */
-import { Fragment, useContext, useState } from 'react';
+import { Fragment, useContext } from 'react';
 import Link from 'next/link';
 import type { LineItem } from 'shopify-buy';
 import { Dialog, Transition } from '@headlessui/react';
 import { XIcon } from '@heroicons/react/outline';
 import { Context } from '../state';
 import { Action } from '../types';
-import { formatPrice } from '../utils/helpers';
+import { formatPrice, removeFromCart, transformToGoogleItem } from '../utils/helpers';
 import Button from './Button';
+import { GetProducts_products_edges_node, GetProducts_products_edges_node_variants_edges_node } from '../queries/__generated__/GetProducts';
 
 const CartDrawer: React.FC = () => {
   const { state: { shopifyClient, checkout, cartOpen }, dispatch} = useContext(Context);
@@ -17,12 +17,22 @@ const CartDrawer: React.FC = () => {
     dispatch({ type: Action.SetCartOpen, payload: { cartOpen: !cartOpen } });
   }
 
-  const removeLineItem = async (itemID: string) => {
+  const removeLineItem = async (lineItem: LineItem) => {
+    const itemID = lineItem.id as string;
     const newCheckout = await shopifyClient.checkout.removeLineItems(
       checkout.id,
       [itemID]
     );
     dispatch({ type: Action.SetCheckout, payload: { checkout: newCheckout } });
+    removeFromCart({
+      items: [{
+        ...transformToGoogleItem(
+          lineItem.variant.product as unknown as GetProducts_products_edges_node,
+          lineItem.variant as unknown as GetProducts_products_edges_node_variants_edges_node
+        ),
+        quantity: newCheckout.lineItems.find(item => item.id === itemID)?.quantity ?? 0
+      }]
+    });
   }
 
   return (
@@ -107,7 +117,7 @@ const CartDrawer: React.FC = () => {
                                       <p className="text-gray-500">Qty {quantity}</p>
 
                                       <div className="flex">
-                                        <button onClick={() => removeLineItem(lineItem.id as string)} type="button" className="font-medium text-primary hover:underline">
+                                        <button onClick={() => removeLineItem(lineItem)} type="button" className="font-medium text-primary hover:underline">
                                           Remove
                                         </button>
                                       </div>

@@ -7,14 +7,14 @@ import Image from 'next/image';
 import fetch from 'isomorphic-fetch';
 import client from '@/src/utils/apollo';
 import { Disclosure, Transition } from '@headlessui/react';
-import { ChevronRightIcon, LightningBoltIcon, RefreshIcon, ShieldCheckIcon, ThumbUpIcon } from '@heroicons/react/outline';
+import { ChevronRightIcon, RefreshIcon } from '@heroicons/react/outline';
 import { GetSingleProduct, GetSingleProductVariables, GetSingleProduct_products_edges_node, GetSingleProduct_products_edges_node_variants_edges_node } from '@/src/queries/__generated__/GetSingleProduct';
 import { SINGLE_PRODUCT_QUERY } from '@/src/queries';
 import Button from '@/src/components/Button';
 import FeatureList from '@/src/components/FeatureList';
 import Gallery from '@/src/components/Gallery';
 import QtySelector from '@/src/components/QtySelector';
-import { classNames, formatPrice } from '@/src/utils/helpers';
+import { classNames, formatPrice, viewItem, transformToGoogleItem, addToCart } from '@/src/utils/helpers';
 import { getStaticProductDetails } from '@/src/static';
 import { defaultDescription } from '@/src/utils/constants';
 import { Context } from '@/src/state';
@@ -37,7 +37,15 @@ const ProductVariantDetail: NextPage<PageProps> = ({ product, variant }) => {
 
   useEffect(() => {
     setImageShown(variant.image!);
-  }, [variant]);
+
+    // send to ga
+    viewItem({
+      items: [{
+        ...transformToGoogleItem(product, variant),
+        list_position: 1,
+      }]
+    });
+  }, [product, variant]);
 
   const openCartDrawer = () => {
     dispatch({ type: Action.SetCartOpen, payload: { cartOpen: true } });
@@ -59,6 +67,12 @@ const ProductVariantDetail: NextPage<PageProps> = ({ product, variant }) => {
         items
       );
       dispatch({ type: Action.SetCheckout, payload: { checkout: newCheckout } });
+      addToCart({
+        items: [{
+          ...transformToGoogleItem(product, variant),
+          quantity: qty,
+        }]
+      })
       openCartDrawer();
     } catch (error) {
 
@@ -72,9 +86,20 @@ const ProductVariantDetail: NextPage<PageProps> = ({ product, variant }) => {
   return (
     <>
       <Head>
-        <title>{product.seo.title || `${product.title} | marcless`}</title>
+        <title>{product.seo.title || `${product.title} | Marcless`}</title>
         <meta name="description" content={product.seo.description || defaultDescription} />
-        <link rel="icon" href="/favicon.ico" />
+
+        <meta property="og:title" content={product.seo.title || `${product.title} | Marcless`} />
+        <meta property="og:type" content="website" />
+        <meta property="og:description" content={product.seo.description || defaultDescription} />
+        <meta property="og:image" content={variant.image?.transformedSrc} />
+        <meta property="og:image:secure_url" content={variant.image?.transformedSrc} />
+
+        {/* twitter */}
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta name="twitter:title" content={product.seo.title || `${product.title} | Marcless`} />
+        <meta name="twitter:description" content={product.seo.description || defaultDescription} />
+
         <script type="application/json+ld" dangerouslySetInnerHTML={{
           __html: JSON.stringify(
             {

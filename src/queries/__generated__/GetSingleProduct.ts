@@ -174,6 +174,10 @@ export interface GetSingleProduct_products_edges_node {
    */
   handle: string;
   /**
+   * A categorization that a product can be tagged with, commonly used for filtering and searching.
+   */
+  productType: string;
+  /**
    * Stripped description of the product, single line with HTML tags removed.
    */
   description: string;
