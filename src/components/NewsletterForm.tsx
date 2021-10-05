@@ -88,6 +88,7 @@ const NewsletterForm: React.FC<NewsletterFormProps> = ({ centered = false, onSub
           onMouseEnter={() => setHover(true)}
           onTouchEnd={() => setHover(false)}
           onMouseLeave={() => setHover(false)}
+          aria-label="Submit form icon"
         >
           <Transition
             as={'div'}

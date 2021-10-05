@@ -186,7 +186,7 @@ const Home: NextPage<GetProducts> = ({ products }) => {
               <Image src={marcOneRoseGold} className="transform rotate-12" alt="razor on black and white marble countertop" objectFit="contain" objectPosition="bottom" />
             </div>
           </div>
-          <div className="hidden bg-primary w-4/5 [ md:block md:w-1/2 md:absolute md:left-0 md:top-0 md:bottom-0 md:z-0 ] [ lg:w-2/3 ]">
+          <div className="hidden bg-primary-light w-4/5 [ md:block md:w-1/2 md:absolute md:left-0 md:top-0 md:bottom-0 md:z-0 ] [ lg:w-2/3 ]">
             <div className="relative h-full w-full">
               <Image src={marcOneRoseGold} className="transform rotate-12 translate-y-6" alt="razor on black and white marble countertop" layout="fill" objectFit="contain" objectPosition="bottom" />
             </div>

@@ -22,7 +22,7 @@ const Button = forwardRef<ButtonRef, ButtonProps>((props, ref) => {
     ...rest
   } = props;
 
-  const baseClasses = 'text-base flex items-center justify-between px-12 py-4 rounded-lg transition duration-300 hover:opacity-90';
+  const baseClasses = 'font-bold text-base flex items-center justify-between px-12 py-4 rounded-lg transition duration-300 hover:opacity-90';
   const getVariantClass = (): string => {
     switch (variant) {
       case 'primary':

@@ -22,7 +22,7 @@ const Header = () => {
   return (
     <header className="border-b border-gray-200 px-2 [ lg:px-0 ]">
       <div className="container mx-auto flex items-center justify-between h-20">
-        <button onClick={() => toggleNav()}>
+        <button onClick={() => toggleNav()} aria-label="Menu icon">
           <MenuIcon className="h-6 w-6" aria-hidden="true" />
         </button>
         <Link href="/" passHref>
@@ -63,6 +63,7 @@ const Header = () => {
             <li className="relative">
               <Link href="/cart" passHref>
                 <a>
+                  <span className="sr-only">View Cart</span>
                   <ShoppingBagIcon className="h-6 w-6" aria-hidden="true" />
                 </a>
               </Link>
