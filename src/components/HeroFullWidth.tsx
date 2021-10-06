@@ -1,10 +1,5 @@
-import React, { useContext } from "react";
-import Image from 'next/image';
-import { Context } from "@/src/state";
-import Button from '@/src/components/Button';
-import marcOne from '@/src/assets/marcone-rosegold-exloded.png';
-import marcOneMatte from '@/src/assets/matte-black-bathroom.jpg';
-import brightSilver from '@/src/assets/bright-silver-in-stand.jpg';
+import React from "react";
+import { motion } from "framer-motion"
 
 interface HeroFullWidthProps {
   media: JSX.Element;
@@ -21,9 +16,14 @@ const HeroFullWidth: React.FC<HeroFullWidthProps> = ({
       </div>
 
       <div className="container mx-auto relative z-10 flex items-center justify-start h-full">
-        <div className="max-w-screen-md flex flex-col items-start justify-start">
+        <motion.div
+          className="max-w-screen-md flex flex-col items-start justify-start"
+          initial={{ y: 50, opacity: 0 }}
+          animate={{ y: 0, opacity: 1 }}
+          transition={{ duration: 0.5, delay: 0.25, ease: "easeInOut" }}
+        >
           {content}
-        </div>
+        </motion.div>
       </div>
     </div>
   );

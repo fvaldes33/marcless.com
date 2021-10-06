@@ -1,6 +1,9 @@
 import { StarIcon } from '@heroicons/react/outline';
 import { StarIcon as StartIconFilled } from '@heroicons/react/solid';
-import React from 'react';
+import { useInView } from 'react-intersection-observer';
+import { motion, useAnimation } from 'framer-motion';
+import { fadeInUp, staggered } from "@/src/utils/constants";
+import React, { useEffect } from 'react';
 
 const testimonials = [
   {
@@ -37,19 +40,35 @@ const TestimonialGrid: React.FC<TestimonialGridProps> = ({
   body,
   items = [],
 }) => {
+  const [ref, inView] = useInView({
+    threshold: 0.5,
+  });
+  const controls = useAnimation();
+
+  useEffect(() => {
+    if (inView) {
+      controls.start('visible');
+    }
+  }, [controls, inView])
+
   return (
-    <section className="pt-12 [ md:pt-24 ]">
+    <section ref={ref} className="pt-12 [ md:pt-24 ]">
       <div className="max-w-screen-lg mx-auto px-6 [ xl:px-0 ]">
-        <div className="text-center">
+        <motion.div initial="hidden" animate={controls} variants={fadeInUp} className="text-center">
           {eyebrow && eyebrow}
           {heading}
           {body && body}
-        </div>
+        </motion.div>
 
         <div className="mt-10">
-          <dl className="space-y-10 md:space-y-0 md:grid md:grid-cols-3 md:gap-x-8 md:gap-y-10">
+          <motion.dl
+            className="space-y-10 md:space-y-0 md:grid md:grid-cols-3 md:gap-x-8 md:gap-y-10"
+            variants={staggered}
+            initial="hidden"
+            animate={controls}
+          >
             {items.map((testimonial) => (
-              <div key={testimonial.name} className="relative bg-white shadow-lg rounded-lg overflow-hidden p-8 transition duration-200 hover:scale-105">
+              <motion.div variants={fadeInUp} key={testimonial.name} className="relative bg-white shadow-lg rounded-lg overflow-hidden p-8 transition duration-200 hover:scale-105">
                 <dt className="flex justify-between">
                   <p className="text-xl font-serif font-bold text-gray-800">{testimonial.name}</p>
                   <div className="flex mt-2">
@@ -68,9 +87,9 @@ const TestimonialGrid: React.FC<TestimonialGridProps> = ({
                 <dd>
                   <p className="mt-4 text-base text-gray-600">{testimonial.description}</p>
                 </dd>
-              </div>
+              </motion.div>
             ))}
-          </dl>
+          </motion.dl>
         </div>
       </div>
     </section>

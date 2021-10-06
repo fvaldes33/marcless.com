@@ -1,4 +1,7 @@
-import React from "react";
+import React, { useEffect } from "react";
+import { useInView } from 'react-intersection-observer';
+import { motion, useAnimation } from 'framer-motion';
+import { fadeInUp, staggered } from "@/src/utils/constants";
 
 interface FeatureListProps {
   eyebrow?: JSX.Element;
@@ -14,19 +17,35 @@ const FeatureList: React.FC<FeatureListProps> = ({
   items = [],
 }) => {
 
+  const [ref, inView] = useInView({
+    threshold: 0.5,
+  });
+  const controls = useAnimation();
+
+  useEffect(() => {
+    if (inView) {
+      controls.start('visible');
+    }
+  }, [controls, inView])
+
   return (
-    <section className="pt-16 [ md:pt-32 ]">
+    <section ref={ref} className="pt-16 [ md:pt-32 ]">
       <div className="max-w-screen-lg mx-auto px-4 [ xl:px-0 ]">
-        <div className="lg:text-center">
+        <motion.div initial="hidden" animate={controls} variants={fadeInUp} className="lg:text-center">
           {eyebrow && eyebrow}
           {heading}
           {body && body}
-        </div>
+        </motion.div>
 
         <div className="mt-10">
-          <dl className="space-y-10 md:space-y-0 md:grid md:grid-cols-3 md:gap-x-8 md:gap-y-10">
+          <motion.dl
+            className="space-y-10 md:space-y-0 md:grid md:grid-cols-3 md:gap-x-8 md:gap-y-10"
+            variants={staggered}
+            initial="hidden"
+            animate={controls}
+          >
             {items.map((feature) => (
-              <div key={feature.name} className="relative">
+              <motion.div key={feature.name} variants={fadeInUp} className="relative">
                 <dt>
                   <div className="absolute flex items-center justify-center h-12 w-12 rounded-full bg-primary text-white">
                     <feature.icon className="h-6 w-6" aria-hidden="true" />
@@ -34,9 +53,9 @@ const FeatureList: React.FC<FeatureListProps> = ({
                   <p className="ml-16 text-lg leading-6 font-medium text-gray-800">{feature.name}</p>
                 </dt>
                 <dd className="mt-2 ml-16 text-base text-gray-600">{feature.description}</dd>
-              </div>
+              </motion.div>
             ))}
-          </dl>
+          </motion.dl>
         </div>
       </div>
     </section>

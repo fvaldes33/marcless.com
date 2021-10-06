@@ -6,6 +6,10 @@ export const helpMe = (): string => {
 }
 
 export const pageview = (url: string) => {
+  if (!('gtag' in window)) {
+    return;
+  }
+
   (window as any).gtag('config', process.env.NEXT_PUBLIC_GOOGLE_ANALYTICS, {
     page_path: url,
   })
@@ -18,6 +22,9 @@ export const pageview = (url: string) => {
 
 // log specific events happening.
 export const event = ({ action, params }: { action: string; params: any }) => {
+  if (!('gtag' in window)) {
+    return;
+  }
   (window as any).gtag('event', action, params)
 }
 

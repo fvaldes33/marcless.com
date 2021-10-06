@@ -1,5 +1,8 @@
-import Image from 'next/image';
+import { useInView } from 'react-intersection-observer';
+import { motion, useAnimation } from 'framer-motion';
 import { classNames, resolveClass } from '../utils/helpers';
+import { useEffect } from 'react';
+import { fadeInUp } from '../utils/constants';
 
 interface ContentMediaProps {
   content: JSX.Element;
@@ -8,6 +11,28 @@ interface ContentMediaProps {
   spacing?: string;
   container?: 'normal' | 'thin' | 'wide' | 'full';
 }
+
+const mediaVariantsLeft = {
+  hidden: { x: -50, opacity: 0 },
+  visible: {
+    x: 0,
+    opacity: 1,
+    transition: {
+      duration: 0.5,
+    }
+  }
+}
+const mediaVariantsRight = {
+  hidden: { x: 50, opacity: 0 },
+  visible: {
+    x: 0,
+    opacity: 1,
+    transition: {
+      duration: 0.5,
+    }
+  }
+}
+
 const ContentMedia: React.FC<ContentMediaProps> = ({
   content,
   media,
@@ -15,9 +40,19 @@ const ContentMedia: React.FC<ContentMediaProps> = ({
   spacing = 'py-12 [ md:py-24 ]',
   container = 'normal'
 }) => {
+  const [ref, inView] = useInView({
+    threshold: 0.4,
+  });
+  const controls = useAnimation();
+
+  useEffect(() => {
+    if (inView) {
+      controls.start('visible');
+    }
+  }, [controls, inView])
 
   return (
-    <section className={classNames(
+    <section ref={ref} className={classNames(
       spacing,
     )}>
       <div className={classNames(
@@ -27,19 +62,19 @@ const ContentMedia: React.FC<ContentMediaProps> = ({
       )}>
 
         {/* Content */}
-        <div className={classNames(
+        <motion.div initial="hidden" animate={controls} variants={fadeInUp} className={classNames(
           'flex flex-col items-start w-full self-center py-8 [ md:w-1/3 md:py-24 ]',
           layout === 'row' ? 'md:mr-12' : 'md:ml-12',
         )}>
           {content}
-        </div>
+        </motion.div>
 
         {/* Media */}
-        <div className={classNames(
+        <motion.div initial="hidden" animate={controls} variants={layout === 'row' ? mediaVariantsRight : mediaVariantsLeft} className={classNames(
           'flex flex-col w-full rounded-2xl overflow-hidden relative shadow-xl z-0 h-80 [ md:h-auto md:w-2/3 ]'
         )}>
           {media}
-        </div>
+        </motion.div>
       </div>
     </section>
   );

@@ -3,6 +3,9 @@ import type { NextPage } from 'next';
 import Head from 'next/head';
 import Link from 'next/link';
 import client from '@/src/utils/apollo';
+import { useInView } from 'react-intersection-observer';
+import { motion, useAnimation } from 'framer-motion';
+import { fadeInUp, staggered } from "@/src/utils/constants";
 import { PRODUCTS_QUERY, GetProducts, GetProductsVariables } from '@/src/queries';
 import { formatPrice, viewItems, transformToGoogleItem } from '@/src/utils/helpers';
 import Button from '@/src/components/Button';
@@ -10,6 +13,16 @@ import { defaultDescription } from '@/src/utils/constants';
 import { useEffect } from 'react';
 
 const Shop: NextPage<GetProducts> = ({ products }) => {
+  const [ref, inView] = useInView({
+    threshold: 0,
+  });
+  const controls = useAnimation();
+
+  useEffect(() => {
+    if (inView) {
+      controls.start('visible');
+    }
+  }, [controls, inView])
 
   useEffect(() => {
     const allItems: any = [];
@@ -31,13 +44,18 @@ const Shop: NextPage<GetProducts> = ({ products }) => {
         <meta name="description" content={defaultDescription} />
       </Head>
 
-      <div className="py-12 px-4 [ md:py-24 ] [ lg:px-0 ] relative bg-white">
-        <div className="container mx-auto overflow-visible [ md:grid md:grid-cols-3 md:gap-x-10 ]">
+      <div ref={ref} className="py-12 px-4 [ md:py-24 ] [ lg:px-0 ] relative bg-white">
+        <motion.div
+          className="container mx-auto overflow-visible [ md:grid md:grid-cols-3 md:gap-x-10 ]"
+          variants={staggered}
+          initial="hidden"
+          animate={controls}
+        >
           {products?.edges.map(({ node }) => {
             return node.variants.edges.map((variant) => {
               const variantImage = variant.node.image;
               return (
-                <article key={variant.node.id} className="group mb-12 [ md:mb-8 ]">
+                <motion.article variants={fadeInUp} key={variant.node.id} className="group mb-12 [ md:mb-8 ]">
                   <figure className="aspect-w-3 aspect-h-4 rounded-lg overflow-hidden">
                     <Link href={`/shop/${encodeURIComponent(node.handle)}/${variant.node.sku}`} passHref>
                       <a className="block">
@@ -68,11 +86,11 @@ const Shop: NextPage<GetProducts> = ({ products }) => {
                       buy now
                     </Button>
                   </div>
-                </article>
+                </motion.article>
               )
             });
           })}
-        </div>
+        </motion.div>
       </div>
     </>
   )
