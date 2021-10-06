@@ -44,7 +44,7 @@ class MyDocument extends Document {
               src="https://www.facebook.com/tr?id=225449046285735&ev=PageView&noscript=1" />
           </noscript>
         </Head>
-        <body className="font-sans font-normal">
+        <body className="font-sans font-normal overflow-x-hidden">
           <Main />
           <NextScript />
         </body>
