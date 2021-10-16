@@ -10,6 +10,7 @@ import AppProvider from '@/src/state';
 import client from '@/src/utils/apollo';
 import { STORE_QUERY } from '@/src/queries';
 import { Store, Store_shop } from '@/src/types';
+import Alert from '@/src/components/Alert';
 import Header from '@/src/components/Header';
 import Footer from '@/src/components/Footer';
 import { useEffect, useState } from 'react';
@@ -94,6 +95,7 @@ function MyApp({ Component, pageProps, store }: AppPropsWithGlobals) {
       `}</Script>
 
       <Body>
+        <Alert />
         <Header />
         <main>
           <Component {...pageProps} />
