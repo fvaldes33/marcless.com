@@ -73,7 +73,9 @@ const ProductVariantDetail: NextPage<PageProps> = ({ product, variant }) => {
           quantity: qty,
         }]
       })
-      openCartDrawer();
+      setTimeout(() => {
+        window.location.href = newCheckout.webUrl;
+      })
     } catch (error) {
 
     } finally {
@@ -202,7 +204,7 @@ const ProductVariantDetail: NextPage<PageProps> = ({ product, variant }) => {
                   {loading ? (
                     <RefreshIcon className="h-6 w-6 animate-spin" aria-hidden="true" />
                   ) : (
-                    <>add to cart</>
+                    <>buy now</>
                   )}
                 </Button>
               </div>
