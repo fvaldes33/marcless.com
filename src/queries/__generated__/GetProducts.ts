@@ -43,7 +43,7 @@ export interface GetProducts_products_edges_node_images_edges_node {
   __typename: "Image";
   /**
    * The location of the transformed image as a URL.
-   * 
+   *
    * All transformation arguments are considered "best-effort". If they can be applied to an image, they will be.
    * Otherwise any transformations which an image type does not support will be ignored.
    */
@@ -82,7 +82,7 @@ export interface GetProducts_products_edges_node_variants_edges_node_image {
   __typename: "Image";
   /**
    * The location of the transformed image as a URL.
-   * 
+   *
    * All transformation arguments are considered "best-effort". If they can be applied to an image, they will be.
    * Otherwise any transformations which an image type does not support will be ignored.
    */
@@ -203,4 +203,5 @@ export interface GetProducts {
 
 export interface GetProductsVariables {
   first?: number | null;
+  query?: string;
 }

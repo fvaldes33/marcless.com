@@ -8,32 +8,31 @@ import fetch from 'isomorphic-fetch';
 import client from '@/src/utils/apollo';
 import { Disclosure, Transition } from '@headlessui/react';
 import { ChevronRightIcon, RefreshIcon } from '@heroicons/react/outline';
-import { GetSingleProduct, GetSingleProductVariables, GetSingleProduct_products_edges_node, GetSingleProduct_products_edges_node_variants_edges_node } from '@/src/queries/__generated__/GetSingleProduct';
-import { SINGLE_PRODUCT_QUERY } from '@/src/queries';
+import { GetSingleProduct, GetSingleProductVariables, GetSingleProduct_products_edges, GetSingleProduct_products_edges_node, GetSingleProduct_products_edges_node_variants_edges_node } from '@/src/queries/__generated__/GetSingleProduct';
+import { GetProducts, GetProductsVariables, PRODUCTS_QUERY, SINGLE_PRODUCT_QUERY } from '@/src/queries';
 import Button from '@/src/components/Button';
-import FeatureList from '@/src/components/FeatureList';
-import Gallery from '@/src/components/Gallery';
 import QtySelector from '@/src/components/QtySelector';
 import { classNames, formatPrice, viewItem, transformToGoogleItem, addToCart } from '@/src/utils/helpers';
 import { getStaticProductDetails } from '@/src/static';
-import { defaultDescription } from '@/src/utils/constants';
+import { brandFeatures, defaultDescription } from '@/src/utils/constants';
 import { Context } from '@/src/state';
 import { Action } from '@/src/types';
-import { Eyebrow, H1, LargeLead } from '@/src/components/Typography';
+import FeatureList from '@/src/components/FeatureList';
+import { Eyebrow, LargeLead } from '@/src/components/Typography';
 
 interface PageProps {
   product: GetSingleProduct_products_edges_node;
   variant: GetSingleProduct_products_edges_node_variants_edges_node;
+  relatedProducts: GetSingleProduct_products_edges[];
 }
 
-const ProductVariantDetail: NextPage<PageProps> = ({ product, variant }) => {
+const ProductVariantDetail: NextPage<PageProps> = ({ product, variant, relatedProducts }) => {
   const { state: { checkout, shopifyClient }, dispatch } = useContext(Context);
   const [loading, setLoading] = useState(false);
   const [qty, setQty] = useState(1);
   const [imageShown, setImageShown] = useState(() => {
     return variant.image!;
   });
-  const productDetails = getStaticProductDetails(product.handle);
 
   useEffect(() => {
     setImageShown(variant.image!);
@@ -119,193 +118,165 @@ const ProductVariantDetail: NextPage<PageProps> = ({ product, variant }) => {
         }} />
       </Head>
 
-      <section className="mt-12 [ md:mt-16 ]">
-        <div className="container max-w-screen-lg mx-auto px-4 [ md:grid md:grid-cols-2 ] [ lg:px-0 ]">
-          <div className="col-span-1">
-            <figure className="aspect-w-3 aspect-h-4 rounded-lg overflow-hidden">
-              <img
-                className="w-full h-full object-center object-cover transition duration-150 hover:scale-110"
-                src={imageShown.transformedSrc}
-                alt={imageShown.altText || 'product image'} />
-            </figure>
+      <section className="container max-w-screen-xl mx-auto px-6 xl:px-0 flex flex-col md:flex-row mt-12 [ md:mt-16 ]">
+        {/* image */}
+        <div className="w-full md:w-1/2 flex-shrink-0 self-start md:sticky md:top-0">
+          <figure className="aspect-w-4 aspect-h-4 rounded-lg overflow-hidden">
+            <img
+              className="w-full h-full object-center object-cover transition duration-150 hover:scale-110"
+              src={imageShown.transformedSrc}
+              alt={imageShown.altText || 'product image'} />
+          </figure>
 
-            <div className="relative">
-              <div className="flex space-x-2 mt-4 overflow-auto scrollbar-hide mr-12">
-                {product.images.edges.map(({ node }, index: number) => {
-                  return (
-                    <figure
-                      key={`thumbnail-${index}`}
-                      className="flex-shrink-0 w-24 h-24 rounded-lg overflow-hidden cursor-pointer"
-                      onClick={() => setImageShown(node)}
-                    >
-                      <img
-                        className="w-full h-full object-top object-cover"
-                        src={node.transformedSrc}
-                        alt={node.altText || `product-thumbail-${product.title}`} />
-                    </figure>
-                  );
-                })}
-              </div>
-              <div className="absolute flex items-center justify-end bg-gradient-to-l from-white h-full pr-4 w-12 top-0 bottom-0 right-0">
-                <ChevronRightIcon className="h-6 w-6" aria-label="" />
-              </div>
+          <div className="relative">
+            <div className="flex space-x-2 mt-4 overflow-auto scrollbar-hide mr-12">
+              {product.images.edges.map(({ node }, index: number) => {
+                return (
+                  <figure
+                    key={`thumbnail-${index}`}
+                    className="flex-shrink-0 w-24 h-24 rounded-lg overflow-hidden cursor-pointer"
+                    onClick={() => setImageShown(node)}
+                  >
+                    <img
+                      className="w-full h-full object-top object-cover"
+                      src={node.transformedSrc}
+                      alt={node.altText || `product-thumbail-${product.title}`} />
+                  </figure>
+                );
+              })}
+            </div>
+            <div className="absolute flex items-center justify-end bg-gradient-to-l from-white h-full pr-4 w-12 top-0 bottom-0 right-0">
+              <ChevronRightIcon className="h-6 w-6" aria-label="" />
             </div>
           </div>
+        </div>
 
-          <article className="col-span-1 mt-12 [ md:mt-12 md:px-8 ]">
-            <header className="flex items-center justify-between">
-              <div>
-                <h1 className="font-serif text-4xl">
-                  {product.title}
-                </h1>
-                <p>{productDetails.punchLine}</p>
-              </div>
-              <div className="flex flex-col text-right relative">
-                <label className="invisible absolute">price</label>
-                <p className="text-xl">{formatPrice(variant.priceV2.amount)}</p>
-                {variant.compareAtPriceV2 && (
-                  <span className="text-red-600 line-through">
-                    {formatPrice(variant.compareAtPriceV2.amount)}
-                  </span>
-                )}
-              </div>
-            </header>
+        {/* title & description */}
+        <div className="text-gray-800 mt-8 flex flex-col items-start">
+          <span className="block text-primary text-base mb-1">On Sale</span>
 
-            <div className="prose py-8" dangerouslySetInnerHTML={{ __html: product.descriptionHtml }} />
+          <h1 className="relative font-sans font-bold text-4xl lg:text-6xl mb-4">
+            <span className="relative z-10">{product.title}</span>
+            <span className="bg-primary bg-opacity-50 absolute h-6 w-full bottom-0 left-0"></span>
+          </h1>
 
-            <div className="">
-              <label className="font-serif block mb-2">Color / {variant.title}</label>
-              <div className="flex flex-wrap mb-6">
-                {product.variants.edges.map(({ node }) => {
-                  const colorSwatch = productDetails.colors.find((color: any) => color.name === node.title.toLowerCase().replace(/ /g, '-'));
-                  return (
-                    <Link key={node.id} href={`/shop/${product.handle}/${node.sku}`} passHref>
-                      <a title={node.title} className={classNames(
-                        'h-8 w-8 mr-4 mb-4 rounded-full flex items-center justify-center border-2 overflow-hidden',
-                        node.sku === variant.sku ? 'border-gray-700' : 'border-gray-200'
-                      )}>
-                        <div className="h-6 w-6 relative rounded-full overflow-hidden">
-                          <Image objectFit="cover" src={colorSwatch.src} alt={colorSwatch.name} />
-                        </div>
-                      </a>
-                    </Link>
-                  );
-                })}
-              </div>
-            </div>
+          <div className="flex relative mb-8">
+            <label className="invisible absolute">price</label>
+            {variant.compareAtPriceV2 && (
+              <span className="text-red-600 text-xl line-through mr-4">
+                {formatPrice(variant.compareAtPriceV2.amount)}
+              </span>
+            )}
+            <p className="text-xl">{formatPrice(variant.priceV2.amount)}</p>
+          </div>
 
-            <div className="flex justify-between">
-              <div className="">
-                {/* quantity selector */}
-                <QtySelector defaultValue={qty} onChange={(num: number) => setQty(num)} />
-              </div>
-              <div className="">
-                <Button disabled={loading} onClick={() => createCheckout()}>
-                  {loading ? (
-                    <RefreshIcon className="h-6 w-6 animate-spin" aria-hidden="true" />
-                  ) : (
-                    <>buy now</>
-                  )}
-                </Button>
-              </div>
-            </div>
-
-            <div className="w-full mt-12">
-              <h2 className="font-serif text-xl mb-4 text-center [ md:text-left ]">{productDetails.faq.heading}</h2>
-              {productDetails.faq.items.map(({ question, answer }: { question: string, answer: string }, index: number) => (
-                <Disclosure key={index}>
-                  {({ open }) => (
-                    <div className={classNames(
-                      index === productDetails.faq.items.length - 1 ? '' : 'mb-4'
+          <div className="">
+            <label className="font-sans block mb-4 font-bold uppercase">Colors / <span className="text-gray-600">{variant.title}</span></label>
+            <div className="flex flex-wrap space-x-4 mb-6">
+              {product.variants.edges.map(({ node }) => {
+                return (
+                  <Link key={node.id} href={`/shop/${product.handle}/${node.sku}`} passHref>
+                    <a title={node.title} className={classNames(
+                      'py-2 px-8 mb-4 flex items-center justify-center border-2 overflow-hidden',
+                      node.sku === variant.sku ? 'border-gray-700' : 'border-gray-200'
                     )}>
-                      <Disclosure.Button className="flex w-full items-center justify-between bg-gray-100 rounded-lg px-6 py-4 text-left">
-                        <span>{question}</span>
-                        <ChevronRightIcon
-                          className={`h-6 w-6 ${open ? "transform rotate-90" : ""}`}
-                        />
-                      </Disclosure.Button>
-
-                      <Transition
-                        show={open}
-                        enter="transition duration-100 ease-out"
-                        enterFrom="transform -translate-y-1/2 opacity-0"
-                        enterTo="transform translate-y-0 opacity-100"
-                        leave="transition duration-75 ease-out"
-                        leaveFrom="transform translate-y-0 opacity-100"
-                        leaveTo="transform -translate-y-1/4 opacity-0"
-                      >
-                        <Disclosure.Panel className="px-6 py-4">
-                          {answer}
-                        </Disclosure.Panel>
-                      </Transition>
-                    </div>
-                  )}
-                </Disclosure>
-              ))}
+                      <div className="relative">
+                        {node.title}
+                      </div>
+                    </a>
+                  </Link>
+                );
+              })}
             </div>
-          </article>
+          </div>
+
+          <div className="flex justify-between w-full">
+            <div className="">
+              {/* quantity selector */}
+              <QtySelector defaultValue={qty} onChange={(num: number) => setQty(num)} />
+            </div>
+            <div className="">
+              <Button disabled={loading} onClick={() => createCheckout()}>
+                {loading ? (
+                  <RefreshIcon className="h-6 w-6 animate-spin" aria-hidden="true" />
+                ) : (
+                  <>Buy Now</>
+                )}
+              </Button>
+            </div>
+          </div>
+          <div className="prose py-8" dangerouslySetInnerHTML={{ __html: product.descriptionHtml }} />
         </div>
       </section>
 
-      <section className="mt-12 [ md:mt-24 ]">
-        <div className="container mx-auto px-4 [ md:grid md:grid-cols-5 ] [ lg:px-0 ]">
-          <div className="col-span-3 flex items-center">
-            <div className="flex flex-col [ md:px-8 ]">
-              <h2 className="font-sans uppercase mb-6 text-primary tracking-widest font-bold">{productDetails.includes.eyebrow}</h2>
-              <p className="text-3xl font-serif mb-4 text-gray-800">
-                {productDetails.includes.heading}
-              </p>
-              <p className="mb-8 [ md:mb-16 ] max-w-2xl text-xl text-gray-600 lg:mx-auto">
-                {productDetails.includes.copy}
-              </p>
-
-              <div className="">
-                <h3 className="text-gray-800 font-bold mb-2">
-                  {productDetails.includes.subheading}
-                </h3>
-                <ul>
-                  {productDetails.includes.items.map((item: string, index: number) => (
-                    <li className="py-1" key={index}>
-                      <p className="text-gray-600">{item}</p>
-                    </li>
-                  ))}
-                </ul>
-              </div>
-            </div>
-          </div>
-          <div className="col-span-2 mt-8 [ md:mt-0 ]">
-            <figure className="aspect-w-4 aspect-h-4 [ md:aspect-w-3 md:aspect-h-4 ] rounded-lg overflow-hidden">
-              <Image
-                className="w-full h-full object-center object-cover transition duration-150 hover:scale-110"
-                layout="fill"
-                src={productDetails.includes.image}
-                alt={'product image'}
-              />
-            </figure>
-          </div>
-        </div>
-      </section>
 
       <FeatureList
-        eyebrow={<Eyebrow>the marc razor</Eyebrow>}
-        heading={<H1 className="mb-4">Fewer blades, less irritation, great design.</H1>}
+        eyebrow={<Eyebrow className="mb-2">why marc<i>less</i></Eyebrow>}
+        heading={
+          <h2 className="font-sans text-4xl md:text-6xl font-bold mb-6 md:mb-12">
+            Our commitment to you.
+          </h2>
+        }
         body={
-          <LargeLead className="mb-12 max-w-screen-md mx-auto">
-            Get a smooth, ultra-close shave without the aggressive, go-beneath-the-surface extra blades that cause razor burn and ingrown hairs.
+          <LargeLead className="">
+            Lorem ipsum dolor sit amet consectetur adipisicing elit. Obcaecati, distinctio modi. Maiores nostrum adipisci quibusdam tenetur asperiores sed cumque odit doloribus, provident dignissimos dicta? Tempore, quo. Accusamus, necessitatibus similique! Labore!
           </LargeLead>
         }
-        items={productDetails.features.items}
+        items={brandFeatures}
       />
 
-      <Gallery images={productDetails.gallery} />
+      {relatedProducts && relatedProducts.length > 0 && (
+        <section className="container mx-auto px-4 xl:px-0 pt-16 md:pt-32">
+          <h2 className="text-4xl md:text-6xl font-sans font-bold mb-12 text-center">Related Products</h2>
+          <div className="md:grid md:grid-cols-2 md:gap-8 lg:grid-cols-3 xl:grid-cols-4">
+            {relatedProducts.map(({ node }) => {
+              const productImage = node.images.edges[0].node;
+              const variant = node.variants.edges[0].node;
+              const regularPrice = node.compareAtPriceRange.minVariantPrice.amount;
+              const salePrice = node.priceRange.minVariantPrice.amount;
+              const onSale = +regularPrice > +salePrice;
 
-      <div className="yotpo yotpo-main-widget"
-        data-product-id={product.id}
-        data-name={product.title}
-        data-url={`/shop/${product.handle}/${variant.sku}`}
-        data-image-url={variant.image?.transformedSrc}
-        data-description={product.description}>
-      </div>
+              return (
+                <div key={node.id} className="flex flex-col group relative rounded-xl shadow-xl overflow-hidden mb-8 md:mb-0">
+                  <div className="flex-shrink-0 w-full min-h-80 bg-gray-200 aspect-w-1 aspect-h-1 overflow-hidden transition-opacity duration-200 group-hover:opacity-75 lg:h-80 lg:aspect-none">
+                    <img
+                      src={productImage.transformedSrc}
+                      alt={productImage.altText ?? ''}
+                      className="w-full h-full object-center object-cover lg:w-full lg:h-full transition-transform duration-200 group-hover:scale-105"
+                    />
+                  </div>
+                  <div className="flex flex-col h-full justify-between p-8">
+                    <h3 className="text-base text-gray-800 mb-4">
+                      <span className="block text-primary text-sm mb-1">New</span>
+                      <Link href={`/shop/${encodeURIComponent(node.handle)}/${variant.sku}`} passHref>
+                        <a href={node.handle} className="font-bold">
+                          <span aria-hidden="true" className="absolute inset-0" />
+                          {node.title}
+                        </a>
+                      </Link>
+                    </h3>
+                    <p className="mt-auto text-sm text-gray-800 flex space-x-4">
+                      {onSale && <span className="line-through text-gray-400">{formatPrice(regularPrice)}</span>}
+                      <span>{formatPrice(salePrice)}</span>
+                    </p>
+                  </div>
+                </div>
+              );
+            })}
+          </div>
+        </section>
+      )}
+
+      {/* <Gallery images={productDetails.gallery} /> */}
+
+      {/* <section className="container max-w-screen-lg mx-auto px-4 font-sans">
+        <div className="yotpo yotpo-main-widget"
+          data-product-id={product.id}
+          data-name={product.title}
+          data-url={`/shop/${product.handle}/${variant.sku}`}
+          data-image-url={variant.image?.transformedSrc}>
+        </div>
+      </section> */}
     </>
   )
 }
@@ -321,10 +292,19 @@ export const getStaticProps: GetStaticProps = async ({ params }) => {
   const product = data.products.edges[0].node;
   const variant = product.variants.edges.find(({ node }) => node.sku === sku);
 
+  const { data: relatedProducts } = await client.query<GetProducts, GetProductsVariables>({
+    query: PRODUCTS_QUERY,
+    variables: {
+      first: 5,
+      query: `type:${product.productType}`
+    }
+  });
+
   return {
     props: {
       product,
-      variant: variant?.node
+      variant: variant?.node,
+      relatedProducts: relatedProducts.products.edges.filter(({ node }) => node.id !== product.id)
     },
   }
 }

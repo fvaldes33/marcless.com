@@ -4,8 +4,8 @@ import type { GetProducts, GetProductsVariables } from './__generated__/GetProdu
 
 export type { GetProducts, GetProductsVariables };
 export const PRODUCTS_QUERY = gql`
-  query GetProducts($first: Int) {
-    products(first: $first) {
+  query GetProducts($first: Int, $query: String) {
+    products(first: $first, query: $query) {
       edges {
         node {
           id

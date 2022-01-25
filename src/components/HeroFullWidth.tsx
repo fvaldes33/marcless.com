@@ -10,7 +10,7 @@ const HeroFullWidth: React.FC<HeroFullWidthProps> = ({
   content
 }) => {
   return (
-    <div className="py-24 px-4 [ md:py-48 ] [ xl:px-0 ] relative bg-tertiary text-white overflow-hidden">
+    <div className="h-[768] py-24 px-4 [ md:py-48 ] [ xl:px-0 ] relative bg-gray-800 text-white overflow-hidden">
       <div className="absolute inset-0">
         {media}
       </div>

@@ -94,14 +94,12 @@ function MyApp({ Component, pageProps, store }: AppPropsWithGlobals) {
         (function e(){var e=document.createElement("script");e.type="text/javascript",e.async=true,e.src="//staticw2.yotpo.com/yy9WUacB03VCmmsa1SQlo8zSb0Tulq2vsbwjchCk/widget.js";var t=document.getElementsByTagName("script")[0];t.parentNode.insertBefore(e,t)})();
       `}</Script>
 
-      <Body>
-        <Alert />
-        <Header />
-        <main>
-          <Component {...pageProps} />
-        </main>
-        <Footer />
-      </Body>
+      {/* <Alert /> */}
+      <Header />
+      <main>
+        <Component {...pageProps} />
+      </main>
+      <Footer />
     </AppProvider>
   );
 }

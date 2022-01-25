@@ -30,7 +30,7 @@ const ContentMedia: React.FC<ContentMediaProps> = ({ eyebrow, heading, body, cta
           {cta && cta}
         </div>
 
-        <div className="flex flex-col w-full rounded-2xl overflow-hidden relative shadow-xl z-0 h-80 [ md:h-auto md:w-2/3 ]">
+        <div className="flex flex-col w-full overflow-hidden relative shadow-xl z-0 h-80 [ md:h-auto md:w-2/3 ]">
           <Image src={image} layout="fill" objectFit="cover" objectPosition="center" alt="Marc One" />
           {/* <div className="absolute inset-0 w-full h-full bg-secondary opacity-25 z-50"></div> */}
         </div>

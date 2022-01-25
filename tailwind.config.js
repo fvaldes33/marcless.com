@@ -4,23 +4,24 @@ const plugin = require('tailwindcss/plugin')
 
 module.exports = {
   mode: 'jit',
-  purge: ['./src/pages/**/*.{js,ts,jsx,tsx}', './src/components/**/*.{js,ts,jsx,tsx}'],
-  darkMode: false, // or 'media' or 'class'
+  content: ['./src/pages/**/*.{js,ts,jsx,tsx}', './src/components/**/*.{js,ts,jsx,tsx}'],
+  // darkMode: false, // or 'media' or 'class'
   theme: {
     extend: {
       fontFamily: {
         serif: ['Bodoni Moda', ...defaultTheme.fontFamily.serif],
-        sans: ['Montserrat', ...defaultTheme.fontFamily.sans],
+        // sans: ['Montserrat', ...defaultTheme.fontFamily.sans],
+        sans: ['Open Sans', ...defaultTheme.fontFamily.sans],
       }
     },
     fontWeight: {
       ...defaultTheme.fontWeight,
-      normal: 300,
+      // normal: 300,
     },
     colors: {
       primary: {
-        light: '#11B5D2',
-        DEFAULT: '#078196',
+        light: '#7dc55b', //#7dc55b
+        DEFAULT: '#6ebe49', //#6ebe49
       },
       secondary: {
         DEFAULT: '#0F0F2D',

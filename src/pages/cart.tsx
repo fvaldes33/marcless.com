@@ -48,14 +48,14 @@ const Cart: NextPage = () => {
         checkout.lineItems.length === 0 ? 'min-h-screen' : ''
       )}>
         <div className="container max-w-screen-lg mx-auto px-4 [ lg:px-0 ]">
-          <h1 className="font-serif text-4xl [ md:text-5xl ] text-center">
+          <h1 className="font-sans font-bold text-4xl [ md:text-6xl ] text-center">
             Your Cart {checkout.lineItems.length === 0 && 'is Empty'}
           </h1>
 
           {checkout.lineItems.length === 0 && (
             <div className="flex justify-center mt-8">
               <Button href="/shop">
-                continue shopping
+                Continue Shopping
               </Button>
             </div>
           )}
@@ -130,7 +130,7 @@ const Cart: NextPage = () => {
                 </ul>
                 <div className="mb-3">
                   <Button block onClick={() => proceedToCheckout()}>
-                    proceed to checkout
+                    Checkout
                   </Button>
                 </div>
                 <div className="text-center">

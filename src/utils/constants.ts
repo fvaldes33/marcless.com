@@ -34,21 +34,24 @@ export const testimonials = [
 
 export const brandFeatures = [
   {
-    name: 'Affordability',
+    color: 'bg-rose-100',
+    name: 'Real Innovation',
     description:
-      'Better stuff, fewer dollars. It’s that simple.',
+      'Tech is commoditized. Marcless tech is different. We are constantly looking for new products that solve real problems.',
     icon: CashIcon,
   },
   {
-    name: 'Quality',
+    color: 'bg-fuchsia-100',
+    name: 'Premium Quality Build',
     description:
-      'Built from the highest quality materials in the industry.',
+      'All products are subject to a comprehensive quality inspection to make sure no faulty items are ever sent.',
     icon: CheckIcon,
   },
   {
-    name: 'Clean and sustainable',
+    color: 'bg-emerald-100',
+    name: 'Fast and Free Shipping',
     description:
-      'Durable and recyclable, while free of nasty chemicals.',
+      'We offer free insured shipping worldwide. We ship from our warehouses in the USA and HK to fulfill all orders quickly no matter where you are.',
     icon: ShieldCheckIcon,
   },
 ];

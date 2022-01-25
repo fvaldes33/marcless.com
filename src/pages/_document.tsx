@@ -22,7 +22,9 @@ class MyDocument extends Document {
           <link rel="preconnect" href="https://cdn.shopify.com" crossOrigin="" />
           <link rel="preconnect" href="https://fonts.googleapis.com" />
           <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="true" />
-          <link href="https://fonts.googleapis.com/css2?family=Bodoni+Moda&family=Montserrat:wght@300;500&display=swap" rel="stylesheet" />
+          {/* <link href="https://fonts.googleapis.com/css2?family=Bodoni+Moda&family=Montserrat:wght@300;500&display=swap" rel="stylesheet" /> */}
+          {/* <link href="https://fonts.googleapis.com/css2?family=Titillium+Web:wght@300;700&display=swap" rel="stylesheet" /> */}
+          <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;700&display=swap" rel="stylesheet" />
 
           {/* open graph */}
           <meta property="og:site_name" content="Marcless" />
@@ -44,7 +46,7 @@ class MyDocument extends Document {
               src="https://www.facebook.com/tr?id=225449046285735&ev=PageView&noscript=1" />
           </noscript>
         </Head>
-        <body className="font-sans font-normal overflow-x-hidden">
+        <body className="font-sans font-normal">
           <Main />
           <NextScript />
         </body>

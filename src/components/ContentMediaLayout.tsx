@@ -71,7 +71,7 @@ const ContentMedia: React.FC<ContentMediaProps> = ({
 
         {/* Media */}
         <motion.div initial="hidden" animate={controls} variants={layout === 'row' ? mediaVariantsRight : mediaVariantsLeft} className={classNames(
-          'flex flex-col w-full rounded-2xl overflow-hidden relative shadow-xl z-0 h-80 [ md:h-auto md:w-2/3 ]'
+          'flex flex-col w-full overflow-hidden relative shadow-xl z-0 h-80 [ md:h-auto md:w-2/3 ]'
         )}>
           {media}
         </motion.div>

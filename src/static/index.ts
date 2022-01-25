@@ -19,6 +19,20 @@ import swatchpurple from '@/src/assets/swatches/purple.png';
 import swatchrose from '@/src/assets/swatches/rose-gold.png';
 import swatchwhite from '@/src/assets/swatches/white.png';
 
+export const colors = [
+  { name: 'black', src: swatchmatteblack },
+  { name: 'blue', src: swatchblue },
+  { name: 'bright-silver', src: swatchbright },
+  { name: 'matte-black', src: swatchmatteblack },
+  { name: 'matte-silver', src: swatchmattesilver },
+  { name: 'mint-green', src: swatchmint },
+  { name: 'navy-blue', src: swatchnavy },
+  { name: 'pink', src: swatchpink },
+  { name: 'purple', src: swatchpurple },
+  { name: 'rose-gold', src: swatchrose },
+  { name: 'white', src: swatchwhite },
+]
+
 export const MarcRazor = {
   punchLine: 'Razor + 20 Blades',
   includes: {
@@ -98,7 +112,8 @@ export const MarcRazor = {
 }
 
 const ProductMap: { [key: string]: any } = {
-  'the-marc-razor': MarcRazor
+  'the-marc-razor': MarcRazor,
+  'ninja-dragons-3-in1-wireless-foldable-charging-station-830911972': MarcRazor
 };
 
 export const getStaticProductDetails = (handle: string) => {

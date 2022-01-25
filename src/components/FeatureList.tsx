@@ -2,12 +2,13 @@ import React, { useEffect } from "react";
 import { useInView } from 'react-intersection-observer';
 import { motion, useAnimation } from 'framer-motion';
 import { fadeInUp, staggered } from "@/src/utils/constants";
+import { classNames } from "../utils/helpers";
 
 interface FeatureListProps {
   eyebrow?: JSX.Element;
   heading: JSX.Element;
   body?: JSX.Element;
-  items: Array<{ name: string; description: string; icon: (props: React.ComponentProps<'svg'>) => JSX.Element }>;
+  items: Array<{ color: string; name: string; description: string; icon: (props: React.ComponentProps<'svg'>) => JSX.Element }>;
 }
 
 const FeatureList: React.FC<FeatureListProps> = ({
@@ -30,8 +31,8 @@ const FeatureList: React.FC<FeatureListProps> = ({
 
   return (
     <section ref={ref} className="pt-16 [ md:pt-32 ]">
-      <div className="max-w-screen-lg mx-auto px-4 [ xl:px-0 ]">
-        <motion.div initial="hidden" animate={controls} variants={fadeInUp} className="lg:text-center">
+      <div className="container mx-auto px-4 [ xl:px-0 ] md:flex md:justify-between">
+        <motion.div initial="hidden" animate={controls} variants={fadeInUp} className="w-full md:w-3/5 flex-shrink-0 pr-12">
           {eyebrow && eyebrow}
           {heading}
           {body && body}
@@ -39,7 +40,7 @@ const FeatureList: React.FC<FeatureListProps> = ({
 
         <div className="mt-10">
           <motion.dl
-            className="space-y-10 md:space-y-0 md:grid md:grid-cols-3 md:gap-x-8 md:gap-y-10"
+            className="space-y-10 flex flex-col"
             variants={staggered}
             initial="hidden"
             animate={controls}
@@ -47,7 +48,10 @@ const FeatureList: React.FC<FeatureListProps> = ({
             {items.map((feature) => (
               <motion.div key={feature.name} variants={fadeInUp} className="relative">
                 <dt>
-                  <div className="absolute flex items-center justify-center h-12 w-12 rounded-full bg-primary text-white">
+                  <div className={classNames(
+                    'absolute flex items-center justify-center h-12 w-12 rounded-full text-gray-800',
+                    feature.color
+                  )}>
                     <feature.icon className="h-6 w-6" aria-hidden="true" />
                   </div>
                   <p className="ml-16 text-lg leading-6 font-medium text-gray-800">{feature.name}</p>

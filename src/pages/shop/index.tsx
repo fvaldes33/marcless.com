@@ -46,49 +46,44 @@ const Shop: NextPage<GetProducts> = ({ products }) => {
 
       <div ref={ref} className="py-12 px-4 [ md:py-24 ] [ lg:px-0 ] relative bg-white">
         <motion.div
-          className="container mx-auto overflow-visible [ md:grid md:grid-cols-3 md:gap-x-10 ]"
+          className="container mx-auto overflow-visible [ md:grid md:grid-cols-3 md:gap-x-10 ] [ lg:grid-cols-4 ]"
           variants={staggered}
           initial="hidden"
           animate={controls}
         >
           {products?.edges.map(({ node }) => {
-            return node.variants.edges.map((variant) => {
-              const variantImage = variant.node.image;
-              return (
-                <motion.article variants={fadeInUp} key={variant.node.id} className="group mb-12 [ md:mb-8 ]">
-                  <figure className="aspect-w-3 aspect-h-4 rounded-lg overflow-hidden">
-                    <Link href={`/shop/${encodeURIComponent(node.handle)}/${variant.node.sku}`} passHref>
-                      <a className="block">
-                        <img
-                          className="w-full h-full object-center object-cover transition duration-150 hover:scale-110"
-                          src={variantImage?.transformedSrc}
-                          alt={variantImage?.altText || 'product image'} />
+            const productImage = node.images.edges[0].node;
+            const variant = node.variants.edges[0].node;
+            const regularPrice = node.compareAtPriceRange.minVariantPrice.amount;
+            const salePrice = node.priceRange.minVariantPrice.amount;
+            const onSale = +regularPrice > +salePrice;
+
+            return (
+              <motion.article variants={fadeInUp} key={node.id} className="flex flex-col group relative rounded-xl shadow-xl overflow-hidden mb-8">
+                <div className="flex-shrink-0 w-full min-h-80 bg-gray-200 aspect-w-1 aspect-h-1 overflow-hidden transition-opacity duration-200 group-hover:opacity-75 lg:h-80 lg:aspect-none">
+                  <img
+                    src={productImage.transformedSrc}
+                    alt={productImage.altText ?? ''}
+                    className="w-full h-full object-center object-cover lg:w-full lg:h-full transition-transform duration-200 group-hover:scale-105"
+                  />
+                </div>
+                <div className="flex flex-col h-full justify-between p-8">
+                  <h3 className="text-base text-gray-800 mb-4">
+                    <span className="block text-primary text-sm mb-1">New</span>
+                    <Link href={`/shop/${encodeURIComponent(node.handle)}/${variant.sku}`} passHref>
+                      <a href={node.handle} className="font-bold">
+                        <span aria-hidden="true" className="absolute inset-0" />
+                        {node.title}
                       </a>
                     </Link>
-                  </figure>
-                  <div className="py-4 flex flex-col items-center">
-                    <h1 className="font-serif text-2xl mb-0">
-                      {node.title.toLowerCase()}
-                    </h1>
-                    <h2 className="font-sans mb-4">
-                      {variant.node.title.toLowerCase()}
-                    </h2>
-                    <p className="font-sans text-base mb-4">
-                      {formatPrice(node.priceRange.minVariantPrice.amount)}
-
-                      {node.compareAtPriceRange && (
-                        <span className="text-red-600 line-through ml-2">
-                          {formatPrice(node.compareAtPriceRange.minVariantPrice.amount)}
-                        </span>
-                      )}
-                    </p>
-                    <Button href={`/shop/${encodeURIComponent(node.handle)}/${variant.node.sku}`}>
-                      buy now
-                    </Button>
-                  </div>
-                </motion.article>
-              )
-            });
+                  </h3>
+                  <p className="mt-auto text-sm text-gray-800 flex space-x-4">
+                    {onSale && <span className="line-through text-gray-400">{formatPrice(regularPrice)}</span>}
+                    <span>{formatPrice(salePrice)}</span>
+                  </p>
+                </div>
+              </motion.article>
+            );
           })}
         </motion.div>
       </div>
@@ -100,7 +95,8 @@ export const getStaticProps = async () => {
   const { data } = await client.query<GetProducts, GetProductsVariables>({
     query: PRODUCTS_QUERY,
     variables: {
-      first: 2,
+      first: 10,
+      query: 'tag:wireless'
     }
   });
 

@@ -30,7 +30,7 @@ const QtySelector: React.FC<QtySelectorProps> = ({
   }, [value, onChange])
 
   return (
-    <div className="h-full border border-gray-200 rounded-lg flex">
+    <div className="h-full border border-gray-200 flex">
       <button onClick={() => decrement()} aria-label="Decrease quantity by one" className="flex items-center w-12 justify-center">
         <MinusCircleIcon className="h-6 w-6 text-gray-500" aria-hidden="true" />
       </button>

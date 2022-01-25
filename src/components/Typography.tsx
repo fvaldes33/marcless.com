@@ -51,12 +51,12 @@ const LargeLead: React.FC<TypographyProps> = ({
 const Display: React.FC<TypographyProps> = ({
   color = 'text-gray-800',
   className = 'mb-12',
-  fontFamily = 'font-serif',
+  fontFamily = 'font-sans font-bold',
   children
 }) => {
   return (
     <h1 className={classNames(
-      'text-4xl [ md:text-6xl md:leading-none ]',
+      'text-4xl [ md:text-7xl md:leading-tight ]',
       fontFamily,
       color,
       className
@@ -69,7 +69,7 @@ const Display: React.FC<TypographyProps> = ({
 const H1: React.FC<TypographyProps> = ({
   color = 'text-gray-800',
   className = 'mb-12',
-  fontFamily = 'font-serif',
+  fontFamily = 'font-sans font-bold',
   children
 }) => {
   return (
@@ -87,7 +87,7 @@ const H1: React.FC<TypographyProps> = ({
 const H2: React.FC<TypographyProps> = ({
   color = 'text-gray-800',
   className = 'mb-10',
-  fontFamily = 'font-serif',
+  fontFamily = 'font-sans font-bold',
   children
 }) => {
   return (

@@ -16,7 +16,7 @@ const PolicyPage: NextPage = () => {
 
       <section className="py-12 [ mg:py-24 ]">
         <div className="container mx-auto px-4 [ lg:px-0 ]">
-          <h1 className="text-4xl font-serif mb-12 text-center">{store?.shippingPolicy?.title}</h1>
+          <h1 className="text-4xl font-sans font-bold mb-12 text-center">{store?.shippingPolicy?.title}</h1>
 
           <div className="prose mx-auto mb-12 [ lg:prose-lg ]" dangerouslySetInnerHTML={{ __html: store?.shippingPolicy?.body || '' }} />
         </div>
