@@ -29,16 +29,16 @@ class MyDocument extends Document {
           {/* open graph */}
           <meta property="og:site_name" content="Marcless" />
           <meta property="og:url" content="https://www.marcless.com/" />
-          <meta property="og:title" content="Better shave, fewer dollars | Marcless" />
+          <meta property="og:title" content="Better tech, less dollars | Marcless" />
           <meta property="og:type" content="website" />
-          <meta property="og:description" content="Inspired by a vintage safety razor, crafted from solid zinc alloy and built to give you the best shave you've ever had. Includes 20 blades." />
+          <meta property="og:description" content="We sell directly to customers, cutting unnecessary costs and crazy markups that make products overly expensive. We pass on the savings to you, so you get the same quality at a fraction of the cost." />
           <meta property="og:image" content="/images/open-graph-logo.jpg" />
           <meta property="og:image:secure_url" content="/images/open-graph-logo.jpg" />
 
           {/* twitter */}
           <meta name="twitter:card" content="summary_large_image" />
-          <meta name="twitter:title" content="Better shave, fewer dollars | Marcless" />
-          <meta name="twitter:description" content="Inspired by a vintage safety razor, crafted from solid zinc alloy and built to give you the best shave you've ever had. Includes 20 blades." />
+          <meta name="twitter:title" content="Better tech, less dollars | Marcless" />
+          <meta name="twitter:description" content="We sell directly to customers, cutting unnecessary costs and crazy markups that make products overly expensive. We pass on the savings to you, so you get the same quality at a fraction of the cost." />
 
           <meta name="facebook-domain-verification" content="xgghiaxp2avfcfq2gyfact2xcn6upm" />
           <noscript>

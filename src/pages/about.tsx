@@ -38,7 +38,7 @@ const AboutPage: NextPage = () => {
           <Eyebrow>About Marcless</Eyebrow>
           <h1 className="mb-8 text-white font-sans font-bold text-3xl md:text-4xl">We are a group of tech enthusiasts who have a passion for developing the products of tomorrow.</h1>
           <p className="text-gray-200 mb-8 leading-loose">
-            {`We know how time-consuming and expensive it is to find and buy new cables or chargers that don't even last that long until you need a new one. That's another reason we decided to launch Evolved Chargers and focus mainly on product quality and sustainability. We're glad that you found us, and hope you'll enjoy our products as we do!`}
+            {`We know how time-consuming and expensive it is to find and buy new cables or chargers that don't even last that long until you need a new one. That's another reason we decided to launch Marcless and focus mainly on product quality and sustainability. We're glad that you found us, and hope you'll enjoy our products as we do!`}
           </p>
           <Button href="/shop" variant="primary">
             Browse Products
