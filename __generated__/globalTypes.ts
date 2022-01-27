@@ -258,6 +258,16 @@ export enum CountryCode {
   ZZ = "ZZ",
 }
 
+/**
+ * The possible content types for a media object.
+ */
+export enum MediaContentType {
+  EXTERNAL_VIDEO = "EXTERNAL_VIDEO",
+  IMAGE = "IMAGE",
+  MODEL_3D = "MODEL_3D",
+  VIDEO = "VIDEO",
+}
+
 //==============================================================
 // END Enums and Input Objects
 //==============================================================

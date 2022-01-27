@@ -1,5 +1,5 @@
 
-import { gql } from 'apollo-boost';
+import { gql } from '@apollo/client';
 
 export type { Store, Store_shop } from './__generated__/Store';
 export const STORE_QUERY = gql`

@@ -22,7 +22,10 @@ import allRazors from '@/src/assets/all-razor-colors@1.jpg';
 import marcOneRoseGold from '@/src/assets/marcone-rosegold-exloded.png';
 import whiteDeviceGroup from '@/src/assets/tech/white-grouped.png';
 import devicesUnsplash from '@/src/assets/tech/devices-light-2-unsplash.jpg';
-// import devicesUnsplash from '@/src/assets/tech/setup-unsplash.jpg';
+import heroChargerModern from '@/src/assets/tech/hero-charger-modern.png';
+import travelerBlack from '@/src/assets/tech/traveler-black.png';
+import standardBlack from '@/src/assets/tech/standard-black.png';
+import architectBlack from '@/src/assets/tech/architect-black.png';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { Pagination } from 'swiper';
 import Link from 'next/link';
@@ -44,7 +47,7 @@ const gridContent = [
       text: 'Shop',
       href: '/shop'
     },
-    image: '/images/chargers/with-devices-transparent.png'
+    image: architectBlack.src
   },
   {
     color: 'bg-fuchsia-100',
@@ -54,7 +57,7 @@ const gridContent = [
       text: 'Shop',
       href: '/shop'
     },
-    image: '/images/chargers/with-devices-transparent.png'
+    image: standardBlack.src
   },
   {
     color: 'bg-emerald-100',
@@ -64,7 +67,7 @@ const gridContent = [
       text: 'Shop',
       href: '/shop'
     },
-    image: '/images/chargers/with-devices-transparent.png'
+    image: travelerBlack.src
   },
 ]
 
@@ -158,7 +161,8 @@ const Home: NextPage<GetProducts> = ({ products }) => {
 
             <img
               className="w-full md:w-2/3 md:ml-auto xl:ml-[initial] lg:w-1/2 xl:w-[600px] max-w-full mt-8 md:mt-0"
-              src="/images/chargers/with-devices-transparent.png"
+              // src="/images/chargers/with-devices-transparent.png"
+              src={heroChargerModern.src}
               alt="Standard Wireless Charger with three devices" />
           </div>
         </div>
@@ -228,7 +232,7 @@ const Home: NextPage<GetProducts> = ({ products }) => {
                   <div className="flex flex-col h-full justify-between p-8">
                     <h3 className="text-base text-gray-800 mb-4">
                       <span className="block text-primary text-sm mb-1">New</span>
-                      <Link href={`/shop/${encodeURIComponent(node.handle)}/${variant.sku}`} passHref>
+                      <Link href={`/shop/${encodeURIComponent(node.handle)}?variant=${variant.sku}`} passHref>
                         <a href={node.handle} className="font-bold">
                           <span aria-hidden="true" className="absolute inset-0" />
                           {node.title}

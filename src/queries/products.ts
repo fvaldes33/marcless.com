@@ -1,5 +1,5 @@
 
-import { gql } from 'apollo-boost';
+import { gql } from '@apollo/client';
 import type { GetProducts, GetProductsVariables } from './__generated__/GetProducts';
 
 export type { GetProducts, GetProductsVariables };
@@ -105,6 +105,31 @@ export const SINGLE_PRODUCT_QUERY = gql`
               node {
                 transformedSrc
                 altText
+              }
+            }
+          }
+          media(first: 1, reverse: true) {
+            edges {
+              node {
+                mediaContentType
+                previewImage {
+                  transformedSrc
+                  altText
+                }
+                ...on Video {
+                  id
+                  sources {
+                    format
+                    url
+                  }
+                }
+                ...on MediaImage {
+                  id
+                  image {
+                    altText
+                    transformedSrc
+                  }
+                }
               }
             }
           }

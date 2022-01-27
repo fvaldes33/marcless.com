@@ -11,6 +11,7 @@ import { formatPrice, viewItems, transformToGoogleItem } from '@/src/utils/helpe
 import Button from '@/src/components/Button';
 import { defaultDescription } from '@/src/utils/constants';
 import { useEffect } from 'react';
+import { ChevronRightIcon } from '@heroicons/react/outline';
 
 const Shop: NextPage<GetProducts> = ({ products }) => {
   const [ref, inView] = useInView({
@@ -44,9 +45,21 @@ const Shop: NextPage<GetProducts> = ({ products }) => {
         <meta name="description" content={defaultDescription} />
       </Head>
 
-      <div ref={ref} className="py-12 px-4 [ md:py-24 ] [ lg:px-0 ] relative bg-white">
+      <section className="bg-primary text-gray-900 container mx-auto flex flex-col md:flex-row justify-between xl:mt-8 py-12 lg:py-16 px-8 lg:px-24">
+        <div className="w-full md:w-1/2 flex-shrink-0">
+          <span className="text-gray-700 text-base md:text-lg mb-1 flex items-center">Shop <ChevronRightIcon className="w-4 h-4 ml-2" /></span>
+          <h1 className="text-4xl md:text-6xl font-bold">
+            Wireless Chargers
+          </h1>
+        </div>
+        <h2 className="text-lg md:text-xl w-full md:w-1/2 xl:w-1/3 mt-10">
+          Charging your Smart Devices made Easier! Go from careless clutter, to attractive, neat and tidy. Our MultiDevice Charging Stations keep your desk, bedroom, and office neat, tidy, and most importantly, cord-free. Select from our elegant collection of  MultiDevice charging stations/docks below.
+        </h2>
+      </section>
+
+      <section ref={ref} className="py-12 px-4 [ xl:px-0 ] relative bg-white">
         <motion.div
-          className="container mx-auto overflow-visible [ md:grid md:grid-cols-3 md:gap-x-10 ] [ lg:grid-cols-4 ]"
+          className="container mx-auto overflow-visible [ md:grid md:grid-cols-3 md:gap-x-10 ] [ xl:grid-cols-4 ]"
           variants={staggered}
           initial="hidden"
           animate={controls}
@@ -70,7 +83,7 @@ const Shop: NextPage<GetProducts> = ({ products }) => {
                 <div className="flex flex-col h-full justify-between p-8">
                   <h3 className="text-base text-gray-800 mb-4">
                     <span className="block text-primary text-sm mb-1">New</span>
-                    <Link href={`/shop/${encodeURIComponent(node.handle)}/${variant.sku}`} passHref>
+                    <Link href={`/shop/${encodeURIComponent(node.handle)}?variant=${variant.sku}`} passHref>
                       <a href={node.handle} className="font-bold">
                         <span aria-hidden="true" className="absolute inset-0" />
                         {node.title}
@@ -86,7 +99,7 @@ const Shop: NextPage<GetProducts> = ({ products }) => {
             );
           })}
         </motion.div>
-      </div>
+      </section>
     </>
   )
 }

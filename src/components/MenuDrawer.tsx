@@ -57,8 +57,9 @@ const MenuDrawer: React.FC = () => {
                     </div>
                     <Dialog.Title>
                       <Link href="/" passHref>
-                        <a className="font-serif block text-4xl tracking-wide">
-                          marc<span className="bg-primary text-white">less</span>
+                        <a className="relative font-sans block text-4xl tracking-wide">
+                          <span className="relative z-10">marcless</span>
+                          <span className="bg-primary bg-opacity-50 absolute h-3 w-full bottom-0 left-0"></span>
                         </a>
                       </Link>
                     </Dialog.Title>

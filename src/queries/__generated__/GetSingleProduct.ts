@@ -3,6 +3,8 @@
 // @generated
 // This file was automatically generated and should not be edited.
 
+import { MediaContentType } from "./../../../__generated__/globalTypes";
+
 // ====================================================
 // GraphQL query operation: GetSingleProduct
 // ====================================================
@@ -158,6 +160,148 @@ export interface GetSingleProduct_products_edges_node_images {
   edges: GetSingleProduct_products_edges_node_images_edges[];
 }
 
+export interface GetSingleProduct_products_edges_node_media_edges_node_ExternalVideo_previewImage {
+  __typename: "Image";
+  /**
+   * The location of the transformed image as a URL.
+   * 
+   * All transformation arguments are considered "best-effort". If they can be applied to an image, they will be.
+   * Otherwise any transformations which an image type does not support will be ignored.
+   */
+  transformedSrc: any;
+  /**
+   * A word or phrase to share the nature or contents of an image.
+   */
+  altText: string | null;
+}
+
+export interface GetSingleProduct_products_edges_node_media_edges_node_ExternalVideo {
+  __typename: "ExternalVideo" | "Model3d";
+  /**
+   * The media content type.
+   */
+  mediaContentType: MediaContentType;
+  /**
+   * The preview image for the media.
+   */
+  previewImage: GetSingleProduct_products_edges_node_media_edges_node_ExternalVideo_previewImage | null;
+}
+
+export interface GetSingleProduct_products_edges_node_media_edges_node_Video_previewImage {
+  __typename: "Image";
+  /**
+   * The location of the transformed image as a URL.
+   * 
+   * All transformation arguments are considered "best-effort". If they can be applied to an image, they will be.
+   * Otherwise any transformations which an image type does not support will be ignored.
+   */
+  transformedSrc: any;
+  /**
+   * A word or phrase to share the nature or contents of an image.
+   */
+  altText: string | null;
+}
+
+export interface GetSingleProduct_products_edges_node_media_edges_node_Video_sources {
+  __typename: "VideoSource";
+  /**
+   * The format of the video source.
+   */
+  format: string;
+  /**
+   * The URL of the video.
+   */
+  url: string;
+}
+
+export interface GetSingleProduct_products_edges_node_media_edges_node_Video {
+  __typename: "Video";
+  /**
+   * The media content type.
+   */
+  mediaContentType: MediaContentType;
+  /**
+   * The preview image for the media.
+   */
+  previewImage: GetSingleProduct_products_edges_node_media_edges_node_Video_previewImage | null;
+  /**
+   * A globally-unique identifier.
+   */
+  id: string;
+  /**
+   * The sources for a video.
+   */
+  sources: GetSingleProduct_products_edges_node_media_edges_node_Video_sources[];
+}
+
+export interface GetSingleProduct_products_edges_node_media_edges_node_MediaImage_previewImage {
+  __typename: "Image";
+  /**
+   * The location of the transformed image as a URL.
+   * 
+   * All transformation arguments are considered "best-effort". If they can be applied to an image, they will be.
+   * Otherwise any transformations which an image type does not support will be ignored.
+   */
+  transformedSrc: any;
+  /**
+   * A word or phrase to share the nature or contents of an image.
+   */
+  altText: string | null;
+}
+
+export interface GetSingleProduct_products_edges_node_media_edges_node_MediaImage_image {
+  __typename: "Image";
+  /**
+   * A word or phrase to share the nature or contents of an image.
+   */
+  altText: string | null;
+  /**
+   * The location of the transformed image as a URL.
+   * 
+   * All transformation arguments are considered "best-effort". If they can be applied to an image, they will be.
+   * Otherwise any transformations which an image type does not support will be ignored.
+   */
+  transformedSrc: any;
+}
+
+export interface GetSingleProduct_products_edges_node_media_edges_node_MediaImage {
+  __typename: "MediaImage";
+  /**
+   * The media content type.
+   */
+  mediaContentType: MediaContentType;
+  /**
+   * The preview image for the media.
+   */
+  previewImage: GetSingleProduct_products_edges_node_media_edges_node_MediaImage_previewImage | null;
+  /**
+   * A globally-unique identifier.
+   */
+  id: string;
+  /**
+   * The image for the media.
+   */
+  image: GetSingleProduct_products_edges_node_media_edges_node_MediaImage_image | null;
+}
+
+export type GetSingleProduct_products_edges_node_media_edges_node = GetSingleProduct_products_edges_node_media_edges_node_ExternalVideo | GetSingleProduct_products_edges_node_media_edges_node_Video | GetSingleProduct_products_edges_node_media_edges_node_MediaImage;
+
+export interface GetSingleProduct_products_edges_node_media_edges {
+  __typename: "MediaEdge";
+  /**
+   * The item at the end of MediaEdge.
+   */
+  node: GetSingleProduct_products_edges_node_media_edges_node;
+}
+
+export interface GetSingleProduct_products_edges_node_media {
+  __typename: "MediaConnection";
+  /**
+   * A list of edges.
+   */
+  edges: GetSingleProduct_products_edges_node_media_edges[];
+}
+
 export interface GetSingleProduct_products_edges_node {
   __typename: "Product";
   /**
@@ -205,6 +349,10 @@ export interface GetSingleProduct_products_edges_node {
    * List of images associated with the product.
    */
   images: GetSingleProduct_products_edges_node_images;
+  /**
+   * The media associated with the product.
+   */
+  media: GetSingleProduct_products_edges_node_media;
 }
 
 export interface GetSingleProduct_products_edges {

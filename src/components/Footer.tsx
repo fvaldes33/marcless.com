@@ -15,7 +15,7 @@ const Footer = () => {
   return (
     <footer className="bg-black text-white py-6 [ md:py-12 ] mt-12 [ md:mt-24 ]">
 
-      <div className="container mx-auto px-4 md:flex md:justify-between [ lg:px-0 ] py-12 border-b border-gray-200">
+      <div className="container mx-auto px-6 md:flex md:justify-between [ xl:px-0 ] py-12 border-b border-gray-200">
         <div className="text-center mb-4 [ md:mb-0 md:text-left md:col-span-2 ]">
           <Link href="/" passHref>
             <a className="relative font-sans block text-4xl tracking-wide">
@@ -37,7 +37,7 @@ const Footer = () => {
         </div>
       </div>
 
-      <div className="container mx-auto [ md:grid md:grid-cols-2 ] py-12">
+      <div className="container mx-auto px-6 [ md:grid md:grid-cols-2 ] [ xl:px-0 ] py-12">
         <div className="text-center mb-8 [ md:mb-0 md:text-left ]">
           <ul className="flex flex-wrap justify-center [ md:justify-start ]">
             {mainNav.map(({ label, href }, index: number) => (
