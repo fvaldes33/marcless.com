@@ -33,14 +33,12 @@ export default async function handler(
     });
     const { products } = await response.json();
     for (let product of products) {
-      for (let variant of product.variants) {
-        routes.push(`
-          <url>
-            <loc>${process.env.NEXT_PUBLIC_BASE_URL}/shop/${product.handle}/${variant.sku}</loc>
-            <lastmod>${product.created_at}</lastmod>
-          </url>
-        `);
-      }
+      routes.push(`
+        <url>
+          <loc>${process.env.NEXT_PUBLIC_BASE_URL}/shop/${product.handle}</loc>
+          <lastmod>${product.created_at}</lastmod>
+        </url>
+      `);
     }
 
     const xml = `<?xml version="1.0" encoding="UTF-8"?><urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">${routes.join('')}</urlset>`;

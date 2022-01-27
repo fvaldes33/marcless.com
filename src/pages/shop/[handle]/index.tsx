@@ -313,7 +313,7 @@ const ProductDetail: NextPage<PageProps> = ({ product, defaultVariant }) => {
                   <div className="flex flex-col h-full justify-between p-8">
                     <h3 className="text-base text-gray-800 mb-4">
                       <span className="block text-primary text-sm mb-1">New</span>
-                      <Link href={`/shop/${encodeURIComponent(node.handle)}/${variant.sku}`} passHref>
+                      <Link href={`/shop/${encodeURIComponent(node.handle)}?variant=${variant.sku}`} passHref>
                         <a href={node.handle} className="font-bold">
                           <span aria-hidden="true" className="absolute inset-0" />
                           {node.title}
@@ -331,8 +331,6 @@ const ProductDetail: NextPage<PageProps> = ({ product, defaultVariant }) => {
           </div>
         </section>
       )}
-
-      {/* <Gallery images={productDetails.gallery} /> */}
 
       {/* <section className="container max-w-screen-lg mx-auto px-4 font-sans">
         <div className="yotpo yotpo-main-widget"

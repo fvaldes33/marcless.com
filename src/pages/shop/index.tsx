@@ -12,6 +12,7 @@ import Button from '@/src/components/Button';
 import { defaultDescription } from '@/src/utils/constants';
 import { useEffect } from 'react';
 import { ChevronRightIcon } from '@heroicons/react/outline';
+import heroImage from '@/src/assets/tech/arthur-edelmans-h8r0iSaj_T8-unsplash.jpg';
 
 const Shop: NextPage<GetProducts> = ({ products }) => {
   const [ref, inView] = useInView({
@@ -45,14 +46,20 @@ const Shop: NextPage<GetProducts> = ({ products }) => {
         <meta name="description" content={defaultDescription} />
       </Head>
 
-      <section className="bg-primary text-gray-900 container mx-auto flex flex-col md:flex-row justify-between xl:mt-8 py-12 lg:py-16 px-8 lg:px-24">
-        <div className="w-full md:w-1/2 flex-shrink-0">
-          <span className="text-gray-700 text-base md:text-lg mb-1 flex items-center">Shop <ChevronRightIcon className="w-4 h-4 ml-2" /></span>
+      <section className="bg-primary bg-opacity-50 text-white container mx-auto flex flex-col md:flex-row justify-between xl:mt-8 py-12 lg:py-16 px-8 lg:px-24 relative">
+        <img
+          className="absolute inset-0 z-0 w-full h-full object-cover"
+          alt="hero image of iphone"
+          src={heroImage.src}
+        />
+
+        <div className="w-full md:w-1/2 flex-shrink-0 relative z-10">
+          <span className="text-gray-200 text-base md:text-lg mb-1 flex items-center">Shop <ChevronRightIcon className="w-4 h-4 ml-2" /></span>
           <h1 className="text-4xl md:text-6xl font-bold">
             Wireless Chargers
           </h1>
         </div>
-        <h2 className="text-lg md:text-xl w-full md:w-1/2 xl:w-1/3 mt-10">
+        <h2 className="text-lg md:text-xl w-full md:w-1/2 xl:w-1/3 mt-10 relative z-10">
           Charging your Smart Devices made Easier! Go from careless clutter, to attractive, neat and tidy. Our MultiDevice Charging Stations keep your desk, bedroom, and office neat, tidy, and most importantly, cord-free. Select from our elegant collection of  MultiDevice charging stations/docks below.
         </h2>
       </section>

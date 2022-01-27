@@ -13,8 +13,8 @@ import Button from '../components/Button';
 import { getStaticProductDetails } from '@/src/static';
 import roseGoldBathroom from '@/src/assets/rose-gold-bathroom.jpg';
 import blackWhiteMarble from '@/src/assets/marble-black-white.jpg';
-import bodyDadShaving from '@/src/assets/dad-boy-shaving@1x.jpg';
-import { Eyebrow, H1, LargeLead, Paragraph } from '../components/Typography';
+import heroImage from '@/src/assets/tech/onur-binay-mVcTLcRAknM-unsplash.jpg';
+import { Display, Eyebrow, H1, LargeLead, Paragraph } from '../components/Typography';
 import ContentMediaLayout from '../components/ContentMediaLayout';
 
 const AboutPage: NextPage = () => {
@@ -28,7 +28,7 @@ const AboutPage: NextPage = () => {
         <meta name="description" content={defaultDescription} />
       </Head>
 
-      <div className="mt-4 py-24 px-4 [ md:py-48 ] [ lg:px-0 ] relative text-gray-800 overflow-hidden">
+      {/* <div className="mt-4 py-24 px-4 [ md:py-48 ] [ lg:px-0 ] relative text-gray-800 overflow-hidden">
         <div className="absolute right-0 top-0 bottom-0 w-4/5 [ md:w-2/3 ]">
           <div className="relative h-full w-full">
             <Image src={roseGoldBathroom} alt="razor on black and white marble countertop" layout="fill" objectFit="cover" />
@@ -40,34 +40,39 @@ const AboutPage: NextPage = () => {
             <h1 className="text-4xl font-serif mb-12 [ md:text-6xl md:leading-tight ]">
               It&apos;s a better shave,<br />for fewer dollars.
             </h1>
-            {/* <Button href="/shop" variant="light">
-              Learn More
-            </Button> */}
           </div>
         </div>
-      </div>
+      </div> */}
 
-      <section className="pt-12 [ md:pt-24 ]">
-        <div className="container max-w-screen-md mx-auto flex flex-col items-start px-4 [ lg:px-0 ]">
-          <Eyebrow>About</Eyebrow>
-          <H1 className="mb-4">Better shave, fewer dollars. It’s that simple.</H1>
-          <Paragraph>
-            Our selection of meticulously crafted single blade razors are a product of our dissatisfaction with Big Razor companies. Against popular belief, multiple blades cause bumps, redness and irritation. They also come at a high and recurring cost. We wanted a clean, simple shave without the added hassle and that is what we’ve curated. It is important to us to offer only high quality products at an affordable price.
+      <section className="py-12 [ md:py-24 ] relative">
+        <img
+          className="absolute inset-0 z-0 w-full h-full object-cover"
+          alt="hero image of iphone"
+          src={heroImage.src} />
+        <div className="relative container max-w-screen-md mx-auto flex flex-col items-start px-4 [ lg:px-0 ] z-10">
+          <Eyebrow>About Marcless</Eyebrow>
+          <H1 className="mb-4 text-white">We are a group of tech enthusiasts who have a passion for developing the products of tomorrow.</H1>
+          <Paragraph className="text-gray-200 mb-8">
+            {`We know how time-consuming and expensive it is to find and buy new cables or chargers that don't even last that long until you need a new one. That's another reason we decided to launch Evolved Chargers and focus mainly on product quality and sustainability. We're glad that you found us, and hope you'll enjoy our products as we do!`}
           </Paragraph>
           <Button href="/shop" variant="primary">
-            shop razors
+            Browse Products
           </Button>
         </div>
       </section>
 
-      <Gallery images={productDetails.gallery} />
+      {/* <Gallery images={productDetails.gallery} /> */}
 
       <FeatureList
-        eyebrow={<Eyebrow>why marc<i>less</i></Eyebrow>}
-        heading={<H1 className="mb-4">Say good bye to the <b>BrandTax</b>.</H1>}
+        eyebrow={<Eyebrow className="mb-2">why marc<i>less</i></Eyebrow>}
+        heading={
+          <h2 className="font-sans text-3xl md:text-4xl font-bold mb-6 md:mb-12">
+            Our commitment to you.
+          </h2>
+        }
         body={
-          <LargeLead className="mb-12 max-w-screen-md mx-auto">
-            We’ve curated a thoughtful selection of quality razors and shaving accessories you reach for every day.
+          <LargeLead className="">
+            {`We sell directly to customers, cutting unnecessary costs and crazy markups that make products overly expensive. We pass on the savings to you, so you get the same quality at a fraction of the cost.`}
           </LargeLead>
         }
         items={brandFeatures}
