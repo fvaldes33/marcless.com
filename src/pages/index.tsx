@@ -65,7 +65,7 @@ const Home: NextPage<{ products: GetCollection_collection_products_edges[] }> = 
 
       <>
         {/* New Huge Hero */}
-        <div className="h-screen w-screen bg-white -mt-20 md:mt-0 lg:-mt-20">
+        <div className="h-screen w-screen bg-white md:mt-0 lg:-mt-20">
           <div className="container mx-auto text-gray-800 flex flex-col h-full w-full justify-center lg:items-center lg:flex-row px-6 xl:px-0">
             <motion.div
               className="flex flex-col items-start flex-shrink-0 w-full lg:w-1/2 xl:w-auto"
