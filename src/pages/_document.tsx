@@ -43,7 +43,7 @@ class MyDocument extends Document {
           <meta name="facebook-domain-verification" content="k9luujjcfq96m0r88lxfxhdzo2mxd7" />
           <noscript>
             <img height="1" width="1" alt="" style={{ display: 'none' }}
-              src="https://www.facebook.com/tr?id=225449046285735&ev=PageView&noscript=1" />
+              src="https://www.facebook.com/tr?id=654936088922063&ev=PageView&noscript=1" />
           </noscript>
         </Head>
         <body className="font-sans font-normal">

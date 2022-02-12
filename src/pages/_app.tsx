@@ -87,7 +87,7 @@ function MyApp({ Component, pageProps, store }: AppPropsWithGlobals) {
             t.src=v;s=b.getElementsByTagName(e)[0];
             s.parentNode.insertBefore(t,s)}(window, document,'script',
             'https://connect.facebook.net/en_US/fbevents.js');
-            fbq('init', '225449046285735');
+            fbq('init', '654936088922063');
             fbq('track', 'PageView');
           `}
         </Script>
