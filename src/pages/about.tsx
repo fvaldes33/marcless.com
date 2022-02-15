@@ -10,7 +10,7 @@ import FeatureList from '../components/FeatureList';
 import Button from '../components/Button';
 import { Eyebrow, LargeLead } from '../components/Typography';
 
-import heroImage from '@/src/assets/tech/onur-binay-mVcTLcRAknM-unsplash.jpg';
+import heroImage from '@/src/assets/tech/phone-cases-compressed-3.jpg';
 
 const AboutPage: NextPage = () => {
   const { state: { store } } = useContext(Context);

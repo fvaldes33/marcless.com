@@ -2,7 +2,10 @@ import { ShieldCheckIcon, CashIcon, CheckIcon } from '@heroicons/react/outline';
 import { MainMenuItem, SocialLinkItems } from "../types";
 
 export const mainNav: MainMenuItem[] = [
-  { label: 'Shop', href: '/shop' },
+  { label: 'Shop', href: '/shop', children: [
+    { label: 'Wireless Chargers', href: '/shop/wireless-chargers' },
+    { label: 'MagSafe iPhone Cases', href: '/shop/phone-cases' },
+  ] },
   { label: 'About', href: '/about' },
   { label: 'Cart', href: '/cart' },
 ];

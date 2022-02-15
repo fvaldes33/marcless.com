@@ -56,80 +56,84 @@ export const PRODUCTS_QUERY = gql`
 
 export const SINGLE_PRODUCT_QUERY = gql`
   query GetSingleProduct($handle: String!) {
-    products(first:1, query: $handle) {
-      edges {
-        node {
-          id
-          title
-          handle
-          productType
-          description
-          descriptionHtml
-          seo {
+    product(handle: $handle) {
+      id
+      title
+      handle
+      productType
+      description
+      descriptionHtml
+      seo {
+        title
+        description
+      }
+      priceRange {
+        minVariantPrice {
+          amount
+        }
+      }
+      compareAtPriceRange {
+        minVariantPrice {
+          amount
+        }
+      }
+      description
+      descriptionHtml
+      options {
+        name
+        values
+      }
+      variants(first: 20) {
+        edges {
+          node {
+            id
             title
-            description
-          }
-          priceRange {
-            minVariantPrice {
+            sku
+            priceV2 {
               amount
             }
-          }
-          compareAtPriceRange {
-            minVariantPrice {
+            compareAtPriceV2 {
               amount
             }
+            image {
+              transformedSrc
+              altText
+            }
+            selectedOptions {
+              name
+              value
+            }
           }
-          description
-          descriptionHtml
-          variants(first: 10) {
-            edges {
-              node {
-                id
-                title
-                sku
-                priceV2 {
-                  amount
-                }
-                compareAtPriceV2 {
-                  amount
-                }
-                image {
-                  transformedSrc
-                  altText
-                }
+        }
+      }
+      images(first: 20) {
+        edges {
+          node {
+            transformedSrc
+            altText
+          }
+        }
+      }
+      media(first: 1, reverse: true) {
+        edges {
+          node {
+            mediaContentType
+            previewImage {
+              transformedSrc
+              altText
+            }
+            ...on Video {
+              id
+              sources {
+                format
+                url
               }
             }
-          }
-          images(first: 20) {
-            edges {
-              node {
-                transformedSrc
+            ...on MediaImage {
+              id
+              image {
                 altText
-              }
-            }
-          }
-          media(first: 1, reverse: true) {
-            edges {
-              node {
-                mediaContentType
-                previewImage {
-                  transformedSrc
-                  altText
-                }
-                ...on Video {
-                  id
-                  sources {
-                    format
-                    url
-                  }
-                }
-                ...on MediaImage {
-                  id
-                  image {
-                    altText
-                    transformedSrc
-                  }
-                }
+                transformedSrc
               }
             }
           }

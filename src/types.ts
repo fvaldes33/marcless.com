@@ -5,6 +5,7 @@ export type { Store, Store_shop };
 export interface MainMenuItem {
   label: string;
   href: string;
+  children?: MainMenuItem[]
 }
 export interface SocialLinkItems {
   label: string;

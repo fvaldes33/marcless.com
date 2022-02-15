@@ -7,8 +7,8 @@ import fetch from 'isomorphic-fetch';
 import client from '@/src/utils/apollo';
 import { useQuery } from '@apollo/client';
 import { ChevronRightIcon, PlayIcon, RefreshIcon } from '@heroicons/react/outline';
-import { GetSingleProduct, GetSingleProductVariables, GetSingleProduct_products, GetSingleProduct_products_edges_node, GetSingleProduct_products_edges_node_media_edges_node_Video_sources, GetSingleProduct_products_edges_node_variants_edges_node } from '@/src/queries/__generated__/GetSingleProduct';
-import { PRODUCTS_QUERY, SINGLE_PRODUCT_QUERY } from '@/src/queries';
+import { GetSingleProduct, GetSingleProductVariables, GetSingleProduct_product, GetSingleProduct_product_variants, GetSingleProduct_product_options, GetSingleProduct_product_variants_edges_node, GetSingleProduct_product_media_edges_node_Video_sources } from '@/src/queries/__generated__/GetSingleProduct';
+import { GetProducts, PRODUCTS_QUERY, SINGLE_PRODUCT_QUERY } from '@/src/queries';
 import Button from '@/src/components/Button';
 import QtySelector from '@/src/components/QtySelector';
 import { classNames, formatPrice, viewItem, transformToGoogleItem, addToCart } from '@/src/utils/helpers';
@@ -20,8 +20,19 @@ import { Eyebrow, LargeLead } from '@/src/components/Typography';
 import { useRouter } from 'next/router';
 
 interface PageProps {
-  product: GetSingleProduct_products_edges_node;
-  defaultVariant: GetSingleProduct_products_edges_node_variants_edges_node;
+  product: GetSingleProduct_product;
+  defaultVariant: GetSingleProduct_product_variants_edges_node;
+}
+
+const colorMap: { [key: string]: string } = {
+  'purple': '#6d6fa7',
+  'brown': '#cf7233',
+  'green': '#2d3637',
+  'crimson': '#3c2c3d',
+  'black': '#000000',
+  'white': '#ffffff',
+  'blue': '#40506f',
+  'orange': '#fd8b47'
 }
 
 const ProductDetail: NextPage<PageProps> = ({ product, defaultVariant }) => {
@@ -32,17 +43,25 @@ const ProductDetail: NextPage<PageProps> = ({ product, defaultVariant }) => {
 
   const [loading, setLoading] = useState(false);
   const [qty, setQty] = useState(1);
-  const [variant, setVariant] = useState<GetSingleProduct_products_edges_node_variants_edges_node>(defaultVariant);
+  const [variant, setVariant] = useState<GetSingleProduct_product_variants_edges_node>(defaultVariant);
   const [imageShown, setImageShown] = useState(() => {
     return defaultVariant ? defaultVariant.image! : product.images.edges[0].node;
   });
-  const [media, setMedia] = useState<GetSingleProduct_products_edges_node_media_edges_node_Video_sources>();
-  const { data: relatedProductsQuery } = useQuery<{ products: GetSingleProduct_products }>(PRODUCTS_QUERY, {
+  const [media, setMedia] = useState<GetSingleProduct_product_media_edges_node_Video_sources>();
+  const { data: relatedProductsQuery } = useQuery<GetProducts>(PRODUCTS_QUERY, {
     variables: {
       first: 5,
-      query: `type:${product.productType}`
+      query: `product_type:${product.productType}`
     }
   });
+
+  // const selectableOptions = product.variants.edges.reduce((acc, { node }) => {
+
+  //   return {
+  //     ...acc,
+  //     []: node.selectedOptions
+  //   }
+  // }, {});
 
   useEffect(() => {
     if (variantSku) {
@@ -237,25 +256,20 @@ const ProductDetail: NextPage<PageProps> = ({ product, defaultVariant }) => {
             <p className="text-xl">{formatPrice(variant.priceV2.amount)}</p>
           </div>
 
-          <div className="">
-            <label className="font-sans block mb-4 font-bold uppercase">Color / <span className="text-gray-600">{variant.title}</span></label>
-            <div className="flex flex-wrap space-x-4 mb-6">
-              {product.variants.edges.map(({ node }) => {
-                return (
-                  <button key={node.id} className={classNames(
-                    'py-2 px-8 mb-4 flex items-center justify-center border-2 overflow-hidden',
-                    node.sku === variant.sku ? 'border-gray-700' : 'border-gray-200'
-                  )} onClick={() => selectVariant(node)}>
-                    <div className="relative">
-                      {node.title}
-                    </div>
-                  </button>
-                );
-              })}
-            </div>
-          </div>
+          <VariantSelect
+            variant={variant}
+            options={product.options}
+            onVariantChange={(selections) => {
+              const v = product.variants.edges.find(({ node }) => {
+                return node.selectedOptions.every(o => Object.values(selections).includes(o.value));
+              })
+              if (v) {
+                selectVariant(v.node);
+              }
+            }}
+          />
 
-          <div className="flex justify-between w-full">
+          <div className="flex justify-between w-full mt-4">
             <div className="">
               {/* quantity selector */}
               <QtySelector defaultValue={qty} onChange={(num: number) => setQty(num)} />
@@ -274,7 +288,6 @@ const ProductDetail: NextPage<PageProps> = ({ product, defaultVariant }) => {
         </div>
       </section>
 
-
       <FeatureList
         eyebrow={<Eyebrow className="mb-2">why marc<i>less</i></Eyebrow>}
         heading={
@@ -284,7 +297,7 @@ const ProductDetail: NextPage<PageProps> = ({ product, defaultVariant }) => {
         }
         body={
           <LargeLead className="">
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Obcaecati, distinctio modi. Maiores nostrum adipisci quibusdam tenetur asperiores sed cumque odit doloribus, provident dignissimos dicta? Tempore, quo. Accusamus, necessitatibus similique! Labore!
+            We sell directly to customers, cutting unnecessary costs and crazy markups that make products overly expensive. We pass on the savings to you, so you get the same quality at a fraction of the cost.
           </LargeLead>
         }
         items={brandFeatures}
@@ -346,14 +359,15 @@ const ProductDetail: NextPage<PageProps> = ({ product, defaultVariant }) => {
 
 export const getStaticProps: GetStaticProps = async ({ params }) => {
   const { handle } = params!;
+
   const { data } = await client.query<GetSingleProduct, GetSingleProductVariables>({
     query: SINGLE_PRODUCT_QUERY,
     variables: {
       handle: handle as string
     }
   });
-  const product = data.products.edges[0].node;
-  const variant = product.variants.edges[0].node;
+  const product = data.product;
+  const variant = product?.variants.edges[0].node;
 
   return {
     props: {
@@ -387,3 +401,84 @@ export const getStaticPaths = async () => {
 }
 
 export default ProductDetail;
+
+function VariantSelect({
+  options,
+  variant,
+  onVariantChange,
+}: {
+    options: GetSingleProduct_product_options[],
+    variant: GetSingleProduct_product_variants_edges_node,
+    onVariantChange: (selections: { [key: string]: null | string }) => void
+}) {
+  const [selected, setSelected] = useState<{ [key: string]: null | string }>(() => {
+    return options.reduce((acc, o) => {
+      const s = variant.selectedOptions.find(s => s.name === o.name);
+      return {
+        ...acc,
+        [o.name.toLowerCase()]: s ? s.value : o.values[0]
+      };
+    }, {})
+  });
+
+  const updateSelection = (name: string, value: string) => {
+    onVariantChange({
+      ...selected,
+      [name]: value
+    })
+  }
+
+  useEffect(() => {
+    setSelected((prev) => {
+      return variant.selectedOptions.reduce((acc, o) => {
+        return {
+          ...acc,
+          [o.name.toLowerCase()]: o.value
+        }
+      }, prev)
+    })
+  }, [variant])
+
+  return (
+    <>
+      {options.map(({ name, values }) => (
+        <div className="" key={name}>
+          <label className="font-sans block mb-2 font-bold uppercase">{name}</label>
+          <div className="flex flex-wrap space-x-4 mb-6">
+            {name === 'Color' ? (
+              <>
+                {values.map((value) => {
+                  const background = colorMap[value.toLowerCase()];
+                  return (
+                    <button
+                      key={`${name}-${value}`}
+                      className={classNames(
+                        'cursor-pointer border-2 rounded-full p-1',
+                        selected[name.toLowerCase()] === value ? 'border-gray-900' : 'border-gray-300'
+                      )}
+                      onClick={() => updateSelection(name.toLowerCase(), value)}
+                    >
+                      <div className="h-8 w-8 rounded-full" style={{ background }}></div>
+                      <span className="sr-only">{value}</span>
+                    </button>
+                  )
+                })}
+              </>
+            ) : (
+              <select
+                value={selected[name.toLowerCase()] ?? ''}
+                onChange={(e) => updateSelection(name.toLowerCase(), e.target.value)}
+              >
+                {values.map((value) => {
+                  return (
+                    <option key={`${name}-${value}`} value={value}>{value}</option>
+                  )
+                })}
+              </select>
+            )}
+          </div>
+        </div>
+      ))}
+    </>
+  )
+}

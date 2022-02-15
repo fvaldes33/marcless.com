@@ -3452,7 +3452,7 @@
           },
           {
             "name": "url",
-            "description": "The location of the image as a URL.\n\nIf no transform options are specified, then the original image will be preserved including any pre-applied transforms.\n\nAll transformation options are considered \"best-effort\". Any transformation\nthat the original image type doesn't support will be ignored.\n\nIf you need multiple variations of the same image, then you can use [GraphQL\nfield aliases](https://graphql.org/learn/queries/#aliases). For example:\n\n```graphql\n{\n  ... on Image {\n    original: url\n    thumbnail: url(transform: { maxWidth: 80, maxHeight: 80 })\n    retina: url(transform: { scale: 2 })\n  }\n}\n```",
+            "description": "The location of the image as a URL.\n\nIf no transform options are specified, then the original image will be preserved including any pre-applied transforms.\n\nAll transformation options are considered \"best-effort\". Any transformation\nthat the original image type doesn't support will be ignored.\n\nIf you need multiple variations of the same image, then you can use [GraphQL\naliases](https://graphql.org/learn/queries/#aliases).",
             "args": [
               {
                 "name": "transform",
@@ -16063,7 +16063,7 @@
           },
           {
             "name": "estimatedCost",
-            "description": "The estimated costs that the buyer will pay at checkout. The estimated costs\nare subject to change and changes will be reflected at checkout.",
+            "description": "The estimated costs that the buyer will pay at checkout. The estimated costs\nare subject to change and changes will be reflected at checkout. The\n`estimatedCost` field uses the `buyerIdentity` field to determine [international pricing](https://shopify.dev/custom-storefronts/products/international-pricing#create-a-cart).",
             "args": [],
             "type": {
               "kind": "NON_NULL",
@@ -16305,7 +16305,7 @@
       {
         "kind": "OBJECT",
         "name": "CartEstimatedCost",
-        "description": "The estimated costs that the buyer will pay at checkout.",
+        "description": "The estimated costs that the buyer will pay at checkout.\nIt uses [`CartBuyerIdentity`](https://shopify.dev/api/storefront/reference/cart/cartbuyeridentity) to determine\n[international pricing](https://shopify.dev/custom-storefronts/products/international-pricing#create-a-cart).",
         "fields": [
           {
             "name": "subtotalAmount",
@@ -17515,7 +17515,7 @@
           },
           {
             "name": "cartBuyerIdentityUpdate",
-            "description": "Updates customer information associated with a cart.",
+            "description": "Updates customer information associated with a cart.\nBuyer identity is used to determine\n[international pricing](https://shopify.dev/custom-storefronts/products/international-pricing#create-a-checkout)\nand should match the customer's shipping address.",
             "args": [
               {
                 "name": "cartId",
@@ -17533,7 +17533,7 @@
               },
               {
                 "name": "buyerIdentity",
-                "description": "The customer associated with the cart.",
+                "description": "The customer associated with the cart. Used to determine [international pricing](https://shopify.dev/custom-storefronts/products/international-pricing#create-a-checkout).\nBuyer identity should match the customer's shipping address.",
                 "type": {
                   "kind": "NON_NULL",
                   "name": null,
@@ -19789,7 +19789,7 @@
       {
         "kind": "INPUT_OBJECT",
         "name": "CartBuyerIdentityInput",
-        "description": "Specifies the input fields to update the buyer information associated with a cart.",
+        "description": "Specifies the input fields to update the buyer information associated with a cart.\nBuyer identity is used to determine\n[international pricing](https://shopify.dev/custom-storefronts/products/international-pricing#create-a-checkout)\nand should match the customer's shipping address.",
         "fields": null,
         "inputFields": [
           {
@@ -19956,7 +19956,7 @@
           },
           {
             "name": "buyerIdentity",
-            "description": "The customer associated with the cart.",
+            "description": "The customer associated with the cart. Used to determine [international pricing](https://shopify.dev/custom-storefronts/products/international-pricing#create-a-checkout).\nBuyer identity should match the customer's shipping address.",
             "type": {
               "kind": "INPUT_OBJECT",
               "name": "CartBuyerIdentityInput",

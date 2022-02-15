@@ -69,11 +69,22 @@ const MenuDrawer: React.FC = () => {
                     <div className="py-8 px-4 sm:px-6 h-full">
                       <div className="flex flex-col items-start h-full">
                         <ul role="list" className="-my-6 divide-y divide-gray-200 mb-12 w-full">
-                          {mainNav.map(({ label, href }, index: number) => (
-                            <li key={index} className="transition duration-300 ease-in-out hover:translate-x-2">
+                          {mainNav.map(({ label, href, children }, index: number) => (
+                            <li key={index} className="">
                               <Link href={href} passHref>
-                                <a onClick={() => toggleNav()} className="py-6 block text-2xl text-gray-800">{label}</a>
+                                <a onClick={() => toggleNav()} className="py-6 block text-2xl text-gray-800 transition duration-300 ease-in-out hover:translate-x-2">{label}</a>
                               </Link>
+                              {children && children.length > 0 && (
+                                <ul className="px-4 sm:px-6 -mt-3">
+                                  {children.map((child) => (
+                                    <li key={child.href} className="">
+                                      <Link href={child.href} passHref>
+                                        <a onClick={() => toggleNav()} className="py-3 block text-xl text-gray-800 transition duration-300 ease-in-out hover:translate-x-2">{child.label}</a>
+                                      </Link>
+                                    </li>
+                                  ))}
+                                </ul>
+                              )}
                             </li>
                           ))}
                         </ul>

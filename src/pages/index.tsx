@@ -29,7 +29,8 @@ const gridContent = [
     subheading: 'Minimal. Unclutered.',
     link: {
       text: 'Shop',
-      href: '/shop'
+      href: '/shop',
+      color: 'text-rose-700'
     },
     image: architectBlack.src
   },
@@ -39,7 +40,8 @@ const gridContent = [
     subheading: 'Productivity Maximized.',
     link: {
       text: 'Shop',
-      href: '/shop'
+      href: '/shop',
+      color: 'text-fuchsia-700'
     },
     image: standardBlack.src
   },
@@ -49,7 +51,8 @@ const gridContent = [
     subheading: 'Simply Compact.',
     link: {
       text: 'Shop',
-      href: '/shop'
+      href: '/shop',
+      color: 'text-emerald-700'
     },
     image: travelerBlack.src
   },
@@ -103,12 +106,15 @@ const Home: NextPage<{ products: GetCollection_collection_products_edges[] }> = 
               grid.color
             )}>
               <div className="text-center my-12">
+                <p className="mb-2 text-gray-700 block text-lg md:text-2xl">{grid.subheading}</p>
                 <h1 className="text-3xl md:text-5xl font-sans font-bold">
                   {grid.heading}
-                  <span className="mt-4 block text-lg md:text-2xl">{grid.subheading}</span>
                 </h1>
                 <Link href={grid.link.href} passHref>
-                  <a className="mt-2 flex justify-center">
+                  <a className={classNames(
+                    'mt-4 flex justify-center',
+                    grid.link.color
+                  )}>
                     <span className="flex items-center space-x-4">
                       {grid.link.text}
                       <ChevronRightIcon className="h-4 w-4" />
