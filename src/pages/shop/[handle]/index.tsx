@@ -370,6 +370,7 @@ export const getStaticProps: GetStaticProps = async ({ params }) => {
   const variant = product?.variants.edges[0].node;
 
   return {
+    revalidate: 10,
     props: {
       product,
       defaultVariant: variant
