@@ -16,3 +16,39 @@ input[type=number]::-webkit-inner-spin-button, input[type=number]::-webkit-outer
 .yotpo * {
     font-family: 'Open Sans' !important;
 }
+
+.yotpo-label {
+    display: none !important;
+}
+
+.yotpo-stars {
+    margin-right: 4px !important;
+}
+
+.yotpo-regular-box:nth-child(1) {
+    border-top: unset !important;
+}
+
+.yotpo-icon-star {
+    color: rgb(31 41 55) !important;
+}
+
+.yotpo-display-wrapper>.yotpo-regular-box {
+    height: unset !important;
+    padding: 0px !important;
+    margin: 0 !important;
+}
+
+.yotpo-stars-and-sum-reviews {
+    display: block;
+}
+
+.write-review-button {
+    top: 0 !important;
+}
+
+@media screen and (min-width: 768px) {
+    .yotpo-stars-and-sum-reviews {
+        display: none;
+    }
+}

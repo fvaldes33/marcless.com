@@ -1,6 +1,7 @@
 /* eslint-disable @next/next/no-img-element */
-import React, { useCallback, useContext, useEffect, useState } from 'react';
+import React, { ComponentClass, useCallback, useContext, useEffect, useState } from 'react';
 import type { NextPage, GetStaticProps } from 'next';
+import dynamic from 'next/dynamic';
 import Head from 'next/head';
 import Link from 'next/link';
 import fetch from 'isomorphic-fetch';
@@ -18,6 +19,20 @@ import { Action } from '@/src/types';
 import FeatureList from '@/src/components/FeatureList';
 import { Eyebrow, LargeLead } from '@/src/components/Typography';
 import { useRouter } from 'next/router';
+
+const YoptoReviews = dynamic(
+  () => import('@/src/components/YoptoReviews'),
+  {
+    ssr: false
+  }
+)
+
+const YoptoStarRating = dynamic(
+  () => import('@/src/components/YoptoStarRating'),
+  {
+    ssr: false
+  }
+)
 
 interface PageProps {
   product: GetSingleProduct_product;
@@ -246,7 +261,7 @@ const ProductDetail: NextPage<PageProps> = ({ product, defaultVariant }) => {
             <span className="bg-primary bg-opacity-50 absolute h-6 w-full bottom-0 left-0"></span>
           </h1>
 
-          <div className="flex relative mb-8">
+          <div className="flex relative mb-2">
             <label className="invisible absolute">price</label>
             {variant.compareAtPriceV2 && (
               <span className="text-red-600 text-xl line-through mr-4">
@@ -254,6 +269,10 @@ const ProductDetail: NextPage<PageProps> = ({ product, defaultVariant }) => {
               </span>
             )}
             <p className="text-xl">{formatPrice(variant.priceV2.amount)}</p>
+          </div>
+
+          <div className="mb-8">
+            <YoptoStarRating product={product} />
           </div>
 
           <VariantSelect
@@ -345,14 +364,7 @@ const ProductDetail: NextPage<PageProps> = ({ product, defaultVariant }) => {
         </section>
       )}
 
-      {/* <section className="container max-w-screen-lg mx-auto px-4 font-sans">
-        <div className="yotpo yotpo-main-widget"
-          data-product-id={product.id}
-          data-name={product.title}
-          data-url={`/shop/${product.handle}/${variant.sku}`}
-          data-image-url={variant.image?.transformedSrc}>
-        </div>
-      </section> */}
+      <YoptoReviews product={product} variant={variant} />
     </>
   )
 }
