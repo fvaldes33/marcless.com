@@ -155,22 +155,24 @@ const ProductDetail: NextPage<PageProps> = ({ product, defaultVariant }) => {
     )
   }
 
+  const description = product.seo.description || defaultDescription;
+
   return (
     <>
       <Head>
-        <title>{product.seo.title || `${product.title} | Marcless`}</title>
-        <meta name="description" content={product.seo.description || defaultDescription} />
+        <title>{product.seo.title || product.title} | Marcless</title>
+        <meta name="description" content={description} />
 
         <meta property="og:title" content={product.seo.title || `${product.title} | Marcless`} />
         <meta property="og:type" content="website" />
-        <meta property="og:description" content={product.seo.description || defaultDescription} />
+        <meta property="og:description" content={description} />
         <meta property="og:image" content={variant.image?.transformedSrc} />
         <meta property="og:image:secure_url" content={variant.image?.transformedSrc} />
 
         {/* twitter */}
         <meta name="twitter:card" content="summary_large_image" />
         <meta name="twitter:title" content={product.seo.title || `${product.title} | Marcless`} />
-        <meta name="twitter:description" content={product.seo.description || defaultDescription} />
+        <meta name="twitter:description" content={description} />
 
         <script type="application/json+ld" dangerouslySetInnerHTML={{
           __html: JSON.stringify(

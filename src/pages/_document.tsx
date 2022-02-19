@@ -22,23 +22,17 @@ class MyDocument extends Document {
           <link rel="preconnect" href="https://cdn.shopify.com" crossOrigin="" />
           <link rel="preconnect" href="https://fonts.googleapis.com" />
           <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="true" />
-          {/* <link href="https://fonts.googleapis.com/css2?family=Bodoni+Moda&family=Montserrat:wght@300;500&display=swap" rel="stylesheet" /> */}
-          {/* <link href="https://fonts.googleapis.com/css2?family=Titillium+Web:wght@300;700&display=swap" rel="stylesheet" /> */}
           <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;700&display=swap" rel="stylesheet" />
 
           {/* open graph */}
           <meta property="og:site_name" content="Marcless" />
           <meta property="og:url" content="https://www.marcless.com/" />
-          <meta property="og:title" content="Better tech, less dollars | Marcless" />
           <meta property="og:type" content="website" />
-          <meta property="og:description" content="We sell directly to customers, cutting unnecessary costs and crazy markups that make products overly expensive. We pass on the savings to you, so you get the same quality at a fraction of the cost." />
           <meta property="og:image" content="/images/open-graph-logo.jpg" />
           <meta property="og:image:secure_url" content="/images/open-graph-logo.jpg" />
 
           {/* twitter */}
           <meta name="twitter:card" content="summary_large_image" />
-          <meta name="twitter:title" content="Better tech, less dollars | Marcless" />
-          <meta name="twitter:description" content="We sell directly to customers, cutting unnecessary costs and crazy markups that make products overly expensive. We pass on the savings to you, so you get the same quality at a fraction of the cost." />
 
           <meta name="facebook-domain-verification" content="k9luujjcfq96m0r88lxfxhdzo2mxd7" />
           <noscript>
