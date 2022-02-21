@@ -15963,7 +15963,7 @@
       {
         "kind": "OBJECT",
         "name": "Cart",
-        "description": "A cart represents the merchandise that a buyer intends to purchase, and the\nestimated cost associated with the cart. To learn how to interact with a cart\nduring a customer's session, refer to [Manage a cart with the Storefront\nAPI](https://shopify.dev/custom-storefronts/cart).",
+        "description": "A cart represents the merchandise that a buyer intends to purchase, and the\nestimated cost associated with the cart. To learn how to interact with a cart\nduring a customer's session, refer to [Manage a cart with the Storefront\nAPI](https://shopify.dev/api/examples/cart).",
         "fields": [
           {
             "name": "attributes",
@@ -16063,7 +16063,7 @@
           },
           {
             "name": "estimatedCost",
-            "description": "The estimated costs that the buyer will pay at checkout. The estimated costs\nare subject to change and changes will be reflected at checkout. The\n`estimatedCost` field uses the `buyerIdentity` field to determine [international pricing](https://shopify.dev/custom-storefronts/products/international-pricing#create-a-cart).",
+            "description": "The estimated costs that the buyer will pay at checkout. The estimated costs\nare subject to change and changes will be reflected at checkout. The\n`estimatedCost` field uses the `buyerIdentity` field to determine [international pricing](https://shopify.dev/api/examples/international-pricing#create-a-cart).",
             "args": [],
             "type": {
               "kind": "NON_NULL",
@@ -16305,7 +16305,7 @@
       {
         "kind": "OBJECT",
         "name": "CartEstimatedCost",
-        "description": "The estimated costs that the buyer will pay at checkout.\nIt uses [`CartBuyerIdentity`](https://shopify.dev/api/storefront/reference/cart/cartbuyeridentity) to determine\n[international pricing](https://shopify.dev/custom-storefronts/products/international-pricing#create-a-cart).",
+        "description": "The estimated costs that the buyer will pay at checkout.\nIt uses [`CartBuyerIdentity`](https://shopify.dev/api/storefront/reference/cart/cartbuyeridentity) to determine\n[international pricing](https://shopify.dev/api/examples/international-pricing#create-a-cart).",
         "fields": [
           {
             "name": "subtotalAmount",
@@ -17515,7 +17515,7 @@
           },
           {
             "name": "cartBuyerIdentityUpdate",
-            "description": "Updates customer information associated with a cart.\nBuyer identity is used to determine\n[international pricing](https://shopify.dev/custom-storefronts/products/international-pricing#create-a-checkout)\nand should match the customer's shipping address.",
+            "description": "Updates customer information associated with a cart.\nBuyer identity is used to determine\n[international pricing](https://shopify.dev/api/examples/international-pricing#create-a-checkout)\nand should match the customer's shipping address.",
             "args": [
               {
                 "name": "cartId",
@@ -17533,7 +17533,7 @@
               },
               {
                 "name": "buyerIdentity",
-                "description": "The customer associated with the cart. Used to determine [international pricing](https://shopify.dev/custom-storefronts/products/international-pricing#create-a-checkout).\nBuyer identity should match the customer's shipping address.",
+                "description": "The customer associated with the cart. Used to determine [international pricing](https://shopify.dev/api/examples/international-pricing#create-a-checkout).\nBuyer identity should match the customer's shipping address.",
                 "type": {
                   "kind": "NON_NULL",
                   "name": null,
@@ -19789,7 +19789,7 @@
       {
         "kind": "INPUT_OBJECT",
         "name": "CartBuyerIdentityInput",
-        "description": "Specifies the input fields to update the buyer information associated with a cart.\nBuyer identity is used to determine\n[international pricing](https://shopify.dev/custom-storefronts/products/international-pricing#create-a-checkout)\nand should match the customer's shipping address.",
+        "description": "Specifies the input fields to update the buyer information associated with a cart.\nBuyer identity is used to determine\n[international pricing](https://shopify.dev/api/examples/international-pricing#create-a-checkout)\nand should match the customer's shipping address.",
         "fields": null,
         "inputFields": [
           {
@@ -19956,7 +19956,7 @@
           },
           {
             "name": "buyerIdentity",
-            "description": "The customer associated with the cart. Used to determine [international pricing](https://shopify.dev/custom-storefronts/products/international-pricing#create-a-checkout).\nBuyer identity should match the customer's shipping address.",
+            "description": "The customer associated with the cart. Used to determine [international pricing](https://shopify.dev/api/examples/international-pricing#create-a-checkout).\nBuyer identity should match the customer's shipping address.",
             "type": {
               "kind": "INPUT_OBJECT",
               "name": "CartBuyerIdentityInput",
@@ -27722,7 +27722,7 @@
       },
       {
         "name": "inContext",
-        "description": "Contextualizes data based on the additional information provided by the\ndirective. For example, you can use the `@inContext(country: CA)` directive to\n[query a product's price](https://shopify.dev/custom-storefronts/products/international-pricing#query-product-prices)\nin a storefront within the context of Canada.",
+        "description": "Contextualizes data based on the additional information provided by the\ndirective. For example, you can use the `@inContext(country: CA)` directive to\n[query a product's price](https://shopify.dev/api/examples/international-pricing#query-product-prices)\nin a storefront within the context of Canada.",
         "locations": [
           "QUERY",
           "MUTATION"

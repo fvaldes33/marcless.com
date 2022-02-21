@@ -109,7 +109,8 @@ export const SINGLE_PRODUCT_QUERY = gql`
       images(first: 20) {
         edges {
           node {
-            transformedSrc
+            transformedSrc: url
+            transformedZoomSrc: url(transform: { scale: 2 })
             altText
           }
         }
@@ -119,7 +120,8 @@ export const SINGLE_PRODUCT_QUERY = gql`
           node {
             mediaContentType
             previewImage {
-              transformedSrc
+              transformedSrc: url
+              transformedZoomSrc: url(transform: { scale: 2 })
               altText
             }
             ...on Video {
@@ -133,7 +135,8 @@ export const SINGLE_PRODUCT_QUERY = gql`
               id
               image {
                 altText
-                transformedSrc
+                transformedSrc: url
+                transformedZoomSrc: url(transform: { scale: 2 })
               }
             }
           }

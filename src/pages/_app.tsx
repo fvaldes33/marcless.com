@@ -1,9 +1,11 @@
 import 'tailwindcss/tailwind.css';
 import 'swiper/css';
-import 'swiper/css/pagination';
+import 'swiper/css/navigation';
+import 'swiper/css/thumbs';
+import 'react-inner-image-zoom/lib/InnerImageZoom/styles.css';
 import '@/src/styles/main.css';
 import App from 'next/app';
-import Script from "next/script";
+import Script from 'next/script';
 import type { AppProps } from 'next/app';
 import { useRouter } from 'next/router';
 import { ApolloProvider } from '@apollo/client';

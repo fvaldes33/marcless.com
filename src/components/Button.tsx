@@ -6,7 +6,7 @@ interface ButtonProps {
   href?: string;
   block?: boolean;
   disabled?: boolean;
-  variant?: 'primary' | 'secondary' | 'light';
+  variant?: 'primary' | 'secondary' | 'light' | 'dark';
   children?: React.ReactNode;
   onClick?: () => void;
 }
@@ -31,6 +31,8 @@ const Button = forwardRef<ButtonRef, ButtonProps>((props, ref) => {
         return 'bg-secondary text-white';
       case 'light':
         return 'bg-white text-primary';
+      case 'dark':
+        return 'bg-black text-white'
       default:
         break;
     }

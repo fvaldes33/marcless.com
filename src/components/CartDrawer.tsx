@@ -37,7 +37,7 @@ const CartDrawer: React.FC = () => {
 
   return (
     <Transition.Root show={cartOpen} as={Fragment}>
-      <Dialog as="div" className="fixed inset-0 overflow-hidden" onClose={toggleCart}>
+      <Dialog as="div" className="fixed inset-0 overflow-hidden z-50" onClose={toggleCart}>
         <div className="absolute inset-0 overflow-hidden">
           <Transition.Child
             as={Fragment}

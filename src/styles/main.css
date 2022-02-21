@@ -7,6 +7,16 @@ input[type=number]::-webkit-inner-spin-button, input[type=number]::-webkit-outer
     height: 396px;
 }
 
+.swiper-slide>figure>div,
+.swiper-slide>figure>div>img {
+    height: 100%;
+    width: 100%;
+}
+
+.swiper-slide>figure>div>img {
+    object-fit: cover;
+}
+
 @media screen and (min-width: 768px) {
     .gallery__slide {
         height: 620px;

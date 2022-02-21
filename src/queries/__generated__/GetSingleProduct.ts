@@ -160,12 +160,29 @@ export interface GetSingleProduct_product_variants {
 export interface GetSingleProduct_product_images_edges_node {
   __typename: "Image";
   /**
-   * The location of the transformed image as a URL.
+   * The location of the image as a URL.
    * 
-   * All transformation arguments are considered "best-effort". If they can be applied to an image, they will be.
-   * Otherwise any transformations which an image type does not support will be ignored.
+   * If no transform options are specified, then the original image will be preserved including any pre-applied transforms.
+   * 
+   * All transformation options are considered "best-effort". Any transformation
+   * that the original image type doesn't support will be ignored.
+   * 
+   * If you need multiple variations of the same image, then you can use [GraphQL
+   * aliases](https: // graphql.org/learn/queries/#aliases).
    */
   transformedSrc: any;
+  /**
+   * The location of the image as a URL.
+   * 
+   * If no transform options are specified, then the original image will be preserved including any pre-applied transforms.
+   * 
+   * All transformation options are considered "best-effort". Any transformation
+   * that the original image type doesn't support will be ignored.
+   * 
+   * If you need multiple variations of the same image, then you can use [GraphQL
+   * aliases](https: // graphql.org/learn/queries/#aliases).
+   */
+  transformedZoomSrc: any;
   /**
    * A word or phrase to share the nature or contents of an image.
    */
@@ -191,12 +208,29 @@ export interface GetSingleProduct_product_images {
 export interface GetSingleProduct_product_media_edges_node_ExternalVideo_previewImage {
   __typename: "Image";
   /**
-   * The location of the transformed image as a URL.
+   * The location of the image as a URL.
    * 
-   * All transformation arguments are considered "best-effort". If they can be applied to an image, they will be.
-   * Otherwise any transformations which an image type does not support will be ignored.
+   * If no transform options are specified, then the original image will be preserved including any pre-applied transforms.
+   * 
+   * All transformation options are considered "best-effort". Any transformation
+   * that the original image type doesn't support will be ignored.
+   * 
+   * If you need multiple variations of the same image, then you can use [GraphQL
+   * aliases](https: // graphql.org/learn/queries/#aliases).
    */
   transformedSrc: any;
+  /**
+   * The location of the image as a URL.
+   * 
+   * If no transform options are specified, then the original image will be preserved including any pre-applied transforms.
+   * 
+   * All transformation options are considered "best-effort". Any transformation
+   * that the original image type doesn't support will be ignored.
+   * 
+   * If you need multiple variations of the same image, then you can use [GraphQL
+   * aliases](https: // graphql.org/learn/queries/#aliases).
+   */
+  transformedZoomSrc: any;
   /**
    * A word or phrase to share the nature or contents of an image.
    */
@@ -218,12 +252,29 @@ export interface GetSingleProduct_product_media_edges_node_ExternalVideo {
 export interface GetSingleProduct_product_media_edges_node_Video_previewImage {
   __typename: "Image";
   /**
-   * The location of the transformed image as a URL.
+   * The location of the image as a URL.
    * 
-   * All transformation arguments are considered "best-effort". If they can be applied to an image, they will be.
-   * Otherwise any transformations which an image type does not support will be ignored.
+   * If no transform options are specified, then the original image will be preserved including any pre-applied transforms.
+   * 
+   * All transformation options are considered "best-effort". Any transformation
+   * that the original image type doesn't support will be ignored.
+   * 
+   * If you need multiple variations of the same image, then you can use [GraphQL
+   * aliases](https: // graphql.org/learn/queries/#aliases).
    */
   transformedSrc: any;
+  /**
+   * The location of the image as a URL.
+   * 
+   * If no transform options are specified, then the original image will be preserved including any pre-applied transforms.
+   * 
+   * All transformation options are considered "best-effort". Any transformation
+   * that the original image type doesn't support will be ignored.
+   * 
+   * If you need multiple variations of the same image, then you can use [GraphQL
+   * aliases](https: // graphql.org/learn/queries/#aliases).
+   */
+  transformedZoomSrc: any;
   /**
    * A word or phrase to share the nature or contents of an image.
    */
@@ -265,12 +316,29 @@ export interface GetSingleProduct_product_media_edges_node_Video {
 export interface GetSingleProduct_product_media_edges_node_MediaImage_previewImage {
   __typename: "Image";
   /**
-   * The location of the transformed image as a URL.
+   * The location of the image as a URL.
    * 
-   * All transformation arguments are considered "best-effort". If they can be applied to an image, they will be.
-   * Otherwise any transformations which an image type does not support will be ignored.
+   * If no transform options are specified, then the original image will be preserved including any pre-applied transforms.
+   * 
+   * All transformation options are considered "best-effort". Any transformation
+   * that the original image type doesn't support will be ignored.
+   * 
+   * If you need multiple variations of the same image, then you can use [GraphQL
+   * aliases](https: // graphql.org/learn/queries/#aliases).
    */
   transformedSrc: any;
+  /**
+   * The location of the image as a URL.
+   * 
+   * If no transform options are specified, then the original image will be preserved including any pre-applied transforms.
+   * 
+   * All transformation options are considered "best-effort". Any transformation
+   * that the original image type doesn't support will be ignored.
+   * 
+   * If you need multiple variations of the same image, then you can use [GraphQL
+   * aliases](https: // graphql.org/learn/queries/#aliases).
+   */
+  transformedZoomSrc: any;
   /**
    * A word or phrase to share the nature or contents of an image.
    */
@@ -284,12 +352,29 @@ export interface GetSingleProduct_product_media_edges_node_MediaImage_image {
    */
   altText: string | null;
   /**
-   * The location of the transformed image as a URL.
+   * The location of the image as a URL.
    * 
-   * All transformation arguments are considered "best-effort". If they can be applied to an image, they will be.
-   * Otherwise any transformations which an image type does not support will be ignored.
+   * If no transform options are specified, then the original image will be preserved including any pre-applied transforms.
+   * 
+   * All transformation options are considered "best-effort". Any transformation
+   * that the original image type doesn't support will be ignored.
+   * 
+   * If you need multiple variations of the same image, then you can use [GraphQL
+   * aliases](https: // graphql.org/learn/queries/#aliases).
    */
   transformedSrc: any;
+  /**
+   * The location of the image as a URL.
+   * 
+   * If no transform options are specified, then the original image will be preserved including any pre-applied transforms.
+   * 
+   * All transformation options are considered "best-effort". Any transformation
+   * that the original image type doesn't support will be ignored.
+   * 
+   * If you need multiple variations of the same image, then you can use [GraphQL
+   * aliases](https: // graphql.org/learn/queries/#aliases).
+   */
+  transformedZoomSrc: any;
 }
 
 export interface GetSingleProduct_product_media_edges_node_MediaImage {
