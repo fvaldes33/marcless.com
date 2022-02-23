@@ -42,7 +42,7 @@ export const transformToGoogleItem = (
   }
 }
 
-export const viewItems = (items: any) => {
+export const viewItems = ({ items }: any) => {
   event({
     action: 'view_item_list',
     params: {
@@ -51,7 +51,7 @@ export const viewItems = (items: any) => {
   });
 }
 
-export const viewItem = (items: any) => {
+export const viewItem = ({ items }: any) => {
   event({
     action: 'view_item',
     params: {
@@ -60,11 +60,15 @@ export const viewItem = (items: any) => {
   });
 }
 
-export const addToCart = (items: any) => {
+export const addToCart = ({ items }: any) => {
   event({
     action: 'add_to_cart',
     params: {
-      items
+      currency: "USD",
+      value: items[0].price,
+      items: [
+        ...items
+      ]
     }
   });
 
