@@ -67,6 +67,14 @@ export const addToCart = (items: any) => {
       items
     }
   });
+
+  // if facebook pixel is enabled
+  if ('fbq' in (window as any)) {
+    (window as any).fbq('track', 'AddToCart', {
+      value: items[0].price,
+      currency: 'USD'
+    });
+  }
 }
 
 export const removeFromCart = (items: any) => {
