@@ -1,10 +1,11 @@
 /* eslint-disable @next/next/no-img-element */
 import { PlayIcon } from "@heroicons/react/outline";
 import { useState } from "react";
-import { Swiper as CoreSwiper, Navigation, Thumbs } from "swiper";
+import { Swiper as CoreSwiper, Navigation, Thumbs, EffectFade } from "swiper";
 import { Swiper, SwiperSlide } from "swiper/react";
 import InnerImageZoom from 'react-inner-image-zoom';
 import { GetSingleProduct_product } from "../queries/__generated__/GetSingleProduct";
+import { classNames } from "../utils/helpers";
 
 export type ProductHeroProps = {
   product: GetSingleProduct_product;
@@ -21,7 +22,8 @@ const ProductHero = ({
         spaceBetween={10}
         navigation={true}
         thumbs={{ swiper: thumbsSwiper }}
-        modules={[Navigation, Thumbs]}
+        modules={[Navigation, Thumbs, EffectFade]}
+        effect="fade"
         className="mainSwiper h-64 md:h-[500px] mb-4"
       >
         {product.images.edges.map(({ node }, index: number) => (
@@ -66,7 +68,7 @@ const ProductHero = ({
       >
         {product.images.edges.map(({ node }, index: number) => (
           <SwiperSlide key={node.transformedSrc}>
-            <img className="w-full h-full object-top object-cover" src={node.transformedSrc} alt={node.altText ?? ''} />
+            <img className={classNames('w-full h-full object-top object-cover')} src={node.transformedSrc} alt={node.altText ?? ''} />
           </SwiperSlide>
         ))}
         {product.media.edges.map(({ node }) => {

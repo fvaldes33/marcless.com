@@ -1,7 +1,9 @@
 import 'tailwindcss/tailwind.css';
 import 'swiper/css';
+import 'swiper/css/effect-fade';
 import 'swiper/css/navigation';
 import 'swiper/css/thumbs';
+import 'swiper/css/pagination';
 import 'react-inner-image-zoom/lib/InnerImageZoom/styles.css';
 import '@/src/styles/main.css';
 import App from 'next/app';

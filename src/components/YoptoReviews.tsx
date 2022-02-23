@@ -21,7 +21,7 @@ function YoptoReviews({
   }, [product.id]);
 
   return (
-    <section className="container mx-auto px-6 font-sans xl:px-0 mt-12 md:flex">
+    <section className="container max-w-screen-xl mx-auto px-6 font-sans xl:px-0 mt-12 md:mt-24 md:flex">
       <div className="w-full md:w-1/3 pt-10">
         <Eyebrow className="mb-2">What people are saying</Eyebrow>
         <h2 className="font-sans text-4xl md:text-6xl font-bold mb-3 md:mb-4 text-gray-800">

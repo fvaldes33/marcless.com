@@ -31,7 +31,7 @@ const FeatureList: React.FC<FeatureListProps> = ({
 
   return (
     <section ref={ref} className="pt-16 [ md:pt-32 ]">
-      <div className="container mx-auto px-4 [ xl:px-0 ] md:flex md:justify-between">
+      <div className="container max-w-screen-xl mx-auto px-4 [ xl:px-0 ] md:flex md:justify-between">
         <motion.div initial="hidden" animate={controls} variants={fadeInUp} className="w-full md:w-3/5 flex-shrink-0 pr-12">
           {eyebrow && eyebrow}
           {heading}

@@ -26,7 +26,7 @@ const Header = () => {
           <MenuIcon className="h-6 w-6" aria-hidden="true" />
         </button>
         <Link href="/" passHref>
-          <a className="relative font-sans block text-4xl tracking-wide">
+          <a className="relative font-sans block text-4xl tracking-wide cursor-pointer">
             <span className="relative z-10">marcless</span>
             <span className="bg-primary bg-opacity-50 absolute h-3 w-full bottom-0 left-0"></span>
           </a>

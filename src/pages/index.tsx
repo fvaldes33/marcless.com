@@ -133,7 +133,7 @@ const Home: NextPage<{ products: GetCollection_collection_products_edges[] }> = 
         <FeatureList
           eyebrow={<Eyebrow className="mb-2">why marc<i>less</i></Eyebrow>}
           heading={
-            <h2 className="font-sans text-4xl md:text-6xl font-bold mb-6 md:mb-12">
+            <h2 className="font-sans text-3xl md:text-5xl font-bold mb-6 md:mb-12">
               Our commitment to you.
             </h2>
           }
@@ -147,7 +147,7 @@ const Home: NextPage<{ products: GetCollection_collection_products_edges[] }> = 
 
         {products && products.length > 0 && (
           <section className="container mx-auto px-4 xl:px-0 pt-16 md:pt-32">
-            <h2 className="text-4xl md:text-6xl font-sans font-bold mb-12 text-center">Featured Products</h2>
+            <h2 className="text-3xl md:text-5xl font-sans font-bold mb-12 text-center">Featured Products</h2>
             <div className="md:grid md:grid-cols-2 md:gap-8 lg:grid-cols-3 xl:grid-cols-4">
               {products.map(({ node }) => {
                 const productImage = node.featuredImage;

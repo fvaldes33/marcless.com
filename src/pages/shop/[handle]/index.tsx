@@ -1,5 +1,5 @@
 /* eslint-disable @next/next/no-img-element */
-import React, { ComponentClass, useCallback, useContext, useEffect, useState } from 'react';
+import React, { useCallback, useContext, useEffect, useState } from 'react';
 import type { NextPage, GetStaticProps } from 'next';
 import dynamic from 'next/dynamic';
 import Head from 'next/head';
@@ -7,7 +7,7 @@ import Link from 'next/link';
 import fetch from 'isomorphic-fetch';
 import client from '@/src/utils/apollo';
 import { useQuery } from '@apollo/client';
-import { ChevronRightIcon, PlayIcon, PlusIcon, RefreshIcon } from '@heroicons/react/outline';
+import { PlusIcon, RefreshIcon } from '@heroicons/react/outline';
 import { GetSingleProduct, GetSingleProductVariables, GetSingleProduct_product, GetSingleProduct_product_variants, GetSingleProduct_product_options, GetSingleProduct_product_variants_edges_node, GetSingleProduct_product_media_edges_node_Video_sources } from '@/src/queries/__generated__/GetSingleProduct';
 import { GetProducts, PRODUCTS_QUERY, SINGLE_PRODUCT_QUERY } from '@/src/queries';
 import Button from '@/src/components/Button';
@@ -21,6 +21,8 @@ import { Eyebrow, LargeLead } from '@/src/components/Typography';
 import { useRouter } from 'next/router';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import ProductHero from '@/src/components/ProductHero';
+import { getStaticProductDetails } from '@/src/static';
+import { Pagination } from 'swiper';
 
 const YoptoReviews = dynamic(
   () => import('@/src/components/YoptoReviews'),
@@ -72,6 +74,7 @@ const ProductDetail: NextPage<PageProps> = ({ product, defaultVariant }) => {
       query: `product_type:${product.productType}`
     }
   });
+  const productDetails = getStaticProductDetails(product.id);
 
   // const selectableOptions = product.variants.edges.reduce((acc, { node }) => {
 
@@ -316,10 +319,39 @@ const ProductDetail: NextPage<PageProps> = ({ product, defaultVariant }) => {
         </div>
       </section>
 
+      {productDetails && productDetails.box && (
+        <section className="container max-w-screen-xl mx-auto pt-24">
+          <h1 className="text-4xl text-center mb-8">{`What's in the Box`}</h1>
+
+          <Swiper
+            modules={[Pagination]}
+            pagination={{ clickable: true }}
+            slidesPerView={1}
+            spaceBetween={0}
+            breakpoints={{
+              768: {
+                slidesPerView: productDetails.box.length
+              }
+            }}
+          >
+            {productDetails.box.map((boxItem: any) => (
+              <SwiperSlide key={boxItem.image}>
+                <div className="text-center w-full mb-8">
+                  <figure className="bg-gray-100 h-96">
+                    <img src={boxItem.image} alt="" className="h-full mx-auto" />
+                  </figure>
+                  <p className="mt-4">{boxItem.name}</p>
+                </div>
+              </SwiperSlide>
+            ))}
+          </Swiper>
+        </section>
+      )}
+
       <FeatureList
         eyebrow={<Eyebrow className="mb-2">why marc<i>less</i></Eyebrow>}
         heading={
-          <h2 className="font-sans text-4xl md:text-6xl font-bold mb-6 md:mb-12">
+          <h2 className="font-sans text-3xl md:text-5xl font-bold mb-6 md:mb-12">
             Our commitment to you.
           </h2>
         }
@@ -332,8 +364,8 @@ const ProductDetail: NextPage<PageProps> = ({ product, defaultVariant }) => {
       />
 
       {relatedProductsQuery && relatedProductsQuery.products.edges.length > 0 && (
-        <section className="container mx-auto px-4 xl:px-0 pt-16 md:pt-32">
-          <h2 className="text-4xl md:text-6xl font-sans font-bold mb-12 text-center">Related Products</h2>
+        <section className="container max-w-screen-xl mx-auto px-4 xl:px-0 pt-16 md:pt-32">
+          <h2 className="text-3xl md:text-5xl font-sans font-bold mb-12 text-center">Related Products</h2>
           <div className="md:grid md:grid-cols-2 md:gap-8 lg:grid-cols-3 xl:grid-cols-4">
             {relatedProductsQuery.products.edges.filter(({ node }) => node.id !== product.id).map(({ node }) => {
               const productImage = node.images.edges[0].node;
