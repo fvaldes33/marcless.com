@@ -20,7 +20,7 @@ const Header = () => {
   }
 
   return (
-    <header className="bg-white text-gray-800 relative z-10">
+    <header className="bg-white border-b text-gray-800 relative z-10">
       <div className="container mx-auto flex items-center justify-between h-20 px-6 [ xl:px-0 ]">
         <button onClick={() => toggleNav()} aria-label="Menu icon">
           <MenuIcon className="h-6 w-6" aria-hidden="true" />

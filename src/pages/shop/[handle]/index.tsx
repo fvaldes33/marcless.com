@@ -237,7 +237,7 @@ const ProductDetail: NextPage<PageProps> = ({ product, defaultVariant }) => {
 
         {/* title & description */}
         <div className="text-gray-800 mt-8 flex flex-col items-start">
-          <span className="block text-primary text-base mb-1">On Sale</span>
+          <span className="block text-primary text-base mb-1">{product.productType}</span>
 
           <h1 className="relative font-sans font-bold text-4xl lg:text-6xl mb-4">
             <span className="relative z-10">{product.title}</span>
