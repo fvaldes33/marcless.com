@@ -49,7 +49,7 @@ const ProductHero = ({
           return (
             <SwiperSlide key={node.id}>
               <div className="w-full h-full">
-                <video className="w-full h-full object-center object-cover" controls autoPlay muted>
+                <video className="w-full h-full object-center object-cover" controls muted>
                   <source type={`video/${media.format}`} src={media.url} />
                 </video>
               </div>
