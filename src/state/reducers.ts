@@ -13,6 +13,13 @@ export function reducer(state: AppState, action: AppAction) {
         ready: true
       };
       break;
+    case Action.SetDismissed:
+      newState = {
+        ...newState,
+        ...action.payload
+      };
+      toLocalStorage('offerDismissed', newState.offerDismissed);
+      break;
     case Action.SetNav:
       newState = {
         ...newState,

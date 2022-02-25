@@ -35,6 +35,7 @@ export interface AppState {
   store?: Store_shop;
   customer?: BasicCustomer;
   checkout: Cart;
+  offerDismissed?: boolean;
 }
 
 type ActionMap<M extends { [index: string]: any }> = {
@@ -54,6 +55,7 @@ export enum Action {
   SetCheckout = 'set-checkout',
   SetCartOpen = 'set-cart-open',
   SetCustomer = 'set-customer',
+  SetDismissed = 'set-dismissed'
 }
 
 export interface ActionTypes {
@@ -62,6 +64,7 @@ export interface ActionTypes {
   [Action.SetCartOpen]: { cartOpen: boolean };
   [Action.SetCustomer]: { customer: BasicCustomer };
   [Action.SetCheckout]: { checkout: Cart };
+  [Action.SetDismissed]: { offerDismissed: boolean };
 }
 
 export type AppAction = ActionMap<ActionTypes>[keyof ActionMap<ActionTypes>];

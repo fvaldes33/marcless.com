@@ -15,6 +15,8 @@ export const defaultState: AppState = {
   shopifyClient: shopify,
   navOpen: false,
   cartOpen: false,
+  offerDismissed: fromLocalStorage<boolean>('offerDismissed', false),
+  customer: fromLocalStorage<BasicCustomer | undefined>('customer', undefined),
   checkout: {
     id: '',
     checkoutUrl: '',
@@ -43,7 +45,6 @@ const AppContextProvider: React.FC<{
   const [state, dispatch] = useReducer(reducer, {
     ...defaultState,
     ...initialState,
-    customer: fromLocalStorage<BasicCustomer | undefined>('customer', undefined)
   });
   const value = { state, dispatch };
 

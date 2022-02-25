@@ -1,22 +1,26 @@
 import { Dialog, Transition } from "@headlessui/react";
 import { Fragment, useContext, useEffect, useState } from "react";
 import { Context } from "../state";
+import { Action } from "../types";
 import NewsletterForm from "./NewsletterForm";
 
 const NewsletterPopup = () => {
   const [isOpen, setIsOpen] = useState<boolean>(false);
   const [submitted, setSubmitted] = useState<boolean>(false);
-  const { state: { customer }} = useContext(Context);
+  const { state: { customer, offerDismissed }, dispatch } = useContext(Context);
 
   useEffect(() => {
-    if (!customer) {
+    if (!customer && !offerDismissed) {
       setTimeout(() => {
         setIsOpen(true);
       }, 3000);
     }
-  }, [customer])
+  }, [customer, offerDismissed])
 
   function closeModal() {
+    if (!submitted) {
+      dispatch({ type: Action.SetDismissed, payload: { offerDismissed: true }})
+    }
     setIsOpen(false)
   }
 
