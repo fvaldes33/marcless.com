@@ -1,7 +1,7 @@
 /* eslint-disable @next/next/no-img-element */
 import { PlayIcon } from "@heroicons/react/outline";
 import { useState } from "react";
-import { Swiper as CoreSwiper, Navigation, Thumbs, EffectFade } from "swiper";
+import { Swiper as CoreSwiper, Navigation, Thumbs, EffectFade, FreeMode } from "swiper";
 import { Swiper, SwiperSlide } from "swiper/react";
 import InnerImageZoom from 'react-inner-image-zoom';
 import { GetSingleProduct_product } from "../queries/__generated__/GetSingleProduct";
@@ -63,7 +63,7 @@ const ProductHero = ({
         slidesPerView={4}
         freeMode={true}
         watchSlidesProgress={true}
-        modules={[Navigation, Thumbs]}
+        modules={[Navigation, Thumbs, FreeMode]}
         className="thumbSwiper h-32"
       >
         {product.images.edges.map(({ node }, index: number) => (
