@@ -43,6 +43,7 @@ const AppContextProvider: React.FC<{
   const [state, dispatch] = useReducer(reducer, {
     ...defaultState,
     ...initialState,
+    customer: fromLocalStorage<BasicCustomer | undefined>('customer', undefined)
   });
   const value = { state, dispatch };
 
@@ -50,8 +51,8 @@ const AppContextProvider: React.FC<{
     // get customer from local storage
     if (init === false) {
       const startInit = async () => {
-        const customer = fromLocalStorage<BasicCustomer>('customer', {} as BasicCustomer);
-        dispatch({ type: Action.SetCustomer, payload: { customer } });
+        // const customer = fromLocalStorage<BasicCustomer>('customer', {} as BasicCustomer);
+        // dispatch({ type: Action.SetCustomer, payload: { customer } });
 
         const existingCheckoutId = fromLocalStorage<string>('checkoutId', '');
         if (existingCheckoutId) {

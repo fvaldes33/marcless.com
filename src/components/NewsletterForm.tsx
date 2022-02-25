@@ -8,7 +8,7 @@ import { classNames } from '../utils/helpers';
 
 type NewsletterFormProps = {
   centered?: boolean;
-  onSubmitForm: (email: string) => void;
+  onSubmitForm: (email: string, error?: any) => void;
 }
 
 const NewsletterForm: React.FC<NewsletterFormProps> = ({ centered = false, onSubmitForm }) => {
@@ -42,24 +42,29 @@ const NewsletterForm: React.FC<NewsletterFormProps> = ({ centered = false, onSub
         body: JSON.stringify(payload),
       })
       const data = await res.json();
+
+      dispatch({
+        type: Action.SetCustomer,
+        payload: {
+          customer: {
+            id: data?.customer?.id,
+            email: email,
+            avatar: `https://www.gravatar.com/avatar/${md5(email)}`
+          }
+        }
+      });
+
+      setLoading(false);
       if (!data.errors) {
         // save customer
-        dispatch({
-          type: Action.SetCustomer,
-          payload: {
-            customer: {
-              id: data.customer.id,
-              email: data.customer.email,
-              avatar: `https://www.gravatar.com/avatar/${md5(data.customer.email)}`
-            }
-          }
-        });
+        onSubmitForm(email)
+      } else {
+        onSubmitForm(email, Object.values(data.errors))
       }
     } catch (error) {
       console.log('[error]', { error })
-    } finally {
       setLoading(false);
-      onSubmitForm(email)
+      onSubmitForm(email, error)
     }
   }
 

@@ -20,6 +20,7 @@ import Header from '@/src/components/Header';
 import Footer from '@/src/components/Footer';
 import { useEffect, useState } from 'react';
 import { pageview } from '@/src/utils/helpers';
+import NewsletterPopup from '../components/NewsletterPopup';
 
 type AppPropsWithGlobals = AppProps & { store: Store_shop };
 
@@ -106,6 +107,7 @@ function MyApp({ Component, pageProps, store }: AppPropsWithGlobals) {
           <Component {...pageProps} />
         </main>
         <Footer />
+        <NewsletterPopup />
       </AppProvider>
     </ApolloProvider>
   );

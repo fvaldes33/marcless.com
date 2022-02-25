@@ -121,7 +121,7 @@ export function toLocalStorage(key: string, value: any): void {
     // silence
   }
 }
-export function fromLocalStorage<T extends {}>(key: string, defaultValue: T): T {
+export function fromLocalStorage<T extends unknown>(key: string, defaultValue: T): T {
   try {
     const storedValue = window.localStorage.getItem(`__marcless__${key}`);
     return storedValue ? JSON.parse(storedValue) : defaultValue;
