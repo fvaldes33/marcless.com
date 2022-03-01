@@ -175,9 +175,9 @@ const ProductDetail: NextPage<PageProps> = ({ product, defaultVariant }) => {
           quantity: qty,
         }]
       })
-      setTimeout(() => {
-        window.location.href = newCheckout.webUrl;
-      })
+      // setTimeout(() => {
+      //   window.location.href = newCheckout.webUrl;
+      // })
     } catch (error) {
 
     } finally {

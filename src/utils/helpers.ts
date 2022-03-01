@@ -32,13 +32,18 @@ export const transformToGoogleItem = (
   product: GetProducts_products_edges_node,
   variant: GetProducts_products_edges_node_variants_edges_node
 ) => {
+  const productId = Buffer.from(product.id, 'base64').toString('ascii').split('/').pop();
+  const variantId = Buffer.from(variant.id, 'base64').toString('ascii').split('/').pop();
+
   return {
-    id: product.id,
+    id: productId,
     name: product.title,
     brand: 'Marcless',
     category: product.productType || "Razors & Razor Blades",
     variant: variant.title,
-    price: variant.priceV2.amount
+    price: variant.priceV2.amount,
+    sku: variant.sku,
+    variantId: variantId,
   }
 }
 
@@ -76,7 +81,12 @@ export const addToCart = ({ items }: any) => {
   if ('fbq' in (window as any)) {
     (window as any).fbq('track', 'AddToCart', {
       value: items[0].price,
-      currency: 'USD'
+      currency: 'USD',
+      content_type: 'product',
+      contents: items.map((i: any) => ({
+        id: i.variantId,
+        quantity: i.quantity,
+      })),
     });
   }
 }
